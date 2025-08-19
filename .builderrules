@@ -1,1 +1,3 @@
 take screenshots after creating the variants to make sure things like font and border radius came through properly. 
+
+Do NOT use Mantine components for anything other than the layout/structure of the app. All visual components should come from our src/stories folder
