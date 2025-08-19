@@ -1,0 +1,351 @@
+.nexus-sidebar {
+  background-color: var(--color-bg-container, #ffffff);
+  border-right: 1px solid var(--color-border-secondary, #e5e5e5);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: width 0.2s ease;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.nexus-sidebar--collapsed {
+  width: 80px !important;
+}
+
+.nexus-sidebar--collapsible {
+  position: relative;
+}
+
+.nexus-sidebar__collapse-button {
+  position: absolute;
+  top: 1rem;
+  right: -10px;
+  z-index: 10;
+  background-color: var(--color-bg-container, #ffffff) !important;
+  border: 1px solid var(--color-border-secondary, #e5e5e5) !important;
+  border-radius: 50% !important;
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  color: var(--color-text-secondary, #525252) !important;
+  transition: all 0.15s ease;
+}
+
+.nexus-sidebar__collapse-button:hover {
+  background-color: var(--color-primary-bg, #f3f4f6) !important;
+  color: var(--color-text, #171717) !important;
+}
+
+.nexus-sidebar--collapsed .nexus-sidebar__collapse-button {
+  transform: rotate(180deg);
+}
+
+.nexus-sidebar__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.nexus-sidebar__header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border-secondary, #e5e5e5);
+  flex-shrink: 0;
+}
+
+.nexus-sidebar__scroll {
+  flex: 1;
+}
+
+.nexus-sidebar__nav {
+  padding: 0.5rem;
+}
+
+.nexus-sidebar__section {
+  margin-bottom: 1rem;
+}
+
+.nexus-sidebar__section:last-child {
+  margin-bottom: 0;
+}
+
+.nexus-sidebar__section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-tertiary, #737373);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.nexus-sidebar__section-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.nexus-sidebar__divider {
+  border-color: var(--color-border-secondary, #e5e5e5);
+  margin: 0.75rem 0;
+}
+
+/* Sidebar Items */
+.nexus-sidebar__item {
+  color: var(--color-text-secondary, #525252) !important;
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  padding: 0.5rem 0.75rem !important;
+  min-height: 36px !important;
+  transition: all 0.15s ease !important;
+  text-decoration: none !important;
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nexus-sidebar__item:hover {
+  background-color: var(--color-primary-bg-hover, #e5e7eb) !important;
+  color: var(--color-text, #171717) !important;
+}
+
+.nexus-sidebar__item--active {
+  background-color: var(--color-primary-bg, #f3f4f6) !important;
+  color: var(--color-primary, #0a0e1b) !important;
+  font-weight: 600 !important;
+}
+
+.nexus-sidebar__item--active:hover {
+  background-color: var(--color-primary-bg-hover, #e5e7eb) !important;
+}
+
+.nexus-sidebar__item--disabled {
+  color: var(--color-text-quaternary, #a3a3a3) !important;
+  cursor: not-allowed !important;
+  opacity: 0.6;
+}
+
+.nexus-sidebar__item--disabled:hover {
+  background-color: transparent !important;
+  color: var(--color-text-quaternary, #a3a3a3) !important;
+}
+
+.nexus-sidebar__item--parent {
+  background: none !important;
+  border: none !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.nexus-sidebar__icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nexus-sidebar__label {
+  flex: 1;
+  text-align: left;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.nexus-sidebar__chevron {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.nexus-sidebar__chevron--open {
+  transform: rotate(0deg);
+}
+
+.nexus-sidebar__badge {
+  background-color: var(--color-primary, #0a0e1b) !important;
+  color: white !important;
+  font-size: 0.6875rem !important;
+  font-weight: 600 !important;
+  min-width: 1rem !important;
+  height: 1rem !important;
+  padding: 0 0.25rem !important;
+  flex-shrink: 0;
+}
+
+.nexus-sidebar__children {
+  margin-left: 0.5rem;
+  border-left: 1px solid var(--color-border-secondary, #e5e5e5);
+  padding-left: 0.5rem;
+}
+
+/* User Section */
+.nexus-sidebar__user {
+  padding: 1rem;
+  border-top: 1px solid var(--color-border-secondary, #e5e5e5);
+  flex-shrink: 0;
+}
+
+.nexus-sidebar__user-button {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.nexus-sidebar__user-button:hover {
+  background-color: var(--color-primary-bg-hover, #e5e7eb);
+}
+
+.nexus-sidebar__user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.nexus-sidebar__user-name {
+  color: var(--color-text, #171717);
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.nexus-sidebar__user-email,
+.nexus-sidebar__user-role {
+  color: var(--color-text-secondary, #525252);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Footer */
+.nexus-sidebar__footer {
+  padding: 1rem;
+  border-top: 1px solid var(--color-border-secondary, #e5e5e5);
+  flex-shrink: 0;
+}
+
+/* Collapsed State */
+.nexus-sidebar--collapsed .nexus-sidebar__section-label {
+  display: none;
+}
+
+.nexus-sidebar--collapsed .nexus-sidebar__label {
+  display: none;
+}
+
+.nexus-sidebar--collapsed .nexus-sidebar__chevron {
+  display: none;
+}
+
+.nexus-sidebar--collapsed .nexus-sidebar__badge {
+  display: none;
+}
+
+.nexus-sidebar--collapsed .nexus-sidebar__user-info {
+  display: none;
+}
+
+.nexus-sidebar--collapsed .nexus-sidebar__children {
+  display: none;
+}
+
+.nexus-sidebar--collapsed .nexus-sidebar__item {
+  padding: 0.5rem !important;
+  justify-content: center;
+}
+
+.nexus-sidebar--collapsed .nexus-sidebar__user-button {
+  justify-content: center;
+}
+
+.nexus-sidebar--collapsed .nexus-sidebar__divider {
+  margin: 0.5rem 0.75rem;
+}
+
+/* Drawer Sidebar */
+.nexus-drawer-sidebar .mantine-Drawer-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.nexus-drawer-sidebar .mantine-Drawer-body {
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.nexus-drawer-sidebar .nexus-sidebar__content {
+  height: 100%;
+}
+
+/* Focus states for accessibility */
+.nexus-sidebar__item:focus,
+.nexus-sidebar__user-button:focus {
+  outline: 2px solid var(--color-primary, #0a0e1b);
+  outline-offset: 2px;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .nexus-sidebar {
+    width: 100% !important;
+  }
+  
+  .nexus-sidebar__collapse-button {
+    display: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .nexus-sidebar {
+    border-right-width: 2px;
+  }
+  
+  .nexus-sidebar__header,
+  .nexus-sidebar__user,
+  .nexus-sidebar__footer {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .nexus-sidebar,
+  .nexus-sidebar__item,
+  .nexus-sidebar__chevron,
+  .nexus-sidebar__user-button,
+  .nexus-sidebar__collapse-button {
+    transition: none;
+  }
+}
+
+/* Custom scrollbar */
+.nexus-sidebar .mantine-ScrollArea-scrollbar {
+  background-color: transparent;
+}
+
+.nexus-sidebar .mantine-ScrollArea-thumb {
+  background-color: var(--color-border, #d4d4d4);
+  border-radius: 4px;
+}
+
+.nexus-sidebar .mantine-ScrollArea-thumb:hover {
+  background-color: var(--color-text-tertiary, #737373);
+}

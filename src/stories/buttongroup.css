@@ -1,0 +1,139 @@
+/* Design tokens for Button Group component */
+:root {
+  --gray-300: #D5D7DA;
+  --gray-700: #414651;
+  --gray-500: #717680;
+  --white: #FFF;
+}
+
+/* Base button group styles */
+.nexus-button-group {
+  display: inline-flex;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+}
+
+/* Individual button item styles */
+.nexus-button-group__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  border: none;
+  border-right: 1px solid var(--gray-300);
+  cursor: pointer;
+  font-family: 'Inter', -apple-system, 'Roboto', 'Helvetica', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--gray-700);
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+/* Remove border from last item */
+.nexus-button-group__item--last {
+  border-right: none;
+}
+
+/* Text content styling */
+.nexus-button-group__text {
+  white-space: nowrap;
+}
+
+/* Icon variant: false (text only) */
+.nexus-button-group--icon-false .nexus-button-group__item {
+  padding: 10px 16px;
+}
+
+/* Icon variant: leading (icon + text) */
+.nexus-button-group--icon-leading .nexus-button-group__item {
+  padding: 10px 16px;
+}
+
+/* Icon variant: only (icon only) */
+.nexus-button-group--icon-only .nexus-button-group__item {
+  padding: 10px 12px;
+}
+
+/* Hover states */
+.nexus-button-group__item:hover {
+  background: #F8F9FA;
+  color: var(--gray-700);
+}
+
+/* Active/Current state */
+.nexus-button-group__item--current {
+  background: #F1F5F9;
+  color: var(--gray-700);
+}
+
+.nexus-button-group__item--current:hover {
+  background: #E2E8F0;
+}
+
+/* Focus states */
+.nexus-button-group__item:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px #3B82F6;
+  z-index: 1;
+}
+
+/* Disabled state */
+.nexus-button-group__item:disabled {
+  background: var(--white);
+  color: var(--gray-300);
+  cursor: not-allowed;
+}
+
+.nexus-button-group__item:disabled:hover {
+  background: var(--white);
+  color: var(--gray-300);
+}
+
+/* Icon styling */
+.nexus-button-group__item svg {
+  flex-shrink: 0;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .nexus-button-group {
+    width: 100%;
+  }
+  
+  .nexus-button-group__item {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .nexus-button-group__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .nexus-button-group {
+    border-color: #000;
+  }
+  
+  .nexus-button-group__item {
+    border-right-color: #000;
+  }
+  
+  .nexus-button-group__item:focus {
+    box-shadow: inset 0 0 0 2px #000;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .nexus-button-group__item {
+    transition: none;
+  }
+}

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input & Textarea Components Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .input-showcase {
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+        .showcase-label {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+    </style>
+    <link rel="stylesheet" href="stories/input.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Nexus Input & Textarea Components</h1>
+        <p>Comprehensive input components with multiple variants and states based on the Figma design system.</p>
+        
+        <div class="section">
+            <h2>Input Variants</h2>
+            <div class="input-grid">
+                <div class="input-showcase">
+                    <div class="showcase-label">Default Input</div>
+                    <div class="nexus-input-container">
+                        <label class="nexus-input__label">Email</label>
+                        <div class="nexus-input nexus-input--default">
+                            <div class="nexus-input__content">
+                                <span class="nexus-input__icon">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18.3333 4.99998C18.3333 4.08331 17.5833 3.33331 16.6667 3.33331H3.33333C2.41666 3.33331 1.66666 4.08331 1.66666 4.99998M18.3333 4.99998V15C18.3333 15.9166 17.5833 16.6666 16.6667 16.6666H3.33333C2.41666 16.6666 1.66666 15.9166 1.66666 15V4.99998M18.3333 4.99998L10 10.8333L1.66666 4.99998" stroke="#717680" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </span>
+                                <input type="text" placeholder="olivia@nexusui.com" class="nexus-input__field">
+                                <span class="nexus-input__help-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.06001 5.99998C6.21675 5.55442 6.52611 5.17872 6.93331 4.9394C7.34052 4.70009 7.81927 4.61261 8.28479 4.69245C8.75032 4.7723 9.17255 5.01433 9.47673 5.37567C9.7809 5.737 9.94738 6.19433 9.94668 6.66665C9.94668 7.99998 7.94668 8.66665 7.94668 8.66665M8.00001 11.3333H8.00668M14.6667 7.99998C14.6667 11.6819 11.6819 14.6666 8.00001 14.6666C4.31811 14.6666 1.33334 11.6819 1.33334 7.99998C1.33334 4.31808 4.31811 1.33331 8.00001 1.33331C11.6819 1.33331 14.6667 4.31808 14.6667 7.99998Z" stroke="#A4A7AE" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <p class="nexus-input__help-text">This is a hint text to help user.</p>
+                    </div>
+                </div>
+
+                <div class="input-showcase">
+                    <div class="showcase-label">Default Input - Error State</div>
+                    <div class="nexus-input-container">
+                        <label class="nexus-input__label">Email</label>
+                        <div class="nexus-input nexus-input--default nexus-input--error">
+                            <div class="nexus-input__content">
+                                <span class="nexus-input__icon">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18.3333 4.99998C18.3333 4.08331 17.5833 3.33331 16.6667 3.33331H3.33333C2.41666 3.33331 1.66666 4.08331 1.66666 4.99998M18.3333 4.99998V15C18.3333 15.9166 17.5833 16.6666 16.6667 16.6666H3.33333C2.41666 16.6666 1.66666 15.9166 1.66666 15V4.99998M18.3333 4.99998L10 10.8333L1.66666 4.99998" stroke="#717680" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </span>
+                                <input type="text" placeholder="olivia@nexusui.com" class="nexus-input__field">
+                                <span class="nexus-input__alert">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.00001 5.33331V7.99998M8.00001 10.6666H8.00668M14.6667 7.99998C14.6667 11.6819 11.6819 14.6666 8.00001 14.6666C4.31811 14.6666 1.33334 11.6819 1.33334 7.99998C1.33334 4.31808 4.31811 1.33331 8.00001 1.33331C11.6819 1.33331 14.6667 4.31808 14.6667 7.99998Z" stroke="#0EA5E9" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <p class="nexus-input__help-text nexus-input__help-text--error">This is an error message.</p>
+                    </div>
+                </div>
+
+                <div class="input-showcase">
+                    <div class="showcase-label">Payment Input</div>
+                    <div class="nexus-input-container">
+                        <label class="nexus-input__label">Card number</label>
+                        <div class="nexus-input nexus-input--payment">
+                            <div class="nexus-input__content">
+                                <span class="nexus-input__icon">
+                                    <div class="nexus-input__payment-icon">
+                                        <svg width="22" height="13" viewBox="0 0 23 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fillRule="evenodd" clipRule="evenodd" d="M11.179 11.8294C9.99493 12.8275 8.45902 13.43 6.78069 13.43C3.03582 13.43 0 10.4303 0 6.72997C0 3.02966 3.03582 0.0299683 6.78069 0.0299683C8.45902 0.0299683 9.99493 0.632466 11.179 1.63051C12.363 0.632466 13.8989 0.0299683 15.5773 0.0299683C19.3221 0.0299683 22.358 3.02966 22.358 6.72997C22.358 10.4303 19.3221 13.43 15.5773 13.43C13.8989 13.43 12.363 12.8275 11.179 11.8294Z" fill="#ED0006"/>
+                                        </svg>
+                                    </div>
+                                </span>
+                                <input type="text" placeholder="Card number" class="nexus-input__field">
+                                <span class="nexus-input__help-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.06001 5.99998C6.21675 5.55442 6.52611 5.17872 6.93331 4.9394C7.34052 4.70009 7.81927 4.61261 8.28479 4.69245C8.75032 4.7723 9.17255 5.01433 9.47673 5.37567C9.7809 5.737 9.94738 6.19433 9.94668 6.66665C9.94668 7.99998 7.94668 8.66665 7.94668 8.66665M8.00001 11.3333H8.00668M14.6667 7.99998C14.6667 11.6819 11.6819 14.6666 8.00001 14.6666C4.31811 14.6666 1.33334 11.6819 1.33334 7.99998C1.33334 4.31808 4.31811 1.33331 8.00001 1.33331C11.6819 1.33331 14.6667 4.31808 14.6667 7.99998Z" stroke="#A4A7AE" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <p class="nexus-input__help-text">This is a hint text to help user.</p>
+                    </div>
+                </div>
+
+                <div class="input-showcase">
+                    <div class="showcase-label">Leading Dropdown</div>
+                    <div class="nexus-input-container">
+                        <label class="nexus-input__label">Phone number</label>
+                        <div class="nexus-input nexus-input--leading-dropdown">
+                            <div class="nexus-input__dropdown nexus-input__dropdown--leading">
+                                <span class="nexus-input__dropdown-text">US</span>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 7.5L10 12.5L15 7.5" stroke="#717680" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="nexus-input__content">
+                                <input type="text" placeholder="+1 (555) 000-0000" class="nexus-input__field">
+                                <span class="nexus-input__help-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.06001 5.99998C6.21675 5.55442 6.52611 5.17872 6.93331 4.9394C7.34052 4.70009 7.81927 4.61261 8.28479 4.69245C8.75032 4.7723 9.17255 5.01433 9.47673 5.37567C9.7809 5.737 9.94738 6.19433 9.94668 6.66665C9.94668 7.99998 7.94668 8.66665 7.94668 8.66665M8.00001 11.3333H8.00668M14.6667 7.99998C14.6667 11.6819 11.6819 14.6666 8.00001 14.6666C4.31811 14.6666 1.33334 11.6819 1.33334 7.99998C1.33334 4.31808 4.31811 1.33331 8.00001 1.33331C11.6819 1.33331 14.6667 4.31808 14.6667 7.99998Z" stroke="#A4A7AE" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <p class="nexus-input__help-text">This is a hint text to help user.</p>
+                    </div>
+                </div>
+
+                <div class="input-showcase">
+                    <div class="showcase-label">Leading Text</div>
+                    <div class="nexus-input-container">
+                        <label class="nexus-input__label">Website</label>
+                        <div class="nexus-input nexus-input--leading-text">
+                            <div class="nexus-input__leading-text">http://</div>
+                            <div class="nexus-input__content">
+                                <input type="text" placeholder="Nexus Design" class="nexus-input__field">
+                                <span class="nexus-input__help-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.06001 5.99998C6.21675 5.55442 6.52611 5.17872 6.93331 4.9394C7.34052 4.70009 7.81927 4.61261 8.28479 4.69245C8.75032 4.7723 9.17255 5.01433 9.47673 5.37567C9.7809 5.737 9.94738 6.19433 9.94668 6.66665C9.94668 7.99998 7.94668 8.66665 7.94668 8.66665M8.00001 11.3333H8.00668M14.6667 7.99998C14.6667 11.6819 11.6819 14.6666 8.00001 14.6666C4.31811 14.6666 1.33334 11.6819 1.33334 7.99998C1.33334 4.31808 4.31811 1.33331 8.00001 1.33331C11.6819 1.33331 14.6667 4.31808 14.6667 7.99998Z" stroke="#A4A7AE" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <p class="nexus-input__help-text">This is a hint text to help user.</p>
+                    </div>
+                </div>
+
+                <div class="input-showcase">
+                    <div class="showcase-label">Trailing Dropdown</div>
+                    <div class="nexus-input-container">
+                        <label class="nexus-input__label">Sale amount</label>
+                        <div class="nexus-input nexus-input--trailing-dropdown">
+                            <div class="nexus-input__content">
+                                <span class="nexus-input__currency">$</span>
+                                <input type="text" placeholder="1,000.00" class="nexus-input__field">
+                                <span class="nexus-input__help-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.06001 5.99998C6.21675 5.55442 6.52611 5.17872 6.93331 4.9394C7.34052 4.70009 7.81927 4.61261 8.28479 4.69245C8.75032 4.7723 9.17255 5.01433 9.47673 5.37567C9.7809 5.737 9.94738 6.19433 9.94668 6.66665C9.94668 7.99998 7.94668 8.66665 7.94668 8.66665M8.00001 11.3333H8.00668M14.6667 7.99998C14.6667 11.6819 11.6819 14.6666 8.00001 14.6666C4.31811 14.6666 1.33334 11.6819 1.33334 7.99998C1.33334 4.31808 4.31811 1.33331 8.00001 1.33331C11.6819 1.33331 14.6667 4.31808 14.6667 7.99998Z" stroke="#A4A7AE" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="nexus-input__dropdown nexus-input__dropdown--trailing">
+                                <span class="nexus-input__dropdown-text">USD</span>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 7.5L10 12.5L15 7.5" stroke="#717680" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="nexus-input__help-text">This is a hint text to help user.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Textarea Variants</h2>
+            <div class="input-grid">
+                <div class="input-showcase">
+                    <div class="showcase-label">Default Textarea</div>
+                    <div class="nexus-textarea-container">
+                        <label class="nexus-textarea__label">Description</label>
+                        <div class="nexus-textarea">
+                            <textarea class="nexus-textarea__field" placeholder="Enter a description..." rows="4"></textarea>
+                        </div>
+                        <p class="nexus-textarea__help-text">This is a hint text to help user.</p>
+                    </div>
+                </div>
+
+                <div class="input-showcase">
+                    <div class="showcase-label">Error Textarea</div>
+                    <div class="nexus-textarea-container">
+                        <label class="nexus-textarea__label">Description</label>
+                        <div class="nexus-textarea nexus-textarea--error">
+                            <textarea class="nexus-textarea__field" placeholder="Enter a description..." rows="4"></textarea>
+                        </div>
+                        <p class="nexus-textarea__help-text nexus-textarea__help-text--error">This is an error message.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

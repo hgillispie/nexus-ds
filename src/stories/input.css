@@ -1,0 +1,340 @@
+/* Design tokens for Input components */
+:root {
+  --input-gray-700: #414651;
+  --input-gray-600: #535862;
+  --input-gray-500: #717680;
+  --input-gray-300: #D5D7DA;
+  --input-gray-100: #F5F5F5;
+  --input-gray-900: #181D27;
+  --input-white: #FFF;
+  --input-error-300: #67E8F9;
+  --input-error-500: #0EA5E9;
+  --input-border-radius: 8px;
+  --input-font-family: 'Inter', -apple-system, 'Roboto', 'Helvetica', sans-serif;
+}
+
+/* Input Container */
+.nexus-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+/* Input Label */
+.nexus-input__label {
+  color: var(--input-gray-700);
+  font-family: var(--input-font-family);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 0;
+}
+
+/* Input Base */
+.nexus-input {
+  display: flex;
+  align-items: center;
+  border-radius: var(--input-border-radius);
+  border: 1px solid var(--input-gray-300);
+  background: var(--input-white);
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.nexus-input--error {
+  border-color: var(--input-error-300);
+}
+
+.nexus-input--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Input Content */
+.nexus-input__content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  padding: 10px 14px;
+  min-height: 44px;
+}
+
+.nexus-input--leading-dropdown .nexus-input__content,
+.nexus-input--leading-text .nexus-input__content {
+  padding-left: 0;
+}
+
+.nexus-input--trailing-dropdown .nexus-input__content {
+  padding-right: 0;
+}
+
+/* Input Field */
+.nexus-input__field {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--input-gray-500);
+  font-family: var(--input-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  outline: none;
+  padding: 0;
+}
+
+.nexus-input__field::placeholder {
+  color: var(--input-gray-500);
+}
+
+.nexus-input__field:disabled {
+  cursor: not-allowed;
+}
+
+/* Icons */
+.nexus-input__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nexus-input__help-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.nexus-input__alert {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Payment Icon */
+.nexus-input__payment-icon {
+  display: flex;
+  width: 34px;
+  height: 24px;
+  padding: 5px 6px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid var(--input-gray-100);
+  background: var(--input-white);
+  position: relative;
+}
+
+.nexus-input__payment-icon svg {
+  position: absolute;
+}
+
+.nexus-input__payment-icon svg:nth-child(1) {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nexus-input__payment-icon svg:nth-child(2) {
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nexus-input__payment-icon svg:nth-child(3) {
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Leading Text */
+.nexus-input__leading-text {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px 10px 14px;
+  color: var(--input-gray-500);
+  font-family: var(--input-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  border-right: 1px solid var(--input-gray-300);
+  background: var(--input-white);
+}
+
+/* Currency Symbol */
+.nexus-input__currency {
+  color: var(--input-gray-500);
+  font-family: var(--input-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  flex-shrink: 0;
+}
+
+/* Dropdown */
+.nexus-input__dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px 10px 14px;
+  background: var(--input-white);
+  border-right: 1px solid var(--input-gray-300);
+  cursor: pointer;
+}
+
+.nexus-input__dropdown--leading {
+  border-right: 1px solid var(--input-gray-300);
+}
+
+.nexus-input__dropdown--trailing {
+  border-left: 1px solid var(--input-gray-300);
+  border-right: none;
+  padding: 10px 14px;
+}
+
+.nexus-input__dropdown-text {
+  color: var(--input-gray-900);
+  font-family: var(--input-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-right: 8px;
+}
+
+/* Input Type Specific Styles */
+.nexus-input--payment .nexus-input__content {
+  padding-left: 10px;
+}
+
+.nexus-input--leading-text .nexus-input__field {
+  border-radius: 0 var(--input-border-radius) var(--input-border-radius) 0;
+}
+
+/* Help Text */
+.nexus-input__help-text {
+  color: var(--input-gray-600);
+  font-family: var(--input-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+}
+
+.nexus-input__help-text--error {
+  color: var(--input-error-500);
+}
+
+/* Textarea Container */
+.nexus-textarea-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+/* Textarea Label */
+.nexus-textarea__label {
+  color: var(--input-gray-700);
+  font-family: var(--input-font-family);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 0;
+}
+
+/* Textarea Base */
+.nexus-textarea {
+  display: flex;
+  border-radius: var(--input-border-radius);
+  border: 1px solid var(--input-gray-300);
+  background: var(--input-white);
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05);
+  padding: 10px 14px;
+  min-height: 120px;
+}
+
+.nexus-textarea--error {
+  border-color: var(--input-error-300);
+}
+
+.nexus-textarea--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Textarea Field */
+.nexus-textarea__field {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--input-gray-500);
+  font-family: var(--input-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  outline: none;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.nexus-textarea__field::placeholder {
+  color: var(--input-gray-500);
+}
+
+.nexus-textarea__field:disabled {
+  cursor: not-allowed;
+  resize: none;
+}
+
+/* Textarea Help Text */
+.nexus-textarea__help-text {
+  color: var(--input-gray-600);
+  font-family: var(--input-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+}
+
+.nexus-textarea__help-text--error {
+  color: var(--input-error-500);
+}
+
+/* Focus States */
+.nexus-input:focus-within {
+  outline: none;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px rgba(14, 165, 233, 0.1);
+}
+
+.nexus-textarea:focus-within {
+  outline: none;
+  box-shadow: 0 1px 2px 0 rgba(10, 13, 18, 0.05), 0 0 0 4px rgba(14, 165, 233, 0.1);
+}
+
+/* Hover States */
+.nexus-input:hover:not(.nexus-input--disabled) {
+  border-color: var(--input-gray-500);
+}
+
+.nexus-textarea:hover:not(.nexus-textarea--disabled) {
+  border-color: var(--input-gray-500);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nexus-input__field {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  .nexus-textarea__field {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}

@@ -1,0 +1,343 @@
+/* Design tokens for Toggle component */
+:root {
+  /* Toggle track colors */
+  --toggle-track-bg-unchecked: #F5F5F5;
+  --toggle-track-bg-unchecked-hover: #E9EAEB;
+  --toggle-track-bg-unchecked-focus: #FAFAFA;
+  --toggle-track-bg-unchecked-disabled: #F5F5F5;
+  
+  --toggle-track-bg-checked: #0F172A;
+  --toggle-track-bg-checked-hover: #0F172A;
+  --toggle-track-bg-checked-focus: #0F172A;
+  --toggle-track-bg-checked-disabled: #F5F5F5;
+  
+  /* Toggle thumb colors */
+  --toggle-thumb-bg-unchecked: #FFFFFF;
+  --toggle-thumb-bg-unchecked-disabled: #FAFAFA;
+  --toggle-thumb-bg-checked: #FFFFFF;
+  --toggle-thumb-bg-checked-disabled: #FAFAFA;
+  
+  /* Text colors */
+  --toggle-text-primary: #414651;
+  --toggle-text-secondary: #535862;
+  --toggle-text-disabled: #9CA3AF;
+  
+  /* Focus ring */
+  --toggle-focus-ring: #E2E8F0;
+  
+  /* Shadows */
+  --toggle-thumb-shadow: 
+    0 1px 2px rgba(10, 13, 18, 0.06),
+    0 1px 3px rgba(10, 13, 18, 0.1);
+  
+  /* Transitions */
+  --toggle-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base toggle container */
+.nexus-toggle-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: 'Inter', -apple-system, 'Roboto', 'Helvetica', sans-serif;
+}
+
+.nexus-toggle-container--with-text {
+  align-items: flex-start;
+}
+
+/* Base toggle button */
+.nexus-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  transition: var(--toggle-transition);
+  flex-shrink: 0;
+}
+
+.nexus-toggle:focus {
+  outline: none;
+}
+
+.nexus-toggle--disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Toggle track (background container) */
+.nexus-toggle__track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  background: var(--toggle-track-bg-unchecked);
+  transition: var(--toggle-transition);
+  overflow: hidden;
+}
+
+/* Medium size (default) */
+.nexus-toggle--md .nexus-toggle__track {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  padding: 2px;
+}
+
+/* Small size */
+.nexus-toggle--sm .nexus-toggle__track {
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  padding: 2px;
+}
+
+/* Toggle thumb (moving circle) */
+.nexus-toggle__thumb {
+  position: relative;
+  background: var(--toggle-thumb-bg-unchecked);
+  border-radius: 50%;
+  box-shadow: var(--toggle-thumb-shadow);
+  transition: var(--toggle-transition);
+  transform: translateX(0);
+}
+
+/* Medium size thumb */
+.nexus-toggle--md .nexus-toggle__thumb {
+  width: 20px;
+  height: 20px;
+}
+
+/* Small size thumb */
+.nexus-toggle--sm .nexus-toggle__thumb {
+  width: 16px;
+  height: 16px;
+}
+
+/* Checked state */
+.nexus-toggle--checked .nexus-toggle__track {
+  background: var(--toggle-track-bg-checked);
+}
+
+.nexus-toggle--checked .nexus-toggle__thumb {
+  background: var(--toggle-thumb-bg-checked);
+}
+
+/* Medium size checked position */
+.nexus-toggle--checked.nexus-toggle--md .nexus-toggle__thumb {
+  transform: translateX(20px);
+}
+
+/* Small size checked position */
+.nexus-toggle--checked.nexus-toggle--sm .nexus-toggle__thumb {
+  transform: translateX(16px);
+}
+
+/* Hover states */
+.nexus-toggle:hover:not(.nexus-toggle--disabled) .nexus-toggle__track {
+  background: var(--toggle-track-bg-unchecked-hover);
+}
+
+.nexus-toggle--checked:hover:not(.nexus-toggle--disabled) .nexus-toggle__track {
+  background: var(--toggle-track-bg-checked-hover);
+}
+
+/* Focus states */
+.nexus-toggle:focus:not(.nexus-toggle--disabled) {
+  box-shadow: 0 0 0 4px var(--toggle-focus-ring);
+  border-radius: 16px;
+}
+
+.nexus-toggle--sm:focus:not(.nexus-toggle--disabled) {
+  border-radius: 14px;
+}
+
+.nexus-toggle:focus:not(.nexus-toggle--disabled) .nexus-toggle__track {
+  background: var(--toggle-track-bg-unchecked-focus);
+}
+
+.nexus-toggle--checked:focus:not(.nexus-toggle--disabled) .nexus-toggle__track {
+  background: var(--toggle-track-bg-checked-focus);
+}
+
+/* Disabled states */
+.nexus-toggle--disabled .nexus-toggle__track {
+  background: var(--toggle-track-bg-unchecked-disabled);
+}
+
+.nexus-toggle--checked.nexus-toggle--disabled .nexus-toggle__track {
+  background: var(--toggle-track-bg-checked-disabled);
+}
+
+.nexus-toggle--disabled .nexus-toggle__thumb {
+  background: var(--toggle-thumb-bg-unchecked-disabled);
+}
+
+.nexus-toggle--checked.nexus-toggle--disabled .nexus-toggle__thumb {
+  background: var(--toggle-thumb-bg-checked-disabled);
+}
+
+/* Text content */
+.nexus-toggle-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.nexus-toggle-text__label {
+  color: var(--toggle-text-primary);
+  font-family: 'Inter', -apple-system, 'Roboto', 'Helvetica', sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.nexus-toggle-text__supporting {
+  color: var(--toggle-text-secondary);
+  font-family: 'Inter', -apple-system, 'Roboto', 'Helvetica', sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  margin-top: 2px;
+  word-wrap: break-word;
+}
+
+/* Medium size text */
+.nexus-toggle--md ~ .nexus-toggle-text .nexus-toggle-text__label {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.nexus-toggle--md ~ .nexus-toggle-text .nexus-toggle-text__supporting {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* Small size text */
+.nexus-toggle--sm ~ .nexus-toggle-text .nexus-toggle-text__label {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.nexus-toggle--sm ~ .nexus-toggle-text .nexus-toggle-text__supporting {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* Disabled text colors */
+.nexus-toggle--disabled ~ .nexus-toggle-text .nexus-toggle-text__label {
+  color: var(--toggle-text-disabled);
+}
+
+.nexus-toggle--disabled ~ .nexus-toggle-text .nexus-toggle-text__supporting {
+  color: var(--toggle-text-disabled);
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .nexus-toggle-container {
+    gap: 10px;
+  }
+  
+  /* Slightly smaller focus rings on mobile */
+  .nexus-toggle:focus:not(.nexus-toggle--disabled) {
+    box-shadow: 0 0 0 3px var(--toggle-focus-ring);
+  }
+  
+  /* Adjust text sizes slightly for mobile */
+  .nexus-toggle--md ~ .nexus-toggle-text .nexus-toggle-text__label {
+    font-size: 15px;
+    line-height: 22px;
+  }
+  
+  .nexus-toggle--md ~ .nexus-toggle-text .nexus-toggle-text__supporting {
+    font-size: 15px;
+    line-height: 22px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .nexus-toggle__track {
+    border: 2px solid currentColor;
+  }
+  
+  .nexus-toggle__thumb {
+    border: 1px solid currentColor;
+  }
+  
+  .nexus-toggle:focus:not(.nexus-toggle--disabled) {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .nexus-toggle,
+  .nexus-toggle__track,
+  .nexus-toggle__thumb {
+    transition: none;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --toggle-track-bg-unchecked: #374151;
+    --toggle-track-bg-unchecked-hover: #4B5563;
+    --toggle-track-bg-unchecked-focus: #374151;
+    --toggle-track-bg-unchecked-disabled: #374151;
+    
+    --toggle-track-bg-checked: #0F172A;
+    --toggle-track-bg-checked-hover: #0F172A;
+    --toggle-track-bg-checked-focus: #0F172A;
+    --toggle-track-bg-checked-disabled: #4B5563;
+    
+    --toggle-thumb-bg-unchecked: #F9FAFB;
+    --toggle-thumb-bg-unchecked-disabled: #6B7280;
+    --toggle-thumb-bg-checked: #F9FAFB;
+    --toggle-thumb-bg-checked-disabled: #6B7280;
+    
+    --toggle-text-primary: #F9FAFB;
+    --toggle-text-secondary: #D1D5DB;
+    --toggle-text-disabled: #6B7280;
+    
+    --toggle-focus-ring: #4B5563;
+  }
+}
+
+/* Focus management for keyboard navigation */
+.nexus-toggle:focus-visible {
+  box-shadow: 0 0 0 4px var(--toggle-focus-ring);
+  border-radius: 16px;
+}
+
+.nexus-toggle--sm:focus-visible {
+  border-radius: 14px;
+}
+
+/* Ensure proper alignment in flexbox layouts */
+.nexus-toggle-container {
+  align-items: flex-start;
+}
+
+/* Support for RTL languages */
+[dir="rtl"] .nexus-toggle-container {
+  direction: rtl;
+}
+
+[dir="rtl"] .nexus-toggle--checked.nexus-toggle--md .nexus-toggle__thumb {
+  transform: translateX(-20px);
+}
+
+[dir="rtl"] .nexus-toggle--checked.nexus-toggle--sm .nexus-toggle__thumb {
+  transform: translateX(-16px);
+}

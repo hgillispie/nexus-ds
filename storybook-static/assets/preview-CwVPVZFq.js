@@ -1,0 +1,1 @@
+const o={parameters:{controls:{matchers:{color:/(background|color)$/i,date:/Date$/}},docs:{source:{state:"open"}}},globalTypes:{fontFamily:{name:"Font Family",description:"Font family for components",defaultValue:"Inter",toolbar:{icon:"typography",items:["Inter","System"]}}}};export{o as default};

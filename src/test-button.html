@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Component Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            align-items: center;
+        }
+        .button-showcase {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+        .button-label {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nexus Button Component</h1>
+        <p>Comprehensive button component with multiple variants based on the Figma design system.</p>
+        
+        <div class="section">
+            <h2>Size Variants</h2>
+            <div class="button-grid">
+                <div class="button-showcase">
+                    <button class="nexus-button nexus-button--md nexus-button--primary nexus-button--icon-none">
+                        <span class="nexus-button__text">Medium Button</span>
+                    </button>
+                    <div class="button-label">Size: md</div>
+                </div>
+                <div class="button-showcase">
+                    <button class="nexus-button nexus-button--lg nexus-button--primary nexus-button--icon-none">
+                        <span class="nexus-button__text">Large Button</span>
+                    </button>
+                    <div class="button-label">Size: lg</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Hierarchy Variants</h2>
+            <div class="button-grid">
+                <div class="button-showcase">
+                    <button class="nexus-button nexus-button--md nexus-button--primary nexus-button--icon-none">
+                        <span class="nexus-button__text">Primary</span>
+                    </button>
+                    <div class="button-label">Primary</div>
+                </div>
+                <div class="button-showcase">
+                    <button class="nexus-button nexus-button--md nexus-button--secondary-color nexus-button--icon-none">
+                        <span class="nexus-button__text">Secondary Color</span>
+                    </button>
+                    <div class="button-label">Secondary Color</div>
+                </div>
+                <div class="button-showcase">
+                    <button class="nexus-button nexus-button--md nexus-button--secondary-gray nexus-button--icon-none">
+                        <span class="nexus-button__text">Secondary Gray</span>
+                    </button>
+                    <div class="button-label">Secondary Gray</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Destructive Variants</h2>
+            <div class="button-grid">
+                <div class="button-showcase">
+                    <button class="nexus-button nexus-button--md nexus-button--primary nexus-button--destructive nexus-button--icon-none">
+                        <span class="nexus-button__text">Delete</span>
+                    </button>
+                    <div class="button-label">Primary Destructive</div>
+                </div>
+                <div class="button-showcase">
+                    <button class="nexus-button nexus-button--md nexus-button--secondary-color nexus-button--destructive nexus-button--icon-none">
+                        <span class="nexus-button__text">Delete</span>
+                    </button>
+                    <div class="button-label">Secondary Color Destructive</div>
+                </div>
+                <div class="button-showcase">
+                    <button class="nexus-button nexus-button--md nexus-button--secondary-gray nexus-button--destructive nexus-button--icon-none">
+                        <span class="nexus-button__text">Delete</span>
+                    </button>
+                    <div class="button-label">Secondary Gray Destructive</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Icon Variants</h2>
+            <div class="button-grid">
+                <div class="button-showcase">
+                    <button class="nexus-button nexus-button--md nexus-button--primary nexus-button--icon-trailing">
+                        <span class="nexus-button__text">Button CTA</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.99984 18.3334C14.6022 18.3334 18.3332 14.6024 18.3332 10C18.3332 5.39765 14.6022 1.66669 9.99984 1.66669C5.39746 1.66669 1.6665 5.39765 1.6665 10C1.6665 14.6024 5.39746 18.3334 9.99984 18.3334Z" stroke="white" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="button-label">Trailing Icon</div>
+                </div>
+                <div class="button-showcase">
+                    <button class="nexus-button nexus-button--md nexus-button--primary nexus-button--icon-only">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.99984 18.3334C14.6022 18.3334 18.3332 14.6024 18.3332 10C18.3332 5.39765 14.6022 1.66669 9.99984 1.66669C5.39746 1.66669 1.6665 5.39765 1.6665 10C1.6665 14.6024 5.39746 18.3334 9.99984 18.3334Z" stroke="white" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="button-label">Icon Only</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>State Demonstrations</h2>
+            <div class="button-grid">
+                <div class="button-showcase">
+                    <button class="nexus-button nexus-button--md nexus-button--primary nexus-button--icon-none">
+                        <span class="nexus-button__text">Default</span>
+                    </button>
+                    <div class="button-label">Default State</div>
+                </div>
+                <div class="button-showcase">
+                    <button class="nexus-button nexus-button--md nexus-button--primary nexus-button--icon-none nexus-button--focused">
+                        <span class="nexus-button__text">Focused</span>
+                    </button>
+                    <div class="button-label">Focused State</div>
+                </div>
+                <div class="button-showcase">
+                    <button class="nexus-button nexus-button--md nexus-button--primary nexus-button--icon-none" disabled>
+                        <span class="nexus-button__text">Disabled</span>
+                    </button>
+                    <div class="button-label">Disabled State</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="stories/button.css">
+</body>
+</html>

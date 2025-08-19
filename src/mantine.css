@@ -1,0 +1,8 @@
+/* Mantine CSS Integration */
+@import '@mantine/core/styles.css';
+
+/* Override Mantine's default font to match our Inter font setup */
+:root {
+  --mantine-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mantine-font-family-headings: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}

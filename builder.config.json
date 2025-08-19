@@ -1,0 +1,20 @@
+{
+    "command": "yarn storybook",
+    "serverUrl": "http://localhost:6006",
+    "commitMode": "draft-prs",
+
+    "allowedCommands": [
+      "npm *",
+      "pnpm *",
+      "yarn *",
+      "git diff *",
+      "git log *",
+      "git status *",
+      "echo *",
+      "cd *",
+      "find *",
+      "ls *",
+      "curl *"
+    ]
+
+  }

@@ -1,3 +1,7 @@
+/* Import Inter font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import './mantine.css';
+
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -10,11 +14,11 @@ body {
   padding: 0;
   font-size: 100%;
   outline: none;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-style: 400;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
   color: #333;
   font-size: 16px;
-  background-color: #26c6da;
+  background-color: #ffffff;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
@@ -36,7 +40,7 @@ label {
   vertical-align: middle;
   line-height: normal;
   overflow: visible;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 button::-moz-focus-inner,
@@ -99,17 +103,17 @@ input[type="submit"] {
 }
 
 .type-light {
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 300;
 }
 
 .type-bold {
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 800;
 }
 
 .type-italic {
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 400;
   font-style: italic;
 }
@@ -120,8 +124,8 @@ input[type="password"],
 textarea {
   font-size: 14px;
   line-height: 20px;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-style: 400;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
   padding: 0.75rem 0;
   line-height: 1.5rem !important;
   border: none;
@@ -131,49 +135,7 @@ textarea {
   outline: none;
 }
 
-.checkbox {
-  display: inline-block;
-  height: 3rem;
-  position: relative;
-  vertical-align: middle;
-  width: 44px;
-}
-
-.checkbox input[type="checkbox"] {
-  font-size: 1em;
-  visibility: hidden;
-}
-
-.checkbox input[type="checkbox"] + span:before {
-  position: absolute;
-  top: 50%;
-  right: auto;
-  bottom: auto;
-  left: 50%;
-  width: 0.85em;
-  height: 0.85em;
-  transform: translate3d(-50%, -50%, 0);
-  background: transparent;
-  box-shadow: #2cc5d2 0 0 0 1px inset;
-  content: "";
-  display: block;
-}
-
-.checkbox input[type="checkbox"]:checked + span:before {
-  font-size: 16px;
-  line-height: 24px;
-  box-shadow: none;
-  color: #2cc5d2;
-  margin-top: -1px;
-  font-family: "percolate";
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-
-  content: "\e65e";
-}
+/* Old checkbox styles removed to prevent conflicts with new design system */
 
 .input-symbol {
   display: inline-block;
@@ -255,7 +217,7 @@ textarea {
   letter-spacing: 0.3em;
   text-indent: 0.3em;
   text-transform: uppercase;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 800;
   font-size: 11px;
   padding-left: 15px;
@@ -415,7 +377,7 @@ textarea {
 .wrapper-message .title-message {
   font-size: 16px;
   line-height: 24px;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 800;
   color: #4a5568;
 }
@@ -449,7 +411,7 @@ textarea {
   line-height: 2rem;
   cursor: pointer;
   white-space: nowrap;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 800;

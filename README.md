@@ -1,111 +1,728 @@
-<p align="center">
-  <a href="https://www.chromatic.com/">
-    <img alt="Chromatic" src="https://avatars2.githubusercontent.com/u/24584319?s=200&v=4" width="60" />
-  </a>
-</p>
+# Untitled UI Design System
 
-<h1 align="center">
-  Chromatic's Intro to Storybook React template
-</h1>
+A comprehensive React design system built with TypeScript, Mantine Core, and design tokens. This system provides a complete set of components, patterns, and guidelines for building modern web applications with Builder Fusion.
 
-This template ships with the main React and Storybook configuration files you'll need to get up and running fast.
+## 🚀 Quick Start
 
-## 🚅 Quick start
+### Installation
 
-1.  **Create the application.**
+```bash
+npm install @your-org/design-system
+# or
+yarn add @your-org/design-system
+```
 
-    Use [degit](https://github.com/Rich-Harris/degit) to get this template.
+### Basic Setup
 
-    ```shell
-    # Clone the template
-    npx degit chromaui/intro-storybook-react-template taskbox
-    ```
+```tsx
+import { MantineProvider } from '@mantine/core';
+import { designSystemTheme } from '@your-org/design-system';
+import '@mantine/core/styles.css';
 
-1.  **Install the dependencies.**
+function App() {
+  return (
+    <MantineProvider theme={designSystemTheme}>
+      {/* Your app content */}
+    </MantineProvider>
+  );
+}
+```
 
-    Navigate into your new site’s directory and install the necessary dependencies.
+### Using Components
 
-    ```shell
-    # Navigate to the directory
-    cd taskbox/
+```tsx
+import { 
+  Button, 
+  Card, 
+  Navigation, 
+  PageLayout, 
+  Typography 
+} from '@your-org/design-system';
 
-    # Install the dependencies
-    yarn
-    ```
+function MyPage() {
+  return (
+    <PageLayout
+      header={{
+        title: "Dashboard",
+        subtitle: "Welcome to your application",
+        actions: <Button>New Project</Button>
+      }}
+    >
+      <Card title="Welcome">
+        <Typography variant="text-lg">
+          Get started with your new application using our design system.
+        </Typography>
+      </Card>
+    </PageLayout>
+  );
+}
+```
 
-1.  **Open the source code and start editing!**
+## 📚 Documentation
 
-    Open the `taskbox` directory in your code editor of choice and building your first component!
+### Storybook (Interactive Documentation)
+- **Local Development**: Run `npm run storybook` and visit `http://localhost:6006`
+- **Component Library**: All components with live examples, props, and usage guidelines
+- **Design Tokens**: Color palettes, typography scales, and spacing systems
 
-1.  **Browse your stories!**
+## 📖 Component Documentation
 
-    Run `yarn storybook` to see your component's stories at `http://localhost:6006`
+### 🎨 Core Design System Components
 
-## 🔎 What's inside?
+#### [`Button`](src/stories/Button.stories.tsx)
+**Purpose**: Primary user actions and interactions
+**When to use**: For any clickable action like submit, save, delete, navigate
+**Variants**:
+- `primary` - Main actions (submit forms, primary CTAs)
+- `secondary-color` - Secondary actions with brand emphasis
+- `secondary-gray` - Neutral secondary actions
+- `destructive` - Dangerous actions (delete, remove)
 
-A quick look at the top-level files and directories included with this template.
+```tsx
+// Primary action
+<Button variant="primary" size="lg">Create Project</Button>
 
-    .
-    ├── .storybook
-    ├── .yarn
-    ├── node_modules
-    ├── public
-    ├── src
-    ├── .eslintrc.cjs
-    ├── .gitignore
-    ├── .yarnrc.yml
-    ├── index.html
-    ├── LICENSE
-    ├── package.json
-    ├── tsconfig.app.json
-    ├── tsconfig.json
-    ├── tsconfig.node.json
-    ├── yarn.lock
-    ├── vite.config.js
-    └── README.md
+// Destructive action
+<Button variant="destructive" size="md">Delete Account</Button>
 
-1.  **`.storybook`**: This directory contains Storybook's [configuration](https://storybook.js.org/docs/configure) files.
+// With icons
+<Button variant="primary" iconPosition="trailing" icon={<ArrowIcon />}>
+  Continue
+</Button>
+```
 
-2.  **`.yarn`**: This directory contains the configuration files for Yarn including the cache and the global packages.
+#### [`Input`](src/stories/Input.stories.tsx)
+**Purpose**: Text data collection and form fields
+**When to use**: For any text input including emails, passwords, URLs, search
+**Types**:
+- `default` - Standard text inputs
+- `payment` - Credit card and payment fields
+- `leading-dropdown` - With country codes or prefixes
+- `trailing-dropdown` - With units or suffixes
+- `leading-text` - URL inputs with protocol prefix
 
-3.  **`node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages).
+```tsx
+// Basic input
+<Input label="Email Address" type="email" placeholder="Enter email" />
 
-4.  **`public`**: This directory will contain the development and production build of the site.
+// Payment input
+<Input type="payment" label="Card Number" />
 
-5.  **`src`**: This directory will contain all of the code related to what you will see on your application.
+// With validation
+<Input label="Password" type="password" error={true} helperText="Password too weak" />
+```
 
-6.  **`eslintrc.cjs`**: This file is the configuration file for [ESLint](https://eslint.org/).
+#### [`Select`](src/stories/Select.stories.tsx)
+**Purpose**: Single or multiple option selection from predefined lists
+**When to use**: For dropdowns, country selection, categories, user assignment
+**Features**: Search functionality, icon support, grouping
 
-7.  **`.gitignore`**: This file tells git which files it should not track or maintain during the development process of your project.
+```tsx
+// Basic select
+<Select
+  label="Country"
+  options={[
+    { value: 'us', label: 'United States' },
+    { value: 'ca', label: 'Canada' }
+  ]}
+/>
 
-8.  **`.yarnrc.yml`**: This file contains the configuration for Yarn. It's used to define the project's settings, such as caching and other settings.
+// With search
+<Select type="search" label="Assign User" options={users} />
 
-9.  **`index.html`**: This is the HTML page that is served when generating a development or production build.
+// With icons
+<Select type="icon-leading" label="Status" options={statusOptions} />
+```
 
-10. **`LICENSE`**: The template is licensed under the MIT licence.
+#### [`Checkbox`](src/stories/Checkbox.stories.tsx)
+**Purpose**: Binary selection and agreement confirmation
+**When to use**: For terms agreement, feature toggles, multi-select lists
+**Types**: `checkbox` for multiple selections, `radio` for single selection
 
-11. **`package.json`**: Standard manifest file for Node.js projects, which typically includes project specific metadata (such as the project's name, the author among other information). It's based on this file that npm will know which packages are necessary to the project.
+```tsx
+// Simple checkbox
+<Checkbox label="Remember me" />
 
-12. **`tsconfig.app.json`**: This file contains the TypeScript compiler options for the project.
+// Radio buttons
+<Checkbox type="radio" name="plan" label="Basic Plan" />
+<Checkbox type="radio" name="plan" label="Pro Plan" />
 
-13. **`tsconfig.json`**: This file is the root TypeScript configuration file that specifies the root files and the compiler options required to compile the project.
+// With supporting text
+<Checkbox
+  label="Email notifications"
+  showSupportingText={true}
+  supportingText="Receive updates about your account"
+/>
+```
 
-14. **`tsconfig.json`**: This file is the root TypeScript configuration file that specifies the root files and the compiler options that could be extended by other configuration files in the project.
+#### [`Toggle`](src/stories/Toggle.stories.tsx)
+**Purpose**: On/off states and preference settings
+**When to use**: For feature enable/disable, privacy settings, notifications
 
-15. **`tsconfig.node.json`**: This file contains the TypeScript compiler options required to manage the Node.js environment in the project configuration files. Used to help distinguish between configurations for different parts of the project.
+```tsx
+// Settings toggle
+<Toggle label="Enable notifications" showText={true} />
 
-16. **`vite.config.js`**: This is the configuration file for [Vite](https://vitejs.dev/), a build tool that aims to provide a faster and leaner development experience for modern web projects.
+// With supporting text
+<Toggle
+  label="Two-factor authentication"
+  showSupportingText={true}
+  supportingText="Add extra security to your account"
+/>
+```
 
-17. **`yarn.lock`**: This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(Do not change it manually).**
+#### [`Badge`](src/stories/Badge.stories.tsx)
+**Purpose**: Status indicators, labels, and count displays
+**When to use**: For status labels, notification counts, category tags
+**Colors**: `primary`, `gray`, `error`, `warning`, `success`
 
-18. **`README.md`**: A text file containing useful reference information about the project.
+```tsx
+// Status badge
+<Badge color="success">Active</Badge>
 
-## Contribute
+// Count badge
+<Badge color="primary">12</Badge>
 
-If you encounter an issue with the template, we encourage you to open an issue in this template's repository.
+// With icon
+<Badge color="error" icon="trailing">Failed</Badge>
+```
 
-## Learning Storybook
+#### [`Typography`](src/stories/Typography.stories.tsx)
+**Purpose**: Consistent text styling across the application
+**When to use**: For all text content instead of custom styles
+**Scales**:
+- `display-*` - Large headings and hero text
+- `text-*` - Body text and descriptions
 
-1. Read our introductory tutorial at [Learn Storybook](https://storybook.js.org/tutorials/intro-to-storybook/react/en/get-started/).
-2. Learn how to transform your component libraries into design systems in our [Design Systems for Developers](https://storybook.js.org/tutorials/design-systems-for-developers/) tutorial.
-3. See our official documentation at [Storybook](https://storybook.js.org/).
+```tsx
+// Page headings
+<Typography variant="display-xl" weight="semibold">Dashboard</Typography>
+
+// Body text
+<Typography variant="text-lg" color="secondary">
+  Manage your projects and team members
+</Typography>
+
+// Helper components
+<Heading level={2}>Section Title</Heading>
+<Text size="md">Body content</Text>
+<Caption>Helper text</Caption>
+```
+
+### 🧩 Complex Components
+
+#### [`Card`](src/stories/Card.stories.tsx)
+**Purpose**: Content containers with structured information
+**When to use**: For displaying grouped information, dashboard widgets, product cards
+**Features**: Headers, actions, badges, images, interactive states
+
+```tsx
+// Basic card
+<Card title="Project Overview" subtitle="Current status and metrics">
+  <Text>Your project content here</Text>
+</Card>
+
+// With actions
+<Card
+  title="Team Members"
+  badge={{ label: "5 members", color: "primary" }}
+  actions={[
+    { label: "Edit", icon: <EditIcon />, onClick: handleEdit },
+    { label: "Delete", icon: <DeleteIcon />, variant: "subtle" }
+  ]}
+>
+  {membersList}
+</Card>
+
+// Interactive card
+<Card
+  title="Analytics Dashboard"
+  interactive={true}
+  onClick={() => navigate('/analytics')}
+>
+  {chartComponent}
+</Card>
+```
+
+#### [`Table`](src/stories/Table.stories.tsx)
+**Purpose**: Displaying and managing tabular data
+**When to use**: For user lists, data grids, admin panels, reports
+**Features**: Sorting, selection, row actions, pagination
+
+```tsx
+<Table
+  data={users}
+  columns={[
+    { key: 'name', label: 'Name', sortable: true },
+    { key: 'email', label: 'Email' },
+    { key: 'status', label: 'Status', sortable: true }
+  ]}
+  actions={[
+    { label: 'Edit', icon: <EditIcon />, onClick: (row) => editUser(row.id) },
+    { label: 'Delete', icon: <DeleteIcon />, variant: 'destructive' }
+  ]}
+  selectable={true}
+  onSelectionChange={handleSelection}
+/>
+```
+
+#### [`Navigation`](src/stories/Navigation.stories.tsx)
+**Purpose**: Primary app navigation and user account access
+**When to use**: As the main header for web applications
+**Features**: Responsive design, user menu, notifications, search integration
+
+```tsx
+<Navigation
+  brand="Your App Name"
+  items={[
+    { label: "Dashboard", href: "/dashboard", active: true, icon: <HomeIcon /> },
+    { label: "Projects", href: "/projects", badge: "3", icon: <ProjectsIcon /> },
+    { label: "Team", href: "/team", icon: <UsersIcon /> }
+  ]}
+  user={{
+    name: "John Doe",
+    email: "john@company.com",
+    avatar: "/user-avatar.jpg",
+    onProfile: () => navigate('/profile'),
+    onSettings: () => navigate('/settings'),
+    onLogout: handleLogout
+  }}
+  search={<SearchInput />}
+  notificationsCount={5}
+  onNotificationsClick={() => setNotificationsOpen(true)}
+/>
+```
+
+#### [`Sidebar`](src/stories/Sidebar.stories.tsx)
+**Purpose**: Secondary navigation and app section organization
+**When to use**: For admin panels, dashboards with multiple sections, settings pages
+**Features**: Collapsible, nested items, user profile, sections
+
+```tsx
+<Sidebar
+  sections={[
+    {
+      label: "Main",
+      items: [
+        { label: "Dashboard", icon: <DashboardIcon />, active: true },
+        { label: "Analytics", icon: <ChartIcon /> }
+      ]
+    },
+    {
+      label: "Management",
+      items: [
+        {
+          label: "Users",
+          icon: <UsersIcon />,
+          children: [
+            { label: "All Users", badge: "245" },
+            { label: "Pending", badge: "12" }
+          ]
+        }
+      ]
+    }
+  ]}
+  user={{
+    name: "Admin User",
+    email: "admin@company.com",
+    role: "Administrator"
+  }}
+  collapsible={true}
+/>
+```
+
+#### [`PageLayout`](src/stories/PageLayout.stories.tsx)
+**Purpose**: Page structure and consistent spacing
+**When to use**: As the foundation for all application pages
+**Features**: Headers, breadcrumbs, containers, responsive design
+
+```tsx
+// Full page layout
+<PageLayout
+  header={{
+    title: "User Management",
+    subtitle: "Manage user accounts and permissions",
+    breadcrumbs: [
+      { label: "Home", href: "/" },
+      { label: "Admin", href: "/admin" },
+      { label: "Users" }
+    ],
+    actions: (
+      <Group>
+        <Button variant="secondary-gray">Export</Button>
+        <Button variant="primary">Add User</Button>
+      </Group>
+    )
+  }}
+  containerSize="lg"
+>
+  {pageContent}
+</PageLayout>
+
+// Simple page wrapper
+<PageContainer size="md" padding="lg">
+  <Typography variant="display-lg" mb="lg">Settings</Typography>
+  {settingsForm}
+</PageContainer>
+```
+
+#### [`Modal`](src/stories/Modal.stories.tsx)
+**Purpose**: Focused user interactions and confirmations
+**When to use**: For forms, confirmations, detailed views, image galleries
+**Features**: Various sizes, close handling, action buttons
+
+```tsx
+<Modal
+  isOpen={isOpen}
+  onClose={handleClose}
+  size="md"
+  title="Confirm Deletion"
+  description="This action cannot be undone"
+  actions={[
+    { label: "Cancel", variant: "secondary", onClick: handleClose },
+    { label: "Delete", variant: "destructive", onClick: handleDelete }
+  ]}
+>
+  <Text>Are you sure you want to delete this item?</Text>
+</Modal>
+```
+
+### 📊 Data Visualization Components
+
+#### [`Chart`](src/stories/Chart.stories.tsx)
+**Purpose**: Line and area charts for trends over time
+**When to use**: For analytics dashboards, performance metrics, time series data
+
+```tsx
+<Chart
+  data={analyticsData}
+  series={[
+    { name: "Users", color: "#0a0e1b", type: "line" },
+    { name: "Revenue", color: "#059669", type: "area" }
+  ]}
+  height={400}
+  showLegend={true}
+/>
+```
+
+#### [`Table`](src/stories/Table.stories.tsx)
+**Purpose**: Data tables with sorting and actions
+**When to use**: For displaying structured data with user interactions
+
+#### [`PieChart`](src/stories/PieChart.stories.tsx)
+**Purpose**: Part-to-whole relationships and proportions
+**When to use**: For market share, budget allocation, category breakdowns
+
+```tsx
+<PieChart
+  data={[
+    { label: "Desktop", value: 45, color: "#0a0e1b" },
+    { label: "Mobile", value: 35, color: "#059669" },
+    { label: "Tablet", value: 20, color: "#e8b4a2" }
+  ]}
+  size="lg"
+  showLabels={true}
+/>
+```
+
+### 📐 Layout Utilities
+
+#### [`Layout`](src/stories/Layout.stories.tsx) (Mantine-powered)
+**Purpose**: Responsive grid systems and containers
+**When to use**: For organizing content in rows and columns
+
+```tsx
+// Grid layout
+<Container size="lg">
+  <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="lg">
+    <Card>Content 1</Card>
+    <Card>Content 2</Card>
+    <Card>Content 3</Card>
+  </SimpleGrid>
+</Container>
+
+// Flex layout
+<Group justify="space-between" align="center">
+  <Typography variant="text-xl">Page Title</Typography>
+  <Button>Action</Button>
+</Group>
+```
+
+## 🎨 Design Tokens
+
+All design tokens are defined in [`design-tokens.tokens.midnight.json`](design-tokens.tokens.midnight.json) and include:
+
+### Colors
+```json
+{
+  "colorprimary": "#0a0e1b",
+  "colorprimarytext": "#0a0e1b", 
+  "colorsuccess": "#059669",
+  "colorwarning": "#e8b4a2",
+  "colorerror": "#fa5252",
+  "colorinfo": "#00d9ff",
+  "colortext": "#171717",
+  "colortextsecondary": "#525252",
+  "colorbgcontainer": "#ffffff",
+  "colorbgbase": "#fafafa"
+}
+```
+
+### Typography Scale
+Built on **Inter font family** with semantic scaling:
+
+- **Display**: `display-2xl` (36px) to `display-xs` (24px)
+- **Text**: `text-xl` (20px) to `text-xs` (12px)
+- Proper line heights and letter spacing included
+
+### Spacing & Layout
+- Consistent 8px grid system
+- Responsive breakpoints: `sm: 768px`, `md: 1024px`, `lg: 1280px`, `xl: 1440px`
+
+## 🛠 Development Setup
+
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+
+### Local Development
+
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd design-system
+
+# Install dependencies
+npm install
+
+# Start Storybook for development
+npm run storybook
+
+# Run tests
+npm test
+
+# Build the library
+npm run build
+```
+
+### File Structure
+
+```
+src/
+├── stories/           # Component implementations and stories
+│   ├── *.tsx         # Component source files
+│   ├── *.css         # Component styles
+│   ├── *.stories.tsx # Storybook stories
+│   └── theme.ts      # Mantine theme configuration
+├── index.ts          # Main export file
+└── index.css         # Global styles
+
+.storybook/           # Storybook configuration
+design-tokens.tokens.midnight.json  # Design tokens
+```
+
+## 🔧 Implementation Patterns
+
+### Common Page Structures
+
+#### **Dashboard Layout**
+```tsx
+import { PageLayout, Navigation, Card, Chart, Table } from '@your-org/design-system';
+
+function Dashboard() {
+  return (
+    <>
+      <Navigation brand="Dashboard" items={navItems} user={currentUser} />
+      <PageLayout containerSize="lg">
+        <SimpleGrid cols={{ base: 1, md: 2, lg: 4 }} spacing="lg">
+          <Card title="Total Users" badge={{ label: "↗ 12%", color: "success" }}>
+            <Typography variant="display-lg">2,543</Typography>
+          </Card>
+          <Card title="Revenue" badge={{ label: "↘ 3%", color: "error" }}>
+            <Typography variant="display-lg">$12,340</Typography>
+          </Card>
+        </SimpleGrid>
+        <Card title="Analytics Overview">
+          <Chart data={chartData} series={chartSeries} />
+        </Card>
+      </PageLayout>
+    </>
+  );
+}
+```
+
+#### **Data Management Page**
+```tsx
+import { PageLayout, Table, Button, Modal, Input } from '@your-org/design-system';
+
+function UserManagement() {
+  return (
+    <PageLayout
+      header={{
+        title: "User Management",
+        subtitle: "Manage user accounts and permissions",
+        actions: <Button variant="primary">Add User</Button>
+      }}
+    >
+      <Card>
+        <Table
+          data={users}
+          columns={userColumns}
+          actions={tableActions}
+          selectable={true}
+        />
+      </Card>
+
+      <Modal isOpen={showModal} title="Add New User">
+        <Stack spacing="md">
+          <Input label="Full Name" />
+          <Input label="Email" type="email" />
+          <Select label="Role" options={roleOptions} />
+          <Group justify="flex-end">
+            <Button variant="secondary-gray">Cancel</Button>
+            <Button variant="primary">Create User</Button>
+          </Group>
+        </Stack>
+      </Modal>
+    </PageLayout>
+  );
+}
+```
+
+#### **Settings/Form Page**
+```tsx
+import { PageLayout, Card, Input, Select, Toggle, Button } from '@your-org/design-system';
+
+function Settings() {
+  return (
+    <PageLayout
+      header={{
+        title: "Account Settings",
+        breadcrumbs: [
+          { label: "Home", href: "/" },
+          { label: "Settings" }
+        ]
+      }}
+      containerSize="md"
+    >
+      <Stack spacing="lg">
+        <Card title="Profile Information">
+          <Stack spacing="md">
+            <Input label="Display Name" defaultValue="John Doe" />
+            <Input label="Email" type="email" defaultValue="john@company.com" />
+            <Select label="Timezone" options={timezoneOptions} />
+          </Stack>
+        </Card>
+
+        <Card title="Preferences">
+          <Stack spacing="md">
+            <Toggle label="Email Notifications" defaultChecked={true} />
+            <Toggle label="Two-Factor Authentication" />
+            <Toggle label="Marketing Communications" />
+          </Stack>
+        </Card>
+
+        <Group justify="flex-end">
+          <Button variant="secondary-gray">Cancel</Button>
+          <Button variant="primary">Save Changes</Button>
+        </Group>
+      </Stack>
+    </PageLayout>
+  );
+}
+```
+
+#### **Application with Sidebar**
+```tsx
+import { Sidebar, PageLayout, Card } from '@your-org/design-system';
+
+function AdminPanel() {
+  return (
+    <AppShell navbar={{ width: 280, breakpoint: 'sm' }}>
+      <AppShell.Navbar>
+        <Sidebar
+          sections={adminSections}
+          user={adminUser}
+          collapsible={true}
+        />
+      </AppShell.Navbar>
+
+      <AppShell.Main>
+        <PageLayout containerSize="lg">
+          {/* Page content */}
+        </PageLayout>
+      </AppShell.Main>
+    </AppShell>
+  );
+}
+```
+
+
+## 📖 External References
+
+### Design Inspiration
+- **[Untitled UI](https://untitledui.com/)** - Original Figma design system
+- **[Inter Font](https://fonts.google.com/specimen/Inter)** - Typography foundation
+
+### Technical Documentation
+- **[Mantine](https://mantine.dev/)** - Core component library
+- **[Storybook](https://storybook.js.org/)** - Component documentation
+- **[React](https://react.dev/)** - UI framework
+- **[TypeScript](https://www.typescriptlang.org/)** - Type safety
+
+### Accessibility
+- **[WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)** - All components follow AA standards
+- **[ARIA Patterns](https://www.w3.org/WAI/ARIA/apg/patterns/)** - Proper semantic markup
+
+## 🎯 Best Practices
+
+### Component Usage
+1. **Always use the MantineProvider** with our custom theme
+2. **Import design tokens** instead of hardcoding colors
+3. **Use semantic component variants** (primary, secondary, etc.)
+4. **Follow the typography scale** instead of custom font sizes
+5. **Test responsive behavior** on mobile and desktop
+
+### Builder Fusion Optimization
+1. **Combine layout components** for complex page structures
+2. **Use consistent spacing** with our 8px grid system
+3. **Leverage component variants** for different UI states
+4. **Include proper labels** for accessibility
+5. **Test with real data** to ensure components scale properly
+
+## 🔄 Updates & Versioning
+
+- **Major version**: Breaking API changes
+- **Minor version**: New components or features
+- **Patch version**: Bug fixes and improvements
+
+### Changelog
+See [CHANGELOG.md](CHANGELOG.md) for detailed release notes.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/new-component`
+3. Add your component with tests and stories
+4. Submit a pull request
+
+### Component Checklist
+- [ ] TypeScript interfaces exported
+- [ ] Comprehensive Storybook stories
+- [ ] Accessibility testing completed
+- [ ] Responsive design verified
+- [ ] Design tokens used consistently
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+## 🆘 Support
+
+- **Documentation**: Run `npm run storybook` for local docs
+- **Issues**: [GitHub Issues](https://github.com/your-org/design-system/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/your-org/design-system/discussions)
+
+---
+
+**Built with ❤️ for Builder Fusion AI-powered development**
