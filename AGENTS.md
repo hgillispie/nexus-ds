@@ -6,7 +6,8 @@ This is a production-ready React component library built with TypeScript and Tai
 
 When importing from Figma or creating components, always generate a complete component package including the main component file, TypeScript types, Storybook stories, and documentation. Think production-ready from the start.
 
-
+## Design Tokens
+-View Design Tokens in DESIGN-TOKENS.md
 
 ## Component Structure
 
