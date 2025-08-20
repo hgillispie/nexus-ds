@@ -35,17 +35,12 @@ export { Sidebar, DrawerSidebar } from './stories/Sidebar';
 // Design System Theme
 export { designSystemTheme } from './stories/theme';
 
-// Mantine Layout Components (re-exported for convenience)
-export {
-  Container,
-  Grid,
-  Flex,
-  Group,
-  Stack,
-  SimpleGrid,
-  MantineProvider,
-  createTheme
-} from '@mantine/core';
+// Custom Layout Components
+export { Container } from './stories/Container';
+export { Grid, GridCol } from './stories/Grid';
+export { SimpleGrid } from './stories/SimpleGrid';
+export { Flex, Group, Stack } from './stories/Flex';
+export { CustomCard as Card, CardSection } from './stories/CustomCard';
 
 // Type exports
 export type { ButtonProps } from './stories/Button';
@@ -91,3 +86,10 @@ export type {
   SidebarSection,
   SidebarUserProps
 } from './stories/Sidebar';
+
+// Custom layout component types
+export type { ContainerProps } from './stories/Container';
+export type { GridProps, GridColProps } from './stories/Grid';
+export type { SimpleGridProps } from './stories/SimpleGrid';
+export type { FlexProps, GroupProps, StackProps } from './stories/Flex';
+export type { CustomCardProps, CardSectionProps } from './stories/CustomCard';
