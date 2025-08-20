@@ -450,7 +450,7 @@ function MyPage() {
 
 ## 🎨 Design Tokens
 
-All design tokens are defined in [`DESIGN-TOKENS.md`](DESIGN-TOKENS.md) and include:
+All design tokens are defined in [`design-tokens.tokens.midnight.json`](design-tokens.tokens.midnight.json) and include:
 
 ### Colors
 ```json
@@ -518,7 +518,7 @@ src/
 └── index.css         # Global styles
 
 .storybook/           # Storybook configuration
-DESIGN-TOKENS.md                     # Design tokens configuration
+design-tokens.tokens.midnight.json  # Design tokens
 ```
 
 ## 🔧 Implementation Patterns

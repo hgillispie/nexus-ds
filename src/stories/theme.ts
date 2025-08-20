@@ -1,6 +1,6 @@
 import { createTheme, MantineColorsTuple } from '@mantine/core';
 
-// Design system colors from DESIGN-TOKENS.md
+// Design system colors from design-tokens.tokens.midnight.json
 const primaryColors: MantineColorsTuple = [
   '#e5e7eb', // primary.1
   '#d1d5db', // primary.2

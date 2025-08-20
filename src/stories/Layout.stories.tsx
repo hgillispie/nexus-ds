@@ -8,7 +8,7 @@ const theme = createTheme({
   fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
   primaryColor: 'dark',
   colors: {
-    // Use colors from DESIGN-TOKENS.md
+    // Use colors from design-tokens.tokens.midnight.json
     dark: [
       '#f5f5f5', // neutral.2
       '#e5e5e5', // colorbordersecondary
