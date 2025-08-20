@@ -78,7 +78,7 @@ input[type="submit"] {
   }
 }
 
-@font-face {
+/* @font-face {
   font-family: "Nunito Sans";
   font-style: italic;
   font-weight: 400;
@@ -100,7 +100,7 @@ input[type="submit"] {
   font-weight: 800;
   src: url(https://fonts.gstatic.com/s/nunitosans/v6/pe03MImSLYBIv1o4X1M8cc8aBc5tU1Q.ttf)
     format("truetype");
-}
+} */
 
 .type-light {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

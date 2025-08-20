@@ -2,7 +2,13 @@
     "command": "yarn storybook",
     "serverUrl": "http://localhost:6006",
     "commitMode": "draft-prs",
-
+    "repositories": [
+        {
+            "name": "ds-lab",
+            "url": "https://github.com/hgillispie/ds-lab.git",
+            "type": "git"
+        }
+    ],
     "allowedCommands": [
       "npm *",
       "pnpm *",

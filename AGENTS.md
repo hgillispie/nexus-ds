@@ -2,12 +2,14 @@
 
 This is a production-ready React component library built with TypeScript and Tailwind CSS. Every component should be fully documented, tested, and include Storybook stories. We're building a professional design system that other teams will depend on.
 
+Ensure the component viewing window in the stories are large enough to show the whole component. Create new lines and reduce the number of component variants rather than have them crowded on a page.
+
 ## Core Principles
 
 When importing from Figma or creating components, always generate a complete component package including the main component file, TypeScript types, Storybook stories, and documentation. Think production-ready from the start.
 
 ## Design Tokens
--View Design Tokens in DESIGN-TOKENS.md
+View Design Tokens in DESIGN-TOKENS.md as the source of truth
 
 ## Component Structure
 
@@ -20,7 +22,7 @@ For every component, create this structure:
 
 ## Technical Requirements
 
-Use TypeScript interfaces for all props with proper JSDoc comments. Export types separately for consumer applications. Use Tailwind CSS exclusively for styling - no inline styles or CSS modules. Include proper accessibility with ARIA labels, keyboard navigation, and focus management. Forward refs for all interactive components.
+Use TypeScript interfaces for all props with proper JSDoc comments. Export types separately for consumer applications. Use Tailwind CSS exclusively for styling - no inline styles or CSS modules. Reference the figma imports for styling as well as DESIGN-TOKENS.md. Include proper accessibility with ARIA labels, keyboard navigation, and focus management. Forward refs for all interactive components. All components, stories and documentation should use Inter font.
 
 ## Storybook Stories
 

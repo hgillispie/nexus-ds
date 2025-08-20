@@ -1,27 +1,40 @@
 import type { Preview } from "@storybook/react";
 import '@mantine/core/styles.css';
 import '../src/index.css';
+import './design-tokens.css';
+import theme from './theme';
 
 const preview: Preview = {
   parameters: {
+    docs: {
+      theme,
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/,
       },
     },
-    docs: {
-      source: {
-        state: 'open',
-      },
-    },
     layout: 'padded',
     backgrounds: {
-      default: 'white',
+      default: 'light',
       values: [
-        { name: 'white', value: '#ffffff' },
-        { name: 'light', value: '#f8f8f8' },
-        { name: 'dark', value: '#333333' },
+        {
+          name: 'light',
+          value: '#FFFFFF', // neutral.0
+        },
+        {
+          name: 'secondary',
+          value: '#FAFAFA', // neutral.50
+        },
+        {
+          name: 'tertiary',
+          value: '#F5F5F5', // neutral.100
+        },
+        {
+          name: 'dark',
+          value: '#0A0E1B', // primary.600
+        },
       ],
     },
     viewport: {
