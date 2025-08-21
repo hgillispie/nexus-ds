@@ -140,52 +140,7 @@ import { Container, Grid, GridCol, Card, Text, Button } from '../../nexus-ds/src
 
 For complete page structures, use our specialized layout components:
 
-### PageLayout
-Complete page wrapper with header, container, and footer support.
-
-```tsx
-import { PageLayout } from '../../nexus-ds/src/index';
-
-<PageLayout
-  header={{
-    title: "Dashboard",
-    subtitle: "Welcome to your application",
-    breadcrumbs: [
-      { label: "Home", href: "/" },
-      { label: "Dashboard" }
-    ],
-    actions: <Button variant="primary">New Project</Button>
-  }}
-  containerSize="lg"
->
-  <YourPageContent />
-</PageLayout>
-```
-
-### PageHeader
-Standalone header component for consistent page titles.
-
-```tsx
-import { PageHeader } from '../../nexus-ds/src/index';
-
-<PageHeader
-  title="User Management"
-  subtitle="Manage user accounts and permissions"
-  breadcrumbs={breadcrumbItems}
-  actions={<Button variant="primary">Add User</Button>}
-/>
-```
-
-### PageContainer
-Simple container wrapper for consistent page content.
-
-```tsx
-import { PageContainer } from '../../nexus-ds/src/index';
-
-<PageContainer size="md" padding="lg">
-  <YourContent />
-</PageContainer>
-```
+**Note**: PageLayout components have been removed. Use Container and other layout components instead for better flexibility.
 
 ## Next Steps
 

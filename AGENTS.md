@@ -74,24 +74,16 @@ IMPORTANT: The Select component uses an `options` prop with an array of option o
 </Select>
 ```
 
-### PageLayout Component
-Use the PageLayout component for consistent page structure. The header prop expects an object with title, subtitle, breadcrumbs, and actions:
+### Layout Components
+Use Container and layout components for page structure:
 
 ```tsx
-<PageLayout
-  header={{
-    title: "Dashboard",
-    subtitle: "Welcome to your application", 
-    breadcrumbs: [
-      { label: "Home", href: "/" },
-      { label: "Dashboard" }
-    ],
-    actions: <Button variant="primary">New Project</Button>
-  }}
-  containerSize="lg"
->
-  {/* Your page content */}
-</PageLayout>
+<Container size="lg">
+  <Card title="Dashboard">
+    <Button variant="primary">New Project</Button>
+    {/* Your page content */}
+  </Card>
+</Container>
 ```
 
 ## Remember

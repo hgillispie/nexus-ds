@@ -35,25 +35,20 @@ import {
   Button, 
   Card, 
   Navigation, 
-  PageLayout, 
+  Container,
   Typography 
 } from '../../nexus-ds/src/index';
 
 function MyPage() {
   return (
-    <PageLayout
-      header={{
-        title: "Dashboard",
-        subtitle: "Welcome to your application",
-        actions: <Button>New Project</Button>
-      }}
-    >
+    <Container size="lg">
       <Card title="Welcome">
         <Typography variant="text-lg">
           Get started with your new application using our design system.
         </Typography>
+        <Button>New Project</Button>
       </Card>
-    </PageLayout>
+    </Container>
   );
 }
 ```
@@ -331,40 +326,6 @@ function MyPage() {
 />
 ```
 
-#### [`PageLayout`](src/stories/PageLayout.stories.tsx)
-**Purpose**: Page structure and consistent spacing
-**When to use**: As the foundation for all application pages
-**Features**: Headers, breadcrumbs, containers, responsive design
-
-```tsx
-// Full page layout
-<PageLayout
-  header={{
-    title: "User Management",
-    subtitle: "Manage user accounts and permissions",
-    breadcrumbs: [
-      { label: "Home", href: "/" },
-      { label: "Admin", href: "/admin" },
-      { label: "Users" }
-    ],
-    actions: (
-      <Group>
-        <Button variant="secondary-gray">Export</Button>
-        <Button variant="primary">Add User</Button>
-      </Group>
-    )
-  }}
-  containerSize="lg"
->
-  {pageContent}
-</PageLayout>
-
-// Simple page wrapper
-<PageContainer size="md" padding="lg">
-  <Typography variant="display-lg" mb="lg">Settings</Typography>
-  {settingsForm}
-</PageContainer>
-```
 
 #### [`Modal`](src/stories/Modal.stories.tsx)
 **Purpose**: Focused user interactions and confirmations
@@ -527,13 +488,13 @@ DESIGN-TOKENS.md                     # Design tokens configuration
 
 #### **Dashboard Layout**
 ```tsx
-import { PageLayout, Navigation, Card, Chart, Table } from '../../nexus-ds/src/index';
+import { Navigation, Card, Chart, Table, Container, SimpleGrid, Typography } from '../../nexus-ds/src/index';
 
 function Dashboard() {
   return (
     <>
       <Navigation brand="Dashboard" items={navItems} user={currentUser} />
-      <PageLayout containerSize="lg">
+      <Container size="lg">
         <SimpleGrid cols={{ base: 1, md: 2, lg: 4 }} spacing="lg">
           <Card title="Total Users" badge={{ label: "↗ 12%", color: "success" }}>
             <Typography variant="display-lg">2,543</Typography>
@@ -545,7 +506,7 @@ function Dashboard() {
         <Card title="Analytics Overview">
           <Chart data={chartData} series={chartSeries} />
         </Card>
-      </PageLayout>
+      </Container>
     </>
   );
 }
@@ -553,17 +514,11 @@ function Dashboard() {
 
 #### **Data Management Page**
 ```tsx
-import { PageLayout, Table, Button, Modal, Input } from '../../nexus-ds/src/index';
+import { Container, Table, Button, Modal, Input, Card, Stack, Group, Select } from '../../nexus-ds/src/index';
 
 function UserManagement() {
   return (
-    <PageLayout
-      header={{
-        title: "User Management",
-        subtitle: "Manage user accounts and permissions",
-        actions: <Button variant="primary">Add User</Button>
-      }}
-    >
+    <Container size="lg">
       <Card>
         <Table
           data={users}
@@ -584,27 +539,18 @@ function UserManagement() {
           </Group>
         </Stack>
       </Modal>
-    </PageLayout>
+    </Container>
   );
 }
 ```
 
 #### **Settings/Form Page**
 ```tsx
-import { PageLayout, Card, Input, Select, Toggle, Button } from '../../nexus-ds/src/index';
+import { Container, Card, Input, Select, Toggle, Button, Stack, Group } from '../../nexus-ds/src/index';
 
 function Settings() {
   return (
-    <PageLayout
-      header={{
-        title: "Account Settings",
-        breadcrumbs: [
-          { label: "Home", href: "/" },
-          { label: "Settings" }
-        ]
-      }}
-      containerSize="md"
-    >
+    <Container size="md">
       <Stack spacing="lg">
         <Card title="Profile Information">
           <Stack spacing="md">
@@ -627,14 +573,14 @@ function Settings() {
           <Button variant="primary">Save Changes</Button>
         </Group>
       </Stack>
-    </PageLayout>
+    </Container>
   );
 }
 ```
 
 #### **Application with Sidebar**
 ```tsx
-import { Sidebar, PageLayout, Card } from '../../nexus-ds/src/index';
+import { Sidebar, Container, Card } from '../../nexus-ds/src/index';
 
 function AdminPanel() {
   return (
@@ -648,9 +594,9 @@ function AdminPanel() {
       </AppShell.Navbar>
 
       <AppShell.Main>
-        <PageLayout containerSize="lg">
+        <Container size="lg">
           {/* Page content */}
-        </PageLayout>
+        </Container>
       </AppShell.Main>
     </AppShell>
   );
