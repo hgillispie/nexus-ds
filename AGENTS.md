@@ -52,6 +52,48 @@ For each component, create a main story file that includes a Default story, indi
 
 Before considering any component complete, ensure it has TypeScript types for all props, Storybook stories for all variants, keyboard navigation support, responsive design consideration, proper ARIA labels, loading and error states if applicable, and export from the main index file.
 
+## Component Usage Guidelines
+
+### Select Component
+IMPORTANT: The Select component uses an `options` prop with an array of option objects, NOT HTML `<option>` children:
+
+```tsx
+// ✅ CORRECT: Use options prop
+<Select
+  label="Country"
+  options={[
+    { value: 'us', label: 'United States' },
+    { value: 'ca', label: 'Canada' }
+  ]}
+/>
+
+// ❌ INCORRECT: Don't use HTML option children
+<Select label="Country">
+  <option value="us">United States</option>
+  <option value="ca">Canada</option>
+</Select>
+```
+
+### PageLayout Component
+Use the PageLayout component for consistent page structure. The header prop expects an object with title, subtitle, breadcrumbs, and actions:
+
+```tsx
+<PageLayout
+  header={{
+    title: "Dashboard",
+    subtitle: "Welcome to your application", 
+    breadcrumbs: [
+      { label: "Home", href: "/" },
+      { label: "Dashboard" }
+    ],
+    actions: <Button variant="primary">New Project</Button>
+  }}
+  containerSize="lg"
+>
+  {/* Your page content */}
+</PageLayout>
+```
+
 ## Remember
 
 We're building a design system that will be used across multiple projects. Every component should be polished, well-documented, and ready for production use. The goal is to create components that developers will love to use and that maintain consistency across applications. 

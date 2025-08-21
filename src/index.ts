@@ -30,7 +30,7 @@ export { default as Icons } from './stories/Icons';
 // New Layout and Navigation Components
 export { Navigation } from './stories/Navigation';
 export { Card } from './stories/Card';
-export { PageLayout, PageHeader, PageContainer, PageContent } from './stories/PageLayout';
+// PageLayout removed - use Container and other layout components instead
 export { Sidebar, DrawerSidebar } from './stories/Sidebar';
 
 // Design System Theme
@@ -75,13 +75,7 @@ export type { IconProps, IconName } from './stories/Icons';
 // New component type exports
 export type { NavigationProps, NavigationItem, UserMenuProps } from './stories/Navigation';
 export type { CardProps, CardAction } from './stories/Card';
-export type {
-  PageLayoutProps,
-  PageHeaderProps,
-  PageContainerProps,
-  PageContentProps,
-  BreadcrumbItem
-} from './stories/PageLayout';
+// PageLayout types removed
 export type {
   SidebarProps,
   DrawerSidebarProps,

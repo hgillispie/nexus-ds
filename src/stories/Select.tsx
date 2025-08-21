@@ -32,7 +32,7 @@ export interface SelectProps {
   /**
    * Array of options to display
    */
-  options: SelectOptionProps[];
+  options?: SelectOptionProps[];
   
   /**
    * Currently selected value
@@ -246,13 +246,13 @@ SelectOption.displayName = 'SelectOption';
  * Select dropdown component
  */
 export const SelectDropdown = React.forwardRef<HTMLDivElement, {
-  options: SelectOptionProps[];
+  options?: SelectOptionProps[];
   selectedValue?: string | number;
   onSelect: (value: string | number) => void;
   isOpen: boolean;
   showIcons?: boolean;
 }>(({
-  options,
+  options = [],
   selectedValue,
   onSelect,
   isOpen,
@@ -316,14 +316,14 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(({
   
   const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
   
-  const selectedOption = options.find(option => option.value === value);
+  const selectedOption = options?.find(option => option.value === value);
   
   const filteredOptions = type === 'search' && searchText
-    ? options.filter(option => 
+    ? (options || []).filter(option => 
         option.label.toLowerCase().includes(searchText.toLowerCase()) ||
         (option.supportingText && option.supportingText.toLowerCase().includes(searchText.toLowerCase()))
       )
-    : options;
+    : (options || []);
 
   const handleToggle = () => {
     const newIsOpen = !isOpen;

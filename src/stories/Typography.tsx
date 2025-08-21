@@ -99,9 +99,10 @@ export const Text: React.FC<Omit<TypographyProps, 'variant'> & { size?: 'xl' | '
   weight = 'regular',
   ...props
 }) => {
+  const variant = `text-${size}` as TypographyProps['variant'];
   return (
     <Typography 
-      variant={`text-${size}` as TypographyProps['variant']}
+      variant={variant}
       weight={weight}
       {...props}
     />
