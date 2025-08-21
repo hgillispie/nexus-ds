@@ -66,23 +66,23 @@ export const Heading: React.FC<Omit<TypographyProps, 'variant'> & { level?: 1 | 
   weight = 'semibold',
   ...props 
 }) => {
-  const variantMap = {
+  const variantMap: Record<1 | 2 | 3 | 4 | 5 | 6, TypographyProps['variant']> = {
     1: 'display-2xl',
     2: 'display-xl',
     3: 'display-lg',
     4: 'display-md',
     5: 'display-sm',
     6: 'display-xs'
-  } as const;
+  };
   
-  const asMap = {
+  const asMap: Record<1 | 2 | 3 | 4 | 5 | 6, 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'> = {
     1: 'h1',
     2: 'h2', 
     3: 'h3',
     4: 'h4',
     5: 'h5',
     6: 'h6'
-  } as const;
+  };
   
   return (
     <Typography 

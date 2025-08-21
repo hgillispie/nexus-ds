@@ -1,18 +1,41 @@
 {
-  "name": "intro-storybook-react-template",
-  "version": "0.2.0",
-  "description": "Starter template to get up and running quickly with React and Storybook",
-  "author": "Chromatic <https://chromatic.com/>",
+  "name": "nexus-ds",
+  "version": "1.0.0",
+  "description": "Nexus Design System - A comprehensive React design system built with TypeScript",
+  "author": "Hunter Gillispie <hunter@example.com>",
   "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles.css": "./dist/style.css"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/chromaui/intro-storybook-react-template"
+    "url": "https://github.com/hgillispie/nexus-ds.git"
   },
   "bugs": {
-    "url": "https://github.com/chromaui/intro-storybook-react-template/issues"
+    "url": "https://github.com/hgillispie/nexus-ds/issues"
   },
+  "homepage": "https://github.com/hgillispie/nexus-ds#readme",
   "license": "MIT",
-  "private": true,
+  "keywords": [
+    "react",
+    "design-system",
+    "components",
+    "typescript",
+    "storybook",
+    "builder-fusion"
+  ],
   "dependencies": {
     "@fontsource/inter": "^5.2.6",
     "@fontsource/space-grotesk": "^5.2.8",
@@ -21,7 +44,9 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build",
+    "build:lib": "tsc && vite build --mode lib",
+    "prepublishOnly": "npm run build:lib",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -60,5 +85,17 @@
       "plugin:storybook/recommended"
     ]
   },
-  "packageManager": "yarn@4.5.0"
+  "packageManager": "yarn@4.5.0",
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    },
+    "react-dom": {
+      "optional": false
+    }
+  }
 }
