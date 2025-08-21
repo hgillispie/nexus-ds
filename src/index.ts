@@ -41,7 +41,7 @@ export { Container } from './stories/Container';
 export { Grid, GridCol } from './stories/Grid';
 export { SimpleGrid } from './stories/SimpleGrid';
 export { Flex, Group, Stack } from './stories/Flex';
-export { CustomCard, CardSection } from './stories/CustomCard';
+// CustomCard removed - use Card component instead
 
 // Type exports
 export type { ButtonProps } from './stories/Button';
@@ -95,4 +95,4 @@ export type { ContainerProps } from './stories/Container';
 export type { GridProps, GridColProps } from './stories/Grid';
 export type { SimpleGridProps } from './stories/SimpleGrid';
 export type { FlexProps, GroupProps, StackProps } from './stories/Flex';
-export type { CustomCardProps, CardSectionProps } from './stories/CustomCard';
+// CustomCard types removed - use Card component types instead

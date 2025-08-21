@@ -8,7 +8,7 @@ This design system includes **custom layout components** built specifically for 
 Responsive container with predefined max-widths for different screen sizes.
 
 ```tsx
-import { Container } from '@your-org/design-system';
+import { Container } from 'nexus-ds';
 
 <Container size="lg">
   <YourContent />
@@ -21,7 +21,7 @@ import { Container } from '@your-org/design-system';
 12-column responsive grid system with flexible column spans.
 
 ```tsx
-import { Grid, GridCol } from '@your-org/design-system';
+import { Grid, GridCol } from 'nexus-ds';
 
 <Grid gap="24px">
   <GridCol span={6}>Half width</GridCol>
@@ -34,7 +34,7 @@ import { Grid, GridCol } from '@your-org/design-system';
 Auto-fitting grid with equal-width columns that adapts to screen size.
 
 ```tsx
-import { SimpleGrid } from '@your-org/design-system';
+import { SimpleGrid } from 'nexus-ds';
 
 <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="24px">
   <CustomCard>Item 1</CustomCard>
@@ -47,21 +47,19 @@ import { SimpleGrid } from '@your-org/design-system';
 Content container with border, shadow, and customizable styling.
 
 ```tsx
-import { CustomCard, CardSection } from '@your-org/design-system';
+import { Card } from 'nexus-ds';
 
-<CustomCard shadow="sm" padding="24px" radius="8px" withBorder>
-  <CardSection>
-    <img src="..." alt="Example" />
-  </CardSection>
+<Card variant="elevated" padding="lg" radius="md" withBorder>
+  <img src="..." alt="Example" />
   <Text>Content</Text>
-</CustomCard>
+</Card>
 ```
 
 ### Flex Layouts
 Modern flexbox utilities for alignment and distribution.
 
 ```tsx
-import { Flex, Group, Stack } from '@your-org/design-system';
+import { Flex, Group, Stack } from 'nexus-ds';
 
 // Generic flex container
 <Flex direction="row" justify="center" align="center" gap="16px">
@@ -87,7 +85,7 @@ import { Flex, Group, Stack } from '@your-org/design-system';
 The layout components are configured to use your design system theme:
 
 ```tsx
-import { designSystemTheme } from '@your-org/design-system';
+import { designSystemTheme } from 'nexus-ds';
 
 // Theme includes:
 // - Inter font family
@@ -103,28 +101,28 @@ import { designSystemTheme } from '@your-org/design-system';
 Layout components work seamlessly with your custom components:
 
 ```tsx
-import { Container, Grid, GridCol, CustomCard } from '@your-org/design-system';
-import { Text, Button } from '@your-org/design-system';
+import { Container, Grid, GridCol, Card } from 'nexus-ds';
+import { Text, Button } from 'nexus-ds';
 
 <Container size="lg">
   <Grid gap="24px">
     <GridCol span={8}>
-      <CustomCard shadow="sm" padding="24px">
-        <Text fw={600} size="xl" mb="sm">
+      <Card variant="elevated" padding="lg">
+        <Text weight="semibold" size="xl">
           Page Title
         </Text>
-        <Text size="lg" c="dimmed" mb="md">
+        <Text size="lg" color="secondary">
           Page description using your typography system
         </Text>
         <Button variant="primary" size="lg">
           Your Custom Button
         </Button>
-      </CustomCard>
+      </Card>
     </GridCol>
     <GridCol span={4}>
-      <CustomCard shadow="sm" padding="24px">
+      <Card variant="elevated" padding="lg">
         <Text>Sidebar content</Text>
-      </CustomCard>
+      </Card>
     </GridCol>
   </Grid>
 </Container>
@@ -147,7 +145,7 @@ For complete page structures, use our specialized layout components:
 Complete page wrapper with header, container, and footer support.
 
 ```tsx
-import { PageLayout } from '@your-org/design-system';
+import { PageLayout } from 'nexus-ds';
 
 <PageLayout
   header={{
@@ -169,7 +167,7 @@ import { PageLayout } from '@your-org/design-system';
 Standalone header component for consistent page titles.
 
 ```tsx
-import { PageHeader } from '@your-org/design-system';
+import { PageHeader } from 'nexus-ds';
 
 <PageHeader
   title="User Management"
@@ -183,7 +181,7 @@ import { PageHeader } from '@your-org/design-system';
 Simple container wrapper for consistent page content.
 
 ```tsx
-import { PageContainer } from '@your-org/design-system';
+import { PageContainer } from 'nexus-ds';
 
 <PageContainer size="md" padding="lg">
   <YourContent />

@@ -4,8 +4,8 @@
     "commitMode": "draft-prs",
     "repositories": [
         {
-            "name": "ds-lab",
-            "url": "https://github.com/hgillispie/ds-lab.git",
+            "name": "nexus-ds",
+            "url": "https://github.com/hgillispie/nexus-ds.git",
             "type": "git"
         }
     ],

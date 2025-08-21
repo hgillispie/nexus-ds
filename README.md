@@ -7,17 +7,17 @@ A comprehensive React design system built with TypeScript and custom components.
 ### Installation
 
 ```bash
-npm install @your-org/design-system
+npm install nexus-ds
 # or
-yarn add @your-org/design-system
+yarn add nexus-ds
 ```
 
 ### Basic Setup
 
 ```tsx
-import { designSystemTheme } from '@your-org/design-system';
+import { designSystemTheme } from 'nexus-ds';
 // Import global styles
-import '@your-org/design-system/styles.css';
+import 'nexus-ds/styles.css';
 
 function App() {
   return (
@@ -37,7 +37,7 @@ import {
   Navigation, 
   PageLayout, 
   Typography 
-} from '@your-org/design-system';
+} from 'nexus-ds';
 
 function MyPage() {
   return (
@@ -527,7 +527,7 @@ DESIGN-TOKENS.md                     # Design tokens configuration
 
 #### **Dashboard Layout**
 ```tsx
-import { PageLayout, Navigation, Card, Chart, Table } from '@your-org/design-system';
+import { PageLayout, Navigation, Card, Chart, Table } from 'nexus-ds';
 
 function Dashboard() {
   return (
@@ -553,7 +553,7 @@ function Dashboard() {
 
 #### **Data Management Page**
 ```tsx
-import { PageLayout, Table, Button, Modal, Input } from '@your-org/design-system';
+import { PageLayout, Table, Button, Modal, Input } from 'nexus-ds';
 
 function UserManagement() {
   return (
@@ -591,7 +591,7 @@ function UserManagement() {
 
 #### **Settings/Form Page**
 ```tsx
-import { PageLayout, Card, Input, Select, Toggle, Button } from '@your-org/design-system';
+import { PageLayout, Card, Input, Select, Toggle, Button } from 'nexus-ds';
 
 function Settings() {
   return (
@@ -634,7 +634,7 @@ function Settings() {
 
 #### **Application with Sidebar**
 ```tsx
-import { Sidebar, PageLayout, Card } from '@your-org/design-system';
+import { Sidebar, PageLayout, Card } from 'nexus-ds';
 
 function AdminPanel() {
   return (
@@ -704,8 +704,8 @@ See [CHANGELOG.md](CHANGELOG.md) for detailed release notes.
 
 ```bash
 # Clone the repository
-git clone https://github.com/hgillispie/ds-lab.git
-cd ds-lab
+git clone https://github.com/hgillispie/nexus-ds.git
+cd nexus-ds
 
 # Install dependencies
 yarn install
@@ -846,7 +846,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 ## 🆘 Support
 
 - **Documentation**: Run `npm run storybook` or `yarn storybook` for local docs
-- **Issues**: [GitHub Issues](https://github.com/hgillispie/ds-lab/issues)
+- **Issues**: [GitHub Issues](https://github.com/hgillispie/nexus-ds/issues)
 - **Builder.io**: [Builder.io Documentation](https://www.builder.io/c/docs)
 
 ---
