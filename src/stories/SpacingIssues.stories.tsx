@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SimpleGrid } from './SimpleGrid';
-import { CustomCard } from './CustomCard';
+import { Card } from './Card';
 import { Text } from './Text';
 import { Heading } from './Heading';
 import { Button } from './Button';
