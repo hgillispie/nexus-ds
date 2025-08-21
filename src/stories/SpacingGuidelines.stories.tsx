@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Container } from './Container';
 import { Card } from './Card';
 import { Text } from './Text';
-import { Heading } from './Heading';
 import { Button } from './Button';
 import { Badge } from './Badge';
 import { Group, Stack } from './Flex';
@@ -106,13 +105,13 @@ export const CardSpacingExample: Story = {
     <Container size="lg">
       <div style={{ padding: tokens.spacing[8] }}>
         <div style={{ marginBottom: tokens.spacing[8] }}>
-          <Heading level={1}>Card Spacing Examples</Heading>
+          <Text component="h1" size="3xl" fw="bold">Card Spacing Examples</Text>
         </div>
         
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: tokens.spacing[8] }}>
           <Card padding="xl" radius="md" withBorder>
             <div style={{ marginBottom: tokens.spacing[4] }}>
-              <Heading level={3}>Proper Card Spacing</Heading>
+              <Text component="h3" size="lg" fw="semibold">Proper Card Spacing</Text>
             </div>
             <div style={{ marginBottom: tokens.spacing[5] }}>
               <Text size="sm" c="dimmed">This card demonstrates proper internal spacing</Text>
@@ -128,7 +127,7 @@ export const CardSpacingExample: Story = {
 
           <Card padding="xl" radius="md" withBorder>
             <div style={{ marginBottom: tokens.spacing[4] }}>
-              <Heading level={3}>With Badge and Actions</Heading>
+              <Text component="h3" size="lg" fw="semibold">With Badge and Actions</Text>
             </div>
             <div style={{ marginBottom: tokens.spacing[5] }}>
               <Badge color="primary" variant="filled">Featured</Badge>
@@ -170,13 +169,13 @@ export const TypographySpacingExample: Story = {
     <Container size="md">
       <div style={{ padding: tokens.spacing[8] }}>
         <div style={{ marginBottom: tokens.spacing[10] }}>
-          <Heading level={1}>Typography Spacing Guidelines</Heading>
+          <Text component="h1" size="3xl" fw="bold">Typography Spacing Guidelines</Text>
         </div>
         
         <Stack gap={tokens.spacing[8]}>
           <div>
             <div style={{ marginBottom: tokens.spacing[4] }}>
-              <Heading level={2}>Section Heading</Heading>
+              <Text component="h2" size="2xl" fw="semibold">Section Heading</Text>
             </div>
             <div style={{ marginBottom: tokens.spacing[5] }}>
               <Text>
@@ -198,7 +197,7 @@ export const TypographySpacingExample: Story = {
 
           <div>
             <div style={{ marginBottom: tokens.spacing[4] }}>
-              <Heading level={2}>Another Section</Heading>
+              <Text component="h2" size="2xl" fw="semibold">Another Section</Text>
             </div>
             <div style={{ marginBottom: tokens.spacing[6] }}>
               <Text size="lg">
@@ -237,7 +236,7 @@ export const LayoutSpacingExample: Story = {
       <Container size="xl">
         <div style={{ padding: `${tokens.spacing[12]} 0` }}>
           <div style={{ marginBottom: tokens.spacing[12] }}>
-            <Heading level={1}>Layout Spacing Standards</Heading>
+            <Text component="h1" size="3xl" fw="bold">Layout Spacing Standards</Text>
             <div style={{ marginTop: tokens.spacing[4] }}>
               <Text size="lg" c="dimmed">
                 Demonstrating page-level spacing and layout patterns
@@ -248,7 +247,7 @@ export const LayoutSpacingExample: Story = {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: tokens.spacing[10] }}>
             <Card padding="xl" radius="md" withBorder>
               <div style={{ marginBottom: tokens.spacing[6] }}>
-                <Heading level={3}>Page Structure</Heading>
+                <Text component="h3" size="lg" fw="semibold">Page Structure</Text>
                 <div style={{ marginTop: tokens.spacing[3] }}>
                   <Text size="sm" c="dimmed">Vertical spacing guidelines</Text>
                 </div>
@@ -263,7 +262,7 @@ export const LayoutSpacingExample: Story = {
 
             <Card padding="xl" radius="md" withBorder>
               <div style={{ marginBottom: tokens.spacing[6] }}>
-                <Heading level={3}>Grid Guidelines</Heading>
+                <Text component="h3" size="lg" fw="semibold">Grid Guidelines</Text>
                 <div style={{ marginTop: tokens.spacing[3] }}>
                   <Text size="sm" c="dimmed">Horizontal spacing patterns</Text>
                 </div>

@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { SimpleGrid } from './SimpleGrid';
 import { Card } from './Card';
 import { Text } from './Text';
-import { Heading } from './Heading';
 import { Button } from './Button';
 import { Badge } from './Badge';
 import { tokens } from '../tokens/design-tokens';
@@ -46,7 +45,7 @@ export const CrowdedLayoutProblem: Story = {
   render: () => (
     <div style={{ padding: tokens.spacing[8] }}>
       <div style={{ marginBottom: tokens.spacing[8] }}>
-        <Heading level={1}>❌ Crowded Layout - Common Problems</Heading>
+        <Text component="h1" size="3xl" fw="bold">❌ Crowded Layout - Common Problems</Text>
         <div style={{ marginTop: tokens.spacing[4] }}>
           <Text c="dimmed">This example shows what NOT to do - cramped spacing that hurts readability</Text>
         </div>
@@ -70,9 +69,9 @@ export const CrowdedLayoutProblem: Story = {
             }}
           >
             {/* No spacing wrappers - everything crammed together */}
-            <Heading level={3} style={{ margin: 0 }}>
+            <Text component="h3" size="lg" fw="semibold" style={{ margin: 0 }}>
               {product.title}
-            </Heading>
+            </Text>
             <Badge color="primary" variant="filled">New</Badge>
             <Text size="sm" c="dimmed" style={{ margin: 0 }}>
               {product.description}
@@ -85,7 +84,7 @@ export const CrowdedLayoutProblem: Story = {
       </SimpleGrid>
       
       <div style={{ marginTop: tokens.spacing[8], padding: tokens.spacing[6], backgroundColor: tokens.color.error[50], borderRadius: tokens.borderRadius.md }}>
-        <Heading level={3}>Problems with this layout:</Heading>
+        <Text component="h3" size="lg" fw="semibold">Problems with this layout:</Text>
         <ul style={{ marginTop: tokens.spacing[4] }}>
           <li><Text size="sm">Card padding too small (12px) - content feels cramped</Text></li>
           <li><Text size="sm">Grid gap too tight (12px) - cards feel connected</Text></li>
@@ -118,7 +117,7 @@ export const ProperLayoutSolution: Story = {
   render: () => (
     <div style={{ padding: tokens.spacing[8] }}>
       <div style={{ marginBottom: tokens.spacing[8] }}>
-        <Heading level={1}>✅ Proper Layout - Design System Standards</Heading>
+        <Text component="h1" size="3xl" fw="bold">✅ Proper Layout - Design System Standards</Text>
         <div style={{ marginTop: tokens.spacing[4] }}>
           <Text c="dimmed">This example shows the correct way to implement spacing for professional layouts</Text>
         </div>
@@ -143,9 +142,9 @@ export const ProperLayoutSolution: Story = {
           >
             {/* Explicit spacing wrappers for control */}
             <div style={{ marginBottom: tokens.spacing[4] }}>
-              <Heading level={3}>
+              <Text component="h3" size="lg" fw="semibold">
                 {product.title}
-              </Heading>
+              </Text>
             </div>
             <div style={{ marginBottom: tokens.spacing[5] }}>
               <Badge color="primary" variant="filled">New</Badge>
@@ -163,7 +162,7 @@ export const ProperLayoutSolution: Story = {
       </SimpleGrid>
       
       <div style={{ marginTop: tokens.spacing[10], padding: tokens.spacing[8], backgroundColor: tokens.color.success[50], borderRadius: tokens.borderRadius.md }}>
-        <Heading level={3}>Improvements in this layout:</Heading>
+        <Text component="h3" size="lg" fw="semibold">Improvements in this layout:</Text>
         <ul style={{ marginTop: tokens.spacing[4] }}>
           <li><Text size="sm">Generous card padding (32px) - content has breathing room</Text></li>
           <li><Text size="sm">Proper grid gaps (32px) - clear separation between cards</Text></li>
@@ -200,7 +199,7 @@ export const BeforeAndAfterComparison: Story = {
   render: () => (
     <div style={{ padding: tokens.spacing[8] }}>
       <div style={{ marginBottom: tokens.spacing[10] }}>
-        <Heading level={1}>Before vs After: Spacing Transformation</Heading>
+        <Text component="h1" size="3xl" fw="bold">Before vs After: Spacing Transformation</Text>
         <div style={{ marginTop: tokens.spacing[4] }}>
           <Text c="dimmed">Side-by-side comparison showing the dramatic improvement proper spacing makes</Text>
         </div>
@@ -210,12 +209,12 @@ export const BeforeAndAfterComparison: Story = {
         {/* BEFORE - Bad spacing */}
         <div>
           <div style={{ marginBottom: tokens.spacing[6] }}>
-            <Heading level={2}>❌ Before: Crowded</Heading>
+            <Text component="h2" size="2xl" fw="semibold">❌ Before: Crowded</Text>
             <Text size="sm" c="dimmed">Tight spacing hurts readability</Text>
           </div>
           
           <Card style={{ padding: '16px' }} radius="md" withBorder>
-            <Heading level={3} style={{ marginBottom: '8px' }}>Quick Actions</Heading>
+            <Text component="h3" size="lg" fw="semibold" style={{ marginBottom: '8px' }}>Quick Actions</Text>
             <Badge color="primary">Important</Badge>
             <Text size="sm" c="dimmed" style={{ margin: '4px 0 8px 0' }}>
               Common tasks you can perform
@@ -230,13 +229,13 @@ export const BeforeAndAfterComparison: Story = {
         {/* AFTER - Good spacing */}
         <div>
           <div style={{ marginBottom: tokens.spacing[6] }}>
-            <Heading level={2}>✅ After: Spacious</Heading>
+            <Text component="h2" size="2xl" fw="semibold">✅ After: Spacious</Text>
             <Text size="sm" c="dimmed">Proper spacing improves clarity</Text>
           </div>
           
           <Card padding="xl" radius="md" withBorder>
             <div style={{ marginBottom: tokens.spacing[4] }}>
-              <Heading level={3}>Quick Actions</Heading>
+              <Text component="h3" size="lg" fw="semibold">Quick Actions</Text>
             </div>
             <div style={{ marginBottom: tokens.spacing[5] }}>
               <Badge color="primary">Important</Badge>
@@ -255,7 +254,7 @@ export const BeforeAndAfterComparison: Story = {
       </div>
       
       <div style={{ marginTop: tokens.spacing[10], padding: tokens.spacing[8], backgroundColor: tokens.semantic.background.secondary, borderRadius: tokens.borderRadius.md }}>
-        <Heading level={3}>Key Differences:</Heading>
+        <Text component="h3" size="lg" fw="semibold">Key Differences:</Text>
         <div style={{ marginTop: tokens.spacing[4], display: 'grid', gridTemplateColumns: '1fr 1fr', gap: tokens.spacing[6] }}>
           <div>
             <Text fw="semibold" size="sm" style={{ marginBottom: tokens.spacing[3] }}>Before (Problems):</Text>
