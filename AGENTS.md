@@ -38,7 +38,7 @@ Write JSDoc comments for components explaining their purpose and usage. Include 
 
 ## Export Strategy
 
-Always update src/index.ts with both the component and its types. Ensure tree-shaking friendly exports. Set up package.json for NPM publishing readiness. Include both CommonJS and ESM builds.
+Always update ../../nexus-ds/src/index.ts with both the component and its types. Ensure tree-shaking friendly exports. Set up package.json for NPM publishing readiness. Include both CommonJS and ESM builds.
 
 ## AI Instructions
 

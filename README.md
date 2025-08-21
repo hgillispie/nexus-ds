@@ -15,9 +15,9 @@ yarn add nexus-ds
 ### Basic Setup
 
 ```tsx
-import { designSystemTheme } from 'nexus-ds';
+import { designSystemTheme } from '../../nexus-ds/src/stories/theme';
 // Import global styles
-import 'nexus-ds/styles.css';
+import '../../nexus-ds/src/index.css';
 
 function App() {
   return (
@@ -37,7 +37,7 @@ import {
   Navigation, 
   PageLayout, 
   Typography 
-} from 'nexus-ds';
+} from '../../nexus-ds/src/index';
 
 function MyPage() {
   return (
@@ -527,7 +527,7 @@ DESIGN-TOKENS.md                     # Design tokens configuration
 
 #### **Dashboard Layout**
 ```tsx
-import { PageLayout, Navigation, Card, Chart, Table } from 'nexus-ds';
+import { PageLayout, Navigation, Card, Chart, Table } from '../../nexus-ds/src/index';
 
 function Dashboard() {
   return (
@@ -553,7 +553,7 @@ function Dashboard() {
 
 #### **Data Management Page**
 ```tsx
-import { PageLayout, Table, Button, Modal, Input } from 'nexus-ds';
+import { PageLayout, Table, Button, Modal, Input } from '../../nexus-ds/src/index';
 
 function UserManagement() {
   return (
@@ -591,7 +591,7 @@ function UserManagement() {
 
 #### **Settings/Form Page**
 ```tsx
-import { PageLayout, Card, Input, Select, Toggle, Button } from 'nexus-ds';
+import { PageLayout, Card, Input, Select, Toggle, Button } from '../../nexus-ds/src/index';
 
 function Settings() {
   return (
@@ -634,7 +634,7 @@ function Settings() {
 
 #### **Application with Sidebar**
 ```tsx
-import { Sidebar, PageLayout, Card } from 'nexus-ds';
+import { Sidebar, PageLayout, Card } from '../../nexus-ds/src/index';
 
 function AdminPanel() {
   return (

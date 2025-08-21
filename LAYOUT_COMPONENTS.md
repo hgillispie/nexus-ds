@@ -8,7 +8,7 @@ This design system includes **custom layout components** built specifically for 
 Responsive container with predefined max-widths for different screen sizes.
 
 ```tsx
-import { Container } from 'nexus-ds';
+import { Container } from '../../nexus-ds/src/index';
 
 <Container size="lg">
   <YourContent />
@@ -21,7 +21,7 @@ import { Container } from 'nexus-ds';
 12-column responsive grid system with flexible column spans.
 
 ```tsx
-import { Grid, GridCol } from 'nexus-ds';
+import { Grid, GridCol } from '../../nexus-ds/src/index';
 
 <Grid gap="24px">
   <GridCol span={6}>Half width</GridCol>
@@ -34,7 +34,7 @@ import { Grid, GridCol } from 'nexus-ds';
 Auto-fitting grid with equal-width columns that adapts to screen size.
 
 ```tsx
-import { SimpleGrid } from 'nexus-ds';
+import { SimpleGrid } from '../../nexus-ds/src/index';
 
 <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="24px">
   <CustomCard>Item 1</CustomCard>
@@ -47,7 +47,7 @@ import { SimpleGrid } from 'nexus-ds';
 Content container with border, shadow, and customizable styling.
 
 ```tsx
-import { Card } from 'nexus-ds';
+import { Card } from '../../nexus-ds/src/index';
 
 <Card variant="elevated" padding="lg" radius="md" withBorder>
   <img src="..." alt="Example" />
@@ -59,7 +59,7 @@ import { Card } from 'nexus-ds';
 Modern flexbox utilities for alignment and distribution.
 
 ```tsx
-import { Flex, Group, Stack } from 'nexus-ds';
+import { Flex, Group, Stack } from '../../nexus-ds/src/index';
 
 // Generic flex container
 <Flex direction="row" justify="center" align="center" gap="16px">
@@ -85,7 +85,7 @@ import { Flex, Group, Stack } from 'nexus-ds';
 The layout components are configured to use your design system theme:
 
 ```tsx
-import { designSystemTheme } from 'nexus-ds';
+import { designSystemTheme } from '../../nexus-ds/src/stories/theme';
 
 // Theme includes:
 // - Inter font family
@@ -101,8 +101,7 @@ import { designSystemTheme } from 'nexus-ds';
 Layout components work seamlessly with your custom components:
 
 ```tsx
-import { Container, Grid, GridCol, Card } from 'nexus-ds';
-import { Text, Button } from 'nexus-ds';
+import { Container, Grid, GridCol, Card, Text, Button } from '../../nexus-ds/src/index';
 
 <Container size="lg">
   <Grid gap="24px">
@@ -145,7 +144,7 @@ For complete page structures, use our specialized layout components:
 Complete page wrapper with header, container, and footer support.
 
 ```tsx
-import { PageLayout } from 'nexus-ds';
+import { PageLayout } from '../../nexus-ds/src/index';
 
 <PageLayout
   header={{
@@ -167,7 +166,7 @@ import { PageLayout } from 'nexus-ds';
 Standalone header component for consistent page titles.
 
 ```tsx
-import { PageHeader } from 'nexus-ds';
+import { PageHeader } from '../../nexus-ds/src/index';
 
 <PageHeader
   title="User Management"
@@ -181,7 +180,7 @@ import { PageHeader } from 'nexus-ds';
 Simple container wrapper for consistent page content.
 
 ```tsx
-import { PageContainer } from 'nexus-ds';
+import { PageContainer } from '../../nexus-ds/src/index';
 
 <PageContainer size="md" padding="lg">
   <YourContent />
