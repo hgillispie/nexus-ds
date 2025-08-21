@@ -110,7 +110,7 @@ export const CardSpacingExample: Story = {
         </div>
         
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: tokens.spacing[8] }}>
-          <Card shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
+          <Card padding="xl" radius="md" withBorder>
             <div style={{ marginBottom: tokens.spacing[4] }}>
               <Heading level={3}>Proper Card Spacing</Heading>
             </div>
@@ -126,7 +126,7 @@ export const CardSpacingExample: Story = {
             <Button size="sm">Learn More</Button>
           </Card>
 
-          <Card shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
+          <Card padding="xl" radius="md" withBorder>
             <div style={{ marginBottom: tokens.spacing[4] }}>
               <Heading level={3}>With Badge and Actions</Heading>
             </div>
@@ -246,7 +246,7 @@ export const LayoutSpacingExample: Story = {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: tokens.spacing[10] }}>
-            <Card shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
+            <Card padding="xl" radius="md" withBorder>
               <div style={{ marginBottom: tokens.spacing[6] }}>
                 <Heading level={3}>Page Structure</Heading>
                 <div style={{ marginTop: tokens.spacing[3] }}>
@@ -261,7 +261,7 @@ export const LayoutSpacingExample: Story = {
               </Stack>
             </Card>
 
-            <Card shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
+            <Card padding="xl" radius="md" withBorder>
               <div style={{ marginBottom: tokens.spacing[6] }}>
                 <Heading level={3}>Grid Guidelines</Heading>
                 <div style={{ marginTop: tokens.spacing[3] }}>
