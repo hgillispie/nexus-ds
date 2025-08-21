@@ -36,16 +36,16 @@ import {
   Card, 
   Navigation, 
   Container,
-  Typography 
+  Text 
 } from '../../nexus-ds/src/index';
 
 function MyPage() {
   return (
     <Container size="lg">
       <Card title="Welcome">
-        <Typography variant="text-lg">
+        <Text size="lg">
           Get started with your new application using our design system.
-        </Typography>
+        </Text>
         <Button>New Project</Button>
       </Card>
     </Container>
@@ -182,27 +182,6 @@ function MyPage() {
 <Badge color="error" icon="trailing">Failed</Badge>
 ```
 
-#### [`Typography`](src/stories/Typography.stories.tsx)
-**Purpose**: Consistent text styling across the application
-**When to use**: For all text content instead of custom styles
-**Scales**:
-- `display-*` - Large headings and hero text
-- `text-*` - Body text and descriptions
-
-```tsx
-// Page headings
-<Typography variant="display-xl" weight="semibold">Dashboard</Typography>
-
-// Body text
-<Typography variant="text-lg" color="secondary">
-  Manage your projects and team members
-</Typography>
-
-// Helper components
-<Heading level={2}>Section Title</Heading>
-<Text size="md">Body content</Text>
-<Caption>Helper text</Caption>
-```
 
 ### 🧩 Complex Components
 
@@ -404,7 +383,7 @@ function MyPage() {
 
 // Flex layout
 <Group justify="space-between" align="center">
-  <Typography variant="text-xl">Page Title</Typography>
+  <Text size="xl">Page Title</Text>
   <Button>Action</Button>
 </Group>
 ```
@@ -488,7 +467,7 @@ DESIGN-TOKENS.md                     # Design tokens configuration
 
 #### **Dashboard Layout**
 ```tsx
-import { Navigation, Card, Chart, Table, Container, SimpleGrid, Typography } from '../../nexus-ds/src/index';
+import { Navigation, Card, Chart, Table, Container, SimpleGrid, Text } from '../../nexus-ds/src/index';
 
 function Dashboard() {
   return (
@@ -497,10 +476,10 @@ function Dashboard() {
       <Container size="lg">
         <SimpleGrid cols={{ base: 1, md: 2, lg: 4 }} spacing="lg">
           <Card title="Total Users" badge={{ label: "↗ 12%", color: "success" }}>
-            <Typography variant="display-lg">2,543</Typography>
+            <Text size="lg" weight="bold">2,543</Text>
           </Card>
           <Card title="Revenue" badge={{ label: "↘ 3%", color: "error" }}>
-            <Typography variant="display-lg">$12,340</Typography>
+            <Text size="lg" weight="bold">$12,340</Text>
           </Card>
         </SimpleGrid>
         <Card title="Analytics Overview">

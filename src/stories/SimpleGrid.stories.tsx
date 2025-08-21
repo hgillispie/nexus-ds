@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { SimpleGrid } from './SimpleGrid';
 import { Button } from './Button';
 import { Text } from './Text';
-import { Heading } from './Typography';
 import { tokens } from '../tokens/design-tokens';
 
 const meta: Meta<typeof SimpleGrid> = {
