@@ -1,19 +1,6 @@
-import React from 'react';
-import {
-  AppShell,
-  Drawer,
-  NavLink,
-  ScrollArea,
-  Divider,
-  Group,
-  Text,
-  Badge,
-  Collapse,
-  UnstyledButton,
-  Avatar,
-  ActionIcon,
-} from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import React, { useState } from 'react';
+import { Stack, Group } from './Flex';
+import { Badge } from './Badge';
 import './sidebar.css';
 
 export interface SidebarItem {
@@ -51,320 +38,333 @@ export interface SidebarProps {
   header?: React.ReactNode;
   /** Sidebar footer content */
   footer?: React.ReactNode;
-  /** Whether sidebar is collapsible */
-  collapsible?: boolean;
-  /** Whether sidebar is collapsed */
-  collapsed?: boolean;
-  /** Callback when collapse state changes */
-  onCollapseChange?: (collapsed: boolean) => void;
-  /** Sidebar width when expanded */
+  /** Sidebar width */
   width?: number;
-  /** Custom className */
+  /** Background color */
+  backgroundColor?: string;
+  /** Border color */
+  borderColor?: string;
+  /** Additional CSS classes */
   className?: string;
+  /** Additional styles */
+  style?: React.CSSProperties;
 }
 
-export interface DrawerSidebarProps extends SidebarProps {
-  /** Whether drawer is opened */
-  opened: boolean;
-  /** Callback when drawer is closed */
-  onClose: () => void;
-  /** Drawer title */
-  title?: string;
-  /** Drawer position */
-  position?: 'left' | 'right';
-  /** Drawer size */
-  size?: number | string;
-}
-
-const ChevronRightIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path
-      d="M6 4L10 8L6 12"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
-const CollapseIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path
-      d="M13 6L8 11L3 6"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
-const SidebarItemComponent: React.FC<{
-  item: SidebarItem;
-  level?: number;
-  collapsed?: boolean;
-}> = ({ item, level = 0, collapsed = false }) => {
-  const [childrenOpened, { toggle: toggleChildren }] = useDisclosure(false);
-  const hasChildren = item.children && item.children.length > 0;
-  
-  const handleClick = () => {
-    if (hasChildren) {
-      toggleChildren();
-    } else if (item.onClick) {
-      item.onClick();
-    }
-  };
-
-  if (hasChildren) {
-    return (
-      <>
-        <UnstyledButton
-          className={`nexus-sidebar__item nexus-sidebar__item--parent ${
-            item.active ? 'nexus-sidebar__item--active' : ''
-          } ${item.disabled ? 'nexus-sidebar__item--disabled' : ''}`}
-          onClick={handleClick}
-          disabled={item.disabled}
-          style={{ paddingLeft: `${0.75 + level * 1}rem` }}
-        >
-          <Group justify="space-between" gap="xs">
-            <Group gap="xs" style={{ flex: 1, minWidth: 0 }}>
-              {item.icon && (
-                <div className="nexus-sidebar__icon">
-                  {item.icon}
-                </div>
-              )}
-              {!collapsed && (
-                <Text className="nexus-sidebar__label" truncate>
-                  {item.label}
-                </Text>
-              )}
-            </Group>
-            {!collapsed && (
-              <div className={`nexus-sidebar__chevron ${childrenOpened ? 'nexus-sidebar__chevron--open' : ''}`}>
-                <CollapseIcon />
-              </div>
-            )}
-            {item.badge && !collapsed && (
-              <Badge size="xs" className="nexus-sidebar__badge">
-                {item.badge}
-              </Badge>
-            )}
-          </Group>
-        </UnstyledButton>
-        
-        {!collapsed && (
-          <Collapse in={childrenOpened}>
-            <div className="nexus-sidebar__children">
-              {item.children?.map((child, index) => (
-                <SidebarItemComponent
-                  key={index}
-                  item={child}
-                  level={level + 1}
-                  collapsed={collapsed}
-                />
-              ))}
-            </div>
-          </Collapse>
-        )}
-      </>
-    );
-  }
-
-  return (
-    <NavLink
-      className={`nexus-sidebar__item ${item.active ? 'nexus-sidebar__item--active' : ''}`}
-      href={item.href}
-      onClick={item.onClick}
-      disabled={item.disabled}
-      style={{ paddingLeft: `${0.75 + level * 1}rem` }}
-      label={!collapsed ? item.label : undefined}
-      leftSection={item.icon}
-      rightSection={
-        item.badge && !collapsed ? (
-          <Badge size="xs" className="nexus-sidebar__badge">
-            {item.badge}
-          </Badge>
-        ) : undefined
-      }
-    />
-  );
-};
-
-const SidebarContent: React.FC<{
-  sections?: SidebarSection[];
-  items?: SidebarItem[];
-  user?: SidebarUserProps;
-  header?: React.ReactNode;
-  footer?: React.ReactNode;
-  collapsed?: boolean;
-}> = ({ sections, items, user, header, footer, collapsed = false }) => {
-  return (
-    <div className="nexus-sidebar__content">
-      {header && (
-        <div className="nexus-sidebar__header">
-          {header}
-        </div>
-      )}
-      
-      <ScrollArea className="nexus-sidebar__scroll">
-        <div className="nexus-sidebar__nav">
-          {sections ? (
-            sections.map((section, sectionIndex) => (
-              <div key={sectionIndex} className="nexus-sidebar__section">
-                {section.label && !collapsed && (
-                  <Text className="nexus-sidebar__section-label">
-                    {section.label}
-                  </Text>
-                )}
-                <div className="nexus-sidebar__section-items">
-                  {section.items.map((item, itemIndex) => (
-                    <SidebarItemComponent
-                      key={itemIndex}
-                      item={item}
-                      collapsed={collapsed}
-                    />
-                  ))}
-                </div>
-                {sectionIndex < sections.length - 1 && !collapsed && (
-                  <Divider className="nexus-sidebar__divider" />
-                )}
-              </div>
-            ))
-          ) : (
-            items?.map((item, index) => (
-              <SidebarItemComponent
-                key={index}
-                item={item}
-                collapsed={collapsed}
-              />
-            ))
-          )}
-        </div>
-      </ScrollArea>
-      
-      {user && (
-        <div className="nexus-sidebar__user">
-          <UnstyledButton
-            className="nexus-sidebar__user-button"
-            onClick={user.onClick}
-          >
-            <Group gap="sm">
-              <Avatar src={user.avatar} size="sm" radius="xl">
-                {user.name.split(' ').map(n => n[0]).join('').toUpperCase()}
-              </Avatar>
-              {!collapsed && (
-                <div className="nexus-sidebar__user-info">
-                  <Text className="nexus-sidebar__user-name" size="sm" fw={500}>
-                    {user.name}
-                  </Text>
-                  {user.email && (
-                    <Text className="nexus-sidebar__user-email" size="xs" c="dimmed">
-                      {user.email}
-                    </Text>
-                  )}
-                  {user.role && (
-                    <Text className="nexus-sidebar__user-role" size="xs" c="dimmed">
-                      {user.role}
-                    </Text>
-                  )}
-                </div>
-              )}
-            </Group>
-          </UnstyledButton>
-        </div>
-      )}
-      
-      {footer && (
-        <div className="nexus-sidebar__footer">
-          {footer}
-        </div>
-      )}
-    </div>
-  );
-};
-
+/**
+ * Sidebar component for navigation
+ */
 export const Sidebar: React.FC<SidebarProps> = ({
   sections,
   items,
   user,
   header,
   footer,
-  collapsible = false,
-  collapsed = false,
-  onCollapseChange,
-  width = 280,
-  className,
+  width = 260,
+  backgroundColor = '#ffffff',
+  borderColor = '#e5e7eb',
+  className = '',
+  style,
 }) => {
-  const sidebarClassName = `
-    nexus-sidebar
-    ${collapsed ? 'nexus-sidebar--collapsed' : ''}
-    ${collapsible ? 'nexus-sidebar--collapsible' : ''}
-    ${className || ''}
-  `.trim();
+  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
 
-  const content = (
-    <SidebarContent
-      sections={sections}
-      items={items}
-      user={user}
-      header={header}
-      footer={footer}
-      collapsed={collapsed}
-    />
+  const toggleExpanded = (label: string) => {
+    const newExpanded = new Set(expandedItems);
+    if (newExpanded.has(label)) {
+      newExpanded.delete(label);
+    } else {
+      newExpanded.add(label);
+    }
+    setExpandedItems(newExpanded);
+  };
+
+  const renderItem = (item: SidebarItem, depth = 0) => {
+    const hasChildren = item.children && item.children.length > 0;
+    const isExpanded = expandedItems.has(item.label);
+
+    return (
+      <div key={item.label}>
+        <button
+          className={`sidebar-item ${item.active ? 'active' : ''} ${item.disabled ? 'disabled' : ''}`}
+          onClick={() => {
+            if (hasChildren) {
+              toggleExpanded(item.label);
+            } else if (!item.disabled) {
+              item.onClick?.();
+            }
+          }}
+          disabled={item.disabled}
+          style={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            padding: `8px ${16 + depth * 16}px`,
+            backgroundColor: item.active ? '#f3f4f6' : 'transparent',
+            border: 'none',
+            borderRadius: '6px',
+            color: item.disabled ? '#9ca3af' : item.active ? '#0a0e1b' : '#6b7280',
+            fontSize: '14px',
+            fontWeight: item.active ? '500' : '400',
+            cursor: item.disabled ? 'not-allowed' : 'pointer',
+            transition: 'all 0.2s',
+            textAlign: 'left',
+            fontFamily: 'Inter, sans-serif',
+          }}
+          onMouseEnter={(e) => {
+            if (!item.active && !item.disabled) {
+              e.currentTarget.style.backgroundColor = '#f9fafb';
+              e.currentTarget.style.color = '#374151';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!item.active && !item.disabled) {
+              e.currentTarget.style.backgroundColor = 'transparent';
+              e.currentTarget.style.color = '#6b7280';
+            }
+          }}
+        >
+          {item.icon && <span style={{ display: 'flex', alignItems: 'center' }}>{item.icon}</span>}
+          <span style={{ flex: 1 }}>{item.label}</span>
+          {item.badge && (
+            <Badge 
+              variant="filled" 
+              size="sm"
+            >
+              {item.badge}
+            </Badge>
+          )}
+          {hasChildren && (
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              style={{
+                transform: isExpanded ? 'rotate(90deg)' : 'rotate(0)',
+                transition: 'transform 0.2s',
+              }}
+            >
+              <path
+                d="M6 4L10 8L6 12"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
+        </button>
+        
+        {hasChildren && isExpanded && (
+          <div style={{ marginTop: '4px' }}>
+            {item.children.map((child) => renderItem(child, depth + 1))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderSection = (section: SidebarSection, index: number) => (
+    <div key={index} style={{ marginBottom: '24px' }}>
+      {section.label && (
+        <div
+          style={{
+            padding: '8px 16px',
+            fontSize: '12px',
+            fontWeight: '600',
+            color: '#9ca3af',
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            fontFamily: 'Inter, sans-serif',
+          }}
+        >
+          {section.label}
+        </div>
+      )}
+      <Stack gap="4px">
+        {section.items.map((item) => renderItem(item))}
+      </Stack>
+    </div>
   );
 
-
   return (
-    <div className={sidebarClassName} style={{ width: collapsed ? 80 : width }}>
-      {collapsible && (
-        <ActionIcon
-          className="nexus-sidebar__collapse-button"
-          variant="subtle"
-          onClick={() => onCollapseChange?.(!collapsed)}
-        >
-          <ChevronRightIcon />
-        </ActionIcon>
+    <aside
+      className={`sidebar ${className}`}
+      style={{
+        width: `${width}px`,
+        height: '100%',
+        backgroundColor,
+        borderRight: `1px solid ${borderColor}`,
+        display: 'flex',
+        flexDirection: 'column',
+        ...style,
+      }}
+    >
+      {header && (
+        <div className="sidebar-header" style={{ padding: '16px', borderBottom: `1px solid ${borderColor}` }}>
+          {header}
+        </div>
       )}
-      {content}
-    </div>
+
+      <div
+        className="sidebar-content"
+        style={{
+          flex: 1,
+          overflowY: 'auto',
+          padding: '16px',
+        }}
+      >
+        {sections && sections.map((section, index) => renderSection(section, index))}
+        {items && (
+          <Stack gap="4px">
+            {items.map((item) => renderItem(item))}
+          </Stack>
+        )}
+      </div>
+
+      {user && (
+        <div
+          className="sidebar-user"
+          style={{
+            padding: '16px',
+            borderTop: `1px solid ${borderColor}`,
+          }}
+        >
+          <button
+            onClick={user.onClick}
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              padding: '8px',
+              backgroundColor: 'transparent',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              transition: 'background-color 0.2s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#f9fafb';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+            }}
+          >
+            {user.avatar ? (
+              <img
+                src={user.avatar}
+                alt={user.name}
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                }}
+              />
+            ) : (
+              <div
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: '#e5e7eb',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  color: '#6b7280',
+                }}
+              >
+                {user.name.charAt(0).toUpperCase()}
+              </div>
+            )}
+            <div style={{ flex: 1, textAlign: 'left' }}>
+              <div style={{ fontSize: '14px', fontWeight: '500', color: '#374151', fontFamily: 'Inter, sans-serif' }}>
+                {user.name}
+              </div>
+              {user.email && (
+                <div style={{ fontSize: '12px', color: '#6b7280', fontFamily: 'Inter, sans-serif' }}>
+                  {user.email}
+                </div>
+              )}
+              {user.role && (
+                <div style={{ fontSize: '11px', color: '#9ca3af', fontFamily: 'Inter, sans-serif', marginTop: '2px' }}>
+                  {user.role}
+                </div>
+              )}
+            </div>
+          </button>
+        </div>
+      )}
+
+      {footer && (
+        <div className="sidebar-footer" style={{ padding: '16px', borderTop: `1px solid ${borderColor}` }}>
+          {footer}
+        </div>
+      )}
+    </aside>
   );
 };
 
+// Drawer Sidebar Component
+export interface DrawerSidebarProps extends SidebarProps {
+  /** Whether the drawer is opened */
+  opened: boolean;
+  /** Callback when drawer should close */
+  onClose: () => void;
+  /** Position of the drawer */
+  position?: 'left' | 'right';
+  /** Overlay background */
+  withOverlay?: boolean;
+}
+
+/**
+ * Drawer-style sidebar for mobile
+ */
 export const DrawerSidebar: React.FC<DrawerSidebarProps> = ({
   opened,
   onClose,
-  title,
   position = 'left',
-  size = 280,
-  sections,
-  items,
-  user,
-  header,
-  footer,
-  className,
-  ...props
+  withOverlay = true,
+  width = 260,
+  ...sidebarProps
 }) => {
+  if (!opened) return null;
+
   return (
-    <Drawer
-      opened={opened}
-      onClose={onClose}
-      title={title}
-      position={position}
-      size={size}
-      className={`nexus-drawer-sidebar ${className || ''}`}
-      padding={0}
-    >
-      <SidebarContent
-        sections={sections}
-        items={items}
-        user={user}
-        header={header}
-        footer={footer}
-        collapsed={false}
-      />
-    </Drawer>
+    <>
+      {withOverlay && (
+        <div
+          className="drawer-overlay"
+          onClick={onClose}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 999,
+          }}
+        />
+      )}
+      <div
+        className="drawer-sidebar"
+        style={{
+          position: 'fixed',
+          top: 0,
+          bottom: 0,
+          [position]: 0,
+          width: `${width}px`,
+          zIndex: 1000,
+          transform: opened ? 'translateX(0)' : position === 'left' ? 'translateX(-100%)' : 'translateX(100%)',
+          transition: 'transform 0.3s ease',
+        }}
+      >
+        <Sidebar width={width} {...sidebarProps} />
+      </div>
+    </>
   );
 };
-
-export default Sidebar;

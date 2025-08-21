@@ -4,8 +4,6 @@ export { ButtonGroup } from './stories/ButtonGroup';
 export { Badge } from './stories/Badge';
 export { BadgeGroup } from './stories/BadgeGroup';
 export { Input, Textarea } from './stories/Input';
-export { Header } from './stories/Header';
-export { Page } from './stories/Page';
 export { Dropdown, DropdownItem, DropdownDivider, DropdownHeader } from './stories/Dropdown';
 export { Select, SelectOption, SelectDropdown } from './stories/Select';
 export { Toggle } from './stories/Toggle';
@@ -24,7 +22,10 @@ export { Carousel } from './stories/Carousel';
 export { Message, MessageReaction, TypingIndicator } from './stories/Message';
 export { ChatInterface } from './stories/ChatInterface';
 export { Table, EditIcon, DeleteIcon, SortIcon } from './stories/Table';
-export { Typography, Heading, Text, Caption } from './stories/Typography';
+export { Typography, Heading, Caption } from './stories/Typography';
+export { Text } from './stories/Text';
+export { Avatar } from './stories/Avatar';
+export { default as Icons } from './stories/Icons';
 
 // New Layout and Navigation Components
 export { Navigation } from './stories/Navigation';
@@ -40,7 +41,7 @@ export { Container } from './stories/Container';
 export { Grid, GridCol } from './stories/Grid';
 export { SimpleGrid } from './stories/SimpleGrid';
 export { Flex, Group, Stack } from './stories/Flex';
-export { CustomCard as Card, CardSection } from './stories/CustomCard';
+export { CustomCard, CardSection } from './stories/CustomCard';
 
 // Type exports
 export type { ButtonProps } from './stories/Button';
@@ -48,7 +49,6 @@ export type { ButtonGroupProps, ButtonGroupItem } from './stories/ButtonGroup';
 export type { BadgeProps } from './stories/Badge';
 export type { BadgeGroupProps } from './stories/BadgeGroup';
 export type { InputProps, TextareaProps } from './stories/Input';
-export type { HeaderProps } from './stories/Header';
 export type { DropdownProps, DropdownItemProps, DropdownHeaderProps } from './stories/Dropdown';
 export type { SelectProps, SelectOptionProps } from './stories/Select';
 export type { ToggleProps } from './stories/Toggle';
@@ -68,6 +68,9 @@ export type { MessageProps, MessageReaction as MessageReactionType } from './sto
 export type { ChatInterfaceProps } from './stories/ChatInterface';
 export type { TableProps, TableColumn, TableAction } from './stories/Table';
 export type { TypographyProps } from './stories/Typography';
+export type { TextProps } from './stories/Text';
+export type { AvatarProps } from './stories/Avatar';
+export type { IconProps, IconName } from './stories/Icons';
 
 // New component type exports
 export type { NavigationProps, NavigationItem, UserMenuProps } from './stories/Navigation';

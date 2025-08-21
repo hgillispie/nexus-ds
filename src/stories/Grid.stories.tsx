@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Grid, GridCol } from './Grid';
+import { Text } from './Text';
+import { tokens } from '../tokens/design-tokens';
 
 const meta: Meta<typeof Grid> = {
   title: 'Layout/Grid',
@@ -29,20 +31,20 @@ export default meta;
 type Story = StoryObj<typeof Grid>;
 
 const ExampleCol = ({ children, ...props }: { children: React.ReactNode; [key: string]: any }) => (
-  <div 
-    style={{ 
-      backgroundColor: '#dbeafe', 
-      padding: '16px', 
-      borderRadius: '8px',
-      border: '1px solid #93c5fd',
+  <div
+    style={{
+      backgroundColor: tokens.color.accent[100],
+      padding: tokens.spacing[4],
+      borderRadius: tokens.borderRadius.md,
+      border: `1px solid ${tokens.color.accent[300]}`,
       textAlign: 'center',
-      fontFamily: 'Inter, sans-serif',
-      color: '#1e40af',
-      fontWeight: '500'
+      fontFamily: tokens.typography.fontFamily.body,
+      color: tokens.color.accent[800],
+      fontWeight: tokens.typography.fontWeight.medium
     }}
     {...props}
   >
-    {children}
+    <Text>{children}</Text>
   </div>
 );
 

@@ -1,6 +1,6 @@
 # Taskbox Design System
 
-A comprehensive React design system built with TypeScript, Mantine Core, and design tokens. This system provides a complete set of components, patterns, and guidelines for building modern web applications with Builder Fusion.
+A comprehensive React design system built with TypeScript and custom components. This system provides a complete set of components, patterns, and guidelines for building modern web applications with Builder Fusion.
 
 ## 🚀 Quick Start
 
@@ -15,15 +15,15 @@ yarn add @your-org/design-system
 ### Basic Setup
 
 ```tsx
-import { MantineProvider } from '@mantine/core';
 import { designSystemTheme } from '@your-org/design-system';
-import '@mantine/core/styles.css';
+// Import global styles
+import '@your-org/design-system/styles.css';
 
 function App() {
   return (
-    <MantineProvider theme={designSystemTheme}>
-      {/* Your app content */}
-    </MantineProvider>
+    <div>
+      {/* Your app content with design system components */}
+    </div>
   );
 }
 ```
@@ -427,7 +427,7 @@ function MyPage() {
 
 ### 📐 Layout Utilities
 
-#### [`Layout`](src/stories/Layout.stories.tsx) (Mantine-powered)
+#### [`Layout`](src/stories/Layout.stories.tsx)
 **Purpose**: Responsive grid systems and containers
 **When to use**: For organizing content in rows and columns
 
@@ -513,7 +513,7 @@ src/
 │   ├── *.tsx         # Component source files
 │   ├── *.css         # Component styles
 │   ├── *.stories.tsx # Storybook stories
-│   └── theme.ts      # Mantine theme configuration
+│   └── theme.ts      # Design system theme configuration
 ├── index.ts          # Main export file
 └── index.css         # Global styles
 
@@ -665,7 +665,6 @@ function AdminPanel() {
 - **[Inter Font](https://fonts.google.com/specimen/Inter)** - Typography foundation
 
 ### Technical Documentation
-- **[Mantine](https://mantine.dev/)** - Core component library
 - **[Storybook](https://storybook.js.org/)** - Component documentation
 - **[React](https://react.dev/)** - UI framework
 - **[TypeScript](https://www.typescriptlang.org/)** - Type safety
@@ -677,7 +676,7 @@ function AdminPanel() {
 ## 🎯 Best Practices
 
 ### Component Usage
-1. **Always use the MantineProvider** with our custom theme
+1. **Import components from the design system** with proper TypeScript types
 2. **Import design tokens** instead of hardcoding colors
 3. **Use semantic component variants** (primary, secondary, etc.)
 4. **Follow the typography scale** instead of custom font sizes

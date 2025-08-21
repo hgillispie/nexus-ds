@@ -5,47 +5,62 @@ export interface ButtonProps {
   /**
    * Size of the button
    */
-  size?: 'md' | 'lg';
-  
+  size?: 'sm' | 'md' | 'lg';
+
   /**
-   * Visual hierarchy of the button
+   * Visual hierarchy of the button (legacy)
    */
   hierarchy?: 'primary' | 'secondary-color' | 'secondary-gray';
-  
+
+  /**
+   * Button variant (modern interface)
+   */
+  variant?: 'primary' | 'outline' | 'subtle' | 'filled';
+
   /**
    * Icon configuration for the button
    */
   icon?: 'none' | 'trailing' | 'only';
-  
+
   /**
    * Whether this is a destructive action
    */
   destructive?: boolean;
-  
+
   /**
    * Button state (controlled externally for demonstration)
    */
   state?: 'default' | 'hover' | 'focused' | 'disabled';
-  
+
   /**
    * Button text content
    */
   children?: React.ReactNode;
-  
+
   /**
    * Disabled state
    */
   disabled?: boolean;
-  
+
   /**
    * Click handler
    */
   onClick?: () => void;
-  
+
   /**
    * Additional CSS classes
    */
   className?: string;
+
+  /**
+   * Full width button
+   */
+  fullWidth?: boolean;
+
+  /**
+   * Additional styles
+   */
+  style?: React.CSSProperties;
 }
 
 /**
@@ -81,7 +96,8 @@ const CircleIcon: React.FC<{ stroke: string }> = ({ stroke }) => (
  */
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
   size = 'md',
-  hierarchy = 'primary',
+  hierarchy,
+  variant = 'primary',
   icon = 'none',
   destructive = false,
   state = 'default',
@@ -89,15 +105,34 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
   disabled = false,
   onClick,
   className,
+  fullWidth = false,
+  style,
   ...props
 }, ref) => {
+  // Map variant to hierarchy for backward compatibility
+  const getHierarchy = () => {
+    if (hierarchy) return hierarchy; // Use hierarchy if explicitly provided
+
+    switch (variant) {
+      case 'outline':
+        return 'secondary-color';
+      case 'subtle':
+        return 'secondary-gray';
+      case 'filled':
+      case 'primary':
+      default:
+        return 'primary';
+    }
+  };
+
   // Build CSS classes based on props
   const baseClasses = 'nexus-button';
   const sizeClass = `nexus-button--${size}`;
-  const hierarchyClass = `nexus-button--${hierarchy}`;
+  const hierarchyClass = `nexus-button--${getHierarchy()}`;
   const iconClass = `nexus-button--icon-${icon}`;
   const destructiveClass = destructive ? 'nexus-button--destructive' : '';
   const stateClass = state !== 'default' ? `nexus-button--${state}` : '';
+  const fullWidthClass = fullWidth ? 'nexus-button--full-width' : '';
   
   const classes = [
     baseClasses,
@@ -106,6 +141,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
     iconClass,
     destructiveClass,
     stateClass,
+    fullWidthClass,
     className
   ].filter(Boolean).join(' ');
 
@@ -135,6 +171,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
       className={classes}
       disabled={disabled || state === 'disabled'}
       onClick={onClick}
+      style={style}
       {...props}
     >
       {!isIconOnly && (

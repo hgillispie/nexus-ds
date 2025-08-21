@@ -3,22 +3,34 @@ import { Button } from './Button';
 
 /**
  * The Button component provides a comprehensive set of button variants for user interactions.
- * It supports multiple sizes, visual hierarchies, icon configurations, destructive states,
- * and interaction states to cover all design system needs.
- * 
+ * It supports multiple sizes, modern variant props, and maintains consistent spacing patterns.
+ *
  * ## Features
- * - **Size variants**: Medium (md) and Large (lg)
- * - **Visual hierarchy**: Primary, Secondary color, Secondary gray
+ * - **Size variants**: Small (sm), Medium (md), and Large (lg)
+ * - **Modern variants**: Primary, Outline, Subtle, Filled
+ * - **Legacy hierarchy**: Primary, Secondary color, Secondary gray (for backwards compatibility)
  * - **Icon support**: Text only, Trailing icon, Icon only
  * - **Destructive actions**: For dangerous operations
  * - **Interactive states**: Default, Hover, Focused, Disabled
- * 
- * ## Usage Guidelines
- * - Use **Primary** buttons for main actions
- * - Use **Secondary color** buttons for secondary actions with brand emphasis
- * - Use **Secondary gray** buttons for neutral secondary actions
- * - Use **Destructive** variants for dangerous actions like delete
- * - Use **Icon only** buttons sparingly, with proper accessibility labels
+ * - **Layout options**: Full width support, custom styling
+ *
+ * ## Variant Guidelines
+ * - **Primary**: Main call-to-action buttons (solid background)
+ * - **Outline**: Secondary actions with border emphasis
+ * - **Subtle**: Tertiary actions with minimal visual weight
+ * - **Filled**: Alternative solid variant for specific contexts
+ *
+ * ## Spacing in Button Groups
+ * When using multiple buttons together, follow these spacing patterns:
+ * - **Button gaps**: Use `gap="md"` (16px) for related actions
+ * - **Button gaps (large)**: Use `gap="lg"` (24px) for separated action groups
+ * - **Vertical spacing**: Use `tokens.spacing[6]` (24px) above button groups
+ * - **Card buttons**: Place buttons with `tokens.spacing[6]` (24px) from content
+ *
+ * ## Size Usage
+ * - **sm**: Use in cards, compact layouts, secondary actions
+ * - **md**: Default size for most interfaces
+ * - **lg**: Use in hero sections, prominent calls-to-action
  */
 const meta: Meta<typeof Button> = {
   title: 'Design System/Button',
@@ -35,8 +47,13 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     size: {
       control: 'select',
-      options: ['md', 'lg'],
-      description: 'Size of the button',
+      options: ['sm', 'md', 'lg'],
+      description: 'Size of the button - sm for compact layouts, md for standard use, lg for prominent actions',
+    },
+    variant: {
+      control: 'select',
+      options: ['primary', 'outline', 'subtle', 'filled'],
+      description: 'Modern variant system - primary for main actions, outline for secondary, subtle for tertiary',
     },
     hierarchy: {
       control: 'select',

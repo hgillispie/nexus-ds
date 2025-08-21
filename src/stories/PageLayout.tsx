@@ -1,5 +1,6 @@
 import React from 'react';
-import { AppShell, Container, Stack, Group, Text, Breadcrumbs, Anchor } from '@mantine/core';
+import { Container } from './Container';
+import { Stack, Group } from './Flex';
 import './pagelayout.css';
 
 export interface BreadcrumbItem {
@@ -32,230 +33,246 @@ export interface PageLayoutProps {
   aside?: React.ReactNode;
   /** Footer component */
   footer?: React.ReactNode;
-  /** Container size */
-  containerSize?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'fluid';
-  /** Page padding */
-  padding?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'none';
-  /** Whether to use full width layout */
-  fluid?: boolean;
+  /** Container size for content */
+  containerSize?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | number;
+  /** Background color */
+  backgroundColor?: string;
   /** Custom className */
   className?: string;
-  /** Background color variant */
-  bg?: 'default' | 'alt' | 'container';
+  /** Custom styles */
+  style?: React.CSSProperties;
 }
 
-export interface PageContainerProps {
-  /** Container content */
-  children: React.ReactNode;
-  /** Container size */
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'fluid';
-  /** Container padding */
-  padding?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'none';
-  /** Custom className */
-  className?: string;
-  /** Whether to center content */
-  centered?: boolean;
-}
-
-export interface PageContentProps {
-  /** Content */
-  children: React.ReactNode;
-  /** Content spacing */
-  spacing?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-  /** Custom className */
-  className?: string;
-}
-
-const ChevronRightIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path
-      d="M6 4L10 8L6 12"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
+/**
+ * PageHeader component for page titles and breadcrumbs
+ */
 export const PageHeader: React.FC<PageHeaderProps> = ({
   title,
   subtitle,
-  breadcrumbs = [],
+  breadcrumbs,
   actions,
-  className,
+  className = '',
 }) => {
   return (
-    <div className={`nexus-page-header ${className || ''}`}>
-      <Container size="lg" className="nexus-page-header__container">
-        {breadcrumbs.length > 0 && (
-          <Breadcrumbs
-            separator={<ChevronRightIcon />}
-            className="nexus-page-header__breadcrumbs"
-            mb="sm"
-          >
-            {breadcrumbs.map((item, index) => (
-              <Anchor
-                key={index}
-                href={item.href}
-                onClick={item.onClick}
-                className="nexus-page-header__breadcrumb"
+    <div
+      className={`page-header ${className}`}
+      style={{
+        padding: '24px 0',
+        backgroundColor: 'white',
+        borderBottom: '1px solid #e5e7eb',
+      }}
+    >
+      <Container size="xl">
+        <Stack gap="16px">
+          {breadcrumbs && breadcrumbs.length > 0 && (
+            <nav aria-label="Breadcrumb">
+              <ol
+                style={{
+                  display: 'flex',
+                  gap: '8px',
+                  listStyle: 'none',
+                  margin: 0,
+                  padding: 0,
+                  fontSize: '14px',
+                  fontFamily: 'Inter, sans-serif',
+                }}
               >
-                {item.label}
-              </Anchor>
-            ))}
-          </Breadcrumbs>
-        )}
-        
-        <Group justify="space-between" align="flex-start">
-          <div className="nexus-page-header__content">
-            <Text className="nexus-page-header__title" component="h1">
-              {title}
-            </Text>
-            {subtitle && (
-              <Text className="nexus-page-header__subtitle">
-                {subtitle}
-              </Text>
-            )}
-          </div>
-          
-          {actions && (
-            <div className="nexus-page-header__actions">
-              {actions}
-            </div>
+                {breadcrumbs.map((item, index) => (
+                  <li key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    {index > 0 && (
+                      <span style={{ color: '#9ca3af' }}>/</span>
+                    )}
+                    {item.href || item.onClick ? (
+                      <a
+                        href={item.href}
+                        onClick={item.onClick}
+                        style={{
+                          color: '#6b7280',
+                          textDecoration: 'none',
+                          cursor: 'pointer',
+                          transition: 'color 0.2s',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = '#374151';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = '#6b7280';
+                        }}
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <span style={{ color: '#374151', fontWeight: '500' }}>
+                        {item.label}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ol>
+            </nav>
           )}
-        </Group>
+          
+          <Group justify="space-between" align="flex-start">
+            <div>
+              <h1 
+                style={{ 
+                  margin: 0, 
+                  fontSize: '32px', 
+                  fontWeight: '700',
+                  color: '#111827',
+                  fontFamily: 'Inter, sans-serif',
+                }}
+              >
+                {title}
+              </h1>
+              {subtitle && (
+                <p 
+                  style={{ 
+                    margin: '8px 0 0 0', 
+                    fontSize: '16px',
+                    color: '#6b7280',
+                    fontFamily: 'Inter, sans-serif',
+                  }}
+                >
+                  {subtitle}
+                </p>
+              )}
+            </div>
+            {actions && (
+              <div>{actions}</div>
+            )}
+          </Group>
+        </Stack>
       </Container>
     </div>
   );
 };
 
+/**
+ * PageContainer component for wrapping page content
+ */
+export interface PageContainerProps {
+  children: React.ReactNode;
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | number;
+  className?: string;
+  style?: React.CSSProperties;
+}
+
 export const PageContainer: React.FC<PageContainerProps> = ({
   children,
-  size = 'lg',
-  padding = 'md',
-  className,
-  centered = false,
+  size = 'xl',
+  className = '',
+  style,
 }) => {
-  const containerClassName = `
-    nexus-page-container
-    nexus-page-container--${padding}
-    ${centered ? 'nexus-page-container--centered' : ''}
-    ${className || ''}
-  `.trim();
-
-  const containerSize = size === 'fluid' ? undefined : size;
-
   return (
-    <Container
-      size={containerSize}
-      className={containerClassName}
-      fluid={size === 'fluid'}
-    >
+    <Container size={size} className={`page-container ${className}`} style={style}>
       {children}
     </Container>
   );
 };
 
+/**
+ * PageContent component for main content area
+ */
+export interface PageContentProps {
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+}
+
 export const PageContent: React.FC<PageContentProps> = ({
   children,
-  spacing = 'md',
-  className,
+  className = '',
+  style,
 }) => {
   return (
-    <Stack
-      gap={spacing}
-      className={`nexus-page-content ${className || ''}`}
+    <div 
+      className={`page-content ${className}`}
+      style={{
+        padding: '32px 0',
+        ...style,
+      }}
     >
       {children}
-    </Stack>
+    </div>
   );
 };
 
+/**
+ * PageLayout component for complete page structure
+ */
 export const PageLayout: React.FC<PageLayoutProps> = ({
   children,
   header,
   navbar,
   aside,
   footer,
-  containerSize = 'lg',
-  padding = 'md',
-  fluid = false,
-  className,
-  bg = 'default',
+  containerSize = 'xl',
+  backgroundColor = '#f9fafb',
+  className = '',
+  style,
 }) => {
-  const layoutClassName = `
-    nexus-page-layout
-    nexus-page-layout--bg-${bg}
-    ${className || ''}
-  `.trim();
-
-  const content = (
-    <main className="nexus-page-layout__main">
-      {header && <PageHeader {...header} />}
-      <div className="nexus-page-layout__content">
-        {fluid ? (
-          <div className={`nexus-page-layout__fluid-content nexus-page-layout__content--${padding}`}>
-            {children}
-          </div>
-        ) : (
-          <PageContainer size={containerSize} padding={padding}>
-            {children}
-          </PageContainer>
-        )}
-      </div>
-    </main>
-  );
-
-  // If we have navbar or aside, use AppShell
-  if (navbar || aside) {
-    return (
-      <AppShell
-        className={layoutClassName}
-        navbar={navbar ? { width: 280, breakpoint: 'sm' } : undefined}
-        aside={aside ? { width: 320, breakpoint: 'md' } : undefined}
-        padding={0}
-      >
-        {navbar && (
-          <AppShell.Navbar className="nexus-page-layout__navbar">
-            {navbar}
-          </AppShell.Navbar>
-        )}
-        
-        <AppShell.Main>
-          {content}
-        </AppShell.Main>
-        
-        {aside && (
-          <AppShell.Aside className="nexus-page-layout__aside">
-            {aside}
-          </AppShell.Aside>
-        )}
-        
-        {footer && (
-          <footer className="nexus-page-layout__footer">
-            <PageContainer size={containerSize} padding={padding}>
-              {footer}
-            </PageContainer>
-          </footer>
-        )}
-      </AppShell>
-    );
-  }
-
-  // Simple layout without sidebars
+  const hasAside = Boolean(aside);
+  
   return (
-    <div className={layoutClassName}>
-      {content}
+    <div
+      className={`page-layout ${className}`}
+      style={{
+        minHeight: '100vh',
+        backgroundColor,
+        display: 'flex',
+        flexDirection: 'column',
+        ...style,
+      }}
+    >
+      {navbar && (
+        <div className="page-layout-navbar">
+          {navbar}
+        </div>
+      )}
+      
+      {header && <PageHeader {...header} />}
+      
+      <div
+        className="page-layout-body"
+        style={{
+          flex: 1,
+          display: 'flex',
+        }}
+      >
+        {aside && (
+          <aside className="page-layout-aside">
+            {aside}
+          </aside>
+        )}
+        
+        <main
+          className="page-layout-main"
+          style={{
+            flex: 1,
+            padding: '32px 0',
+          }}
+        >
+          <Container size={containerSize}>
+            {children}
+          </Container>
+        </main>
+      </div>
+      
       {footer && (
-        <footer className="nexus-page-layout__footer">
-          <PageContainer size={containerSize} padding={padding}>
+        <footer
+          className="page-layout-footer"
+          style={{
+            backgroundColor: 'white',
+            borderTop: '1px solid #e5e7eb',
+            padding: '24px 0',
+          }}
+        >
+          <Container size={containerSize}>
             {footer}
-          </PageContainer>
+          </Container>
         </footer>
       )}
     </div>
   );
 };
-
-export default PageLayout;

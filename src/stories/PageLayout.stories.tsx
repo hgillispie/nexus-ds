@@ -1,11 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { MantineProvider, Text, Button, Group, Badge } from '@mantine/core';
 import { PageLayout, PageHeader, PageContainer, PageContent } from './PageLayout';
-import { Card } from './Card';
-import { designSystemTheme } from './theme';
+import { Button } from './Button';
+import { Badge } from './Badge';
+import { Group } from './Flex';
+import { CustomCard as Card } from './CustomCard';
+import { Text } from './Text';
+import { tokens } from '../tokens/design-tokens';
 
 const meta: Meta<typeof PageLayout> = {
-  title: 'Components/PageLayout',
+  title: 'Layout/PageLayout',
   component: PageLayout,
   parameters: {
     layout: 'fullscreen',
@@ -17,11 +20,9 @@ const meta: Meta<typeof PageLayout> = {
   },
   decorators: [
     (Story) => (
-      <MantineProvider theme={designSystemTheme}>
-        <div style={{ minHeight: '100vh' }}>
-          <Story />
-        </div>
-      </MantineProvider>
+      <div style={{ minHeight: '100vh' }}>
+        <Story />
+      </div>
     ),
   ],
   tags: ['autodocs'],
@@ -31,37 +32,50 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const SampleContent = () => (
-  <PageContent spacing="lg">
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
-      <Card
-        title="Welcome"
-        subtitle="Get started with your dashboard"
-        badge={{ label: 'New', color: 'blue' }}
-      >
-        <Text mb="md">
-          This is your main dashboard where you can manage all your projects and tasks.
-        </Text>
+  <PageContent spacing="xl">
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: tokens.spacing[10] }}>
+      <Card shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
+        <div style={{ marginBottom: tokens.spacing[4] }}>
+          <Text fw={600}>Welcome</Text>
+        </div>
+        <div style={{ marginBottom: tokens.spacing[5] }}>
+          <Text size="sm" c="dimmed">Get started with your dashboard</Text>
+        </div>
+        <div style={{ marginBottom: tokens.spacing[5] }}>
+          <Badge color="blue" variant="filled">New</Badge>
+        </div>
+        <div style={{ marginBottom: tokens.spacing[6] }}>
+          <Text>
+            This is your main dashboard where you can manage all your projects and tasks.
+          </Text>
+        </div>
         <Button size="sm">Get Started</Button>
       </Card>
 
-      <Card
-        title="Recent Activity"
-        subtitle="Your latest updates"
-      >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+      <Card shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
+        <div style={{ marginBottom: tokens.spacing[4] }}>
+          <Text fw={600}>Recent Activity</Text>
+        </div>
+        <div style={{ marginBottom: tokens.spacing[6] }}>
+          <Text size="sm" c="dimmed">Your latest updates</Text>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: tokens.spacing[3] }}>
           <Text size="sm">• Project Alpha updated</Text>
           <Text size="sm">• New team member added</Text>
           <Text size="sm">• Report generated</Text>
         </div>
       </Card>
 
-      <Card
-        title="Quick Actions"
-        subtitle="Common tasks"
-      >
-        <Group gap="sm">
-          <Button size="sm" variant="outline">Create Project</Button>
-          <Button size="sm" variant="outline">Add User</Button>
+      <Card shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
+        <div style={{ marginBottom: tokens.spacing[4] }}>
+          <Text fw={600}>Quick Actions</Text>
+        </div>
+        <div style={{ marginBottom: tokens.spacing[6] }}>
+          <Text size="sm" c="dimmed">Common tasks</Text>
+        </div>
+        <Group gap="md">
+          <Button variant="outline" size="sm">Create Project</Button>
+          <Button variant="outline" size="sm">Add User</Button>
         </Group>
       </Card>
     </div>
@@ -78,9 +92,9 @@ export const Default: Story = {
         { label: 'Dashboard' },
       ],
       actions: (
-        <Group gap="sm">
-          <Button variant="outline">Export</Button>
-          <Button>New Project</Button>
+        <Group gap="lg">
+          <Button variant="outline" size="sm">Export</Button>
+          <Button size="sm">New Project</Button>
         </Group>
       ),
     },
@@ -93,7 +107,7 @@ export const WithoutHeader: Story = {
     children: (
       <PageContent spacing="lg">
         <Text size="xl" fw={600} mb="md">Simple Page Layout</Text>
-        <Text mb="lg">
+        <Text mb="xl">
           This page doesn't use a header component, just content with proper spacing and container.
         </Text>
         <SampleContent />
@@ -114,11 +128,11 @@ export const FluidLayout: Story = {
     fluid: true,
     padding: 'lg',
     children: (
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
-        gap: '1rem',
-        marginBottom: '2rem'
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gap: tokens.spacing[8],
+        marginBottom: tokens.spacing[10]
       }}>
         {Array.from({ length: 8 }, (_, i) => (
           <Card key={i} title={`Card ${i + 1}`} padding="md">
@@ -188,19 +202,25 @@ export const WithFooter: Story = {
     },
     children: (
       <PageContent spacing="xl">
-        <Text size="xl" fw={600} mb="md">About Our Team</Text>
-        <Text mb="lg">
-          Learn more about the people behind our company and what drives us to build amazing products.
-        </Text>
+        <div style={{ marginBottom: tokens.spacing[6] }}>
+          <Text size="xl" fw={600}>About Our Team</Text>
+        </div>
+        <div style={{ marginBottom: tokens.spacing[10] }}>
+          <Text>
+            Learn more about the people behind our company and what drives us to build amazing products.
+          </Text>
+        </div>
         <SampleContent />
       </PageContent>
     ),
     footer: (
-      <div style={{ textAlign: 'center', padding: '2rem 0' }}>
-        <Text size="sm" c="dimmed" mb="sm">
-          © 2024 Untitled UI. All rights reserved.
-        </Text>
-        <Group justify="center" gap="md">
+      <div style={{ textAlign: 'center', padding: `${tokens.spacing[8]} 0` }}>
+        <div style={{ marginBottom: tokens.spacing[5] }}>
+          <Text size="sm" c="dimmed">
+            © 2024 Nexus. All rights reserved.
+          </Text>
+        </div>
+        <Group justify="center" gap="lg">
           <Text size="sm" component="a" href="#" style={{ textDecoration: 'none', color: '#525252' }}>
             Privacy Policy
           </Text>
@@ -286,11 +306,15 @@ export const ContainerOnly: Story = {
   render: () => (
     <div style={{ backgroundColor: '#fafafa', minHeight: '100vh', padding: '2rem 0' }}>
       <PageContainer size="md" padding="lg">
-        <Text size="xl" fw={600} mb="md">Standalone Container</Text>
-        <Text mb="lg">
-          The PageContainer component can be used independently to wrap content with consistent sizing and padding.
-        </Text>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
+        <div style={{ marginBottom: tokens.spacing[6] }}>
+          <Text size="xl" fw={600}>Standalone Container</Text>
+        </div>
+        <div style={{ marginBottom: tokens.spacing[8] }}>
+          <Text>
+            The PageContainer component can be used independently to wrap content with consistent sizing and padding.
+          </Text>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: tokens.spacing[6] }}>
           <Card title="Contained Card 1" padding="md">
             <Text>This card is inside a page container.</Text>
           </Card>
@@ -314,18 +338,18 @@ export const ResponsiveDemo: Story = {
         { label: 'Responsive' },
       ],
       actions: (
-        <Group gap="sm">
+        <Group gap="lg">
           <Button variant="outline" size="sm" visibleFrom="sm">Export Data</Button>
           <Button size="sm">New Item</Button>
         </Group>
       ),
     },
     children: (
-      <PageContent spacing="lg">
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
-          gap: '1.5rem' 
+      <PageContent spacing="xl">
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: tokens.spacing[8]
         }}>
           <Card title="Mobile Friendly" subtitle="Stacks on small screens" padding="md">
             <Text>This card layout automatically stacks on mobile devices for better usability.</Text>

@@ -1,13 +1,19 @@
 import React from 'react';
-import { Paper, Group, Text, Badge, ActionIcon, Divider } from '@mantine/core';
+import { Text } from './Text';
+import { Button } from './Button';
+import { Badge } from './Badge';
+import { Group } from './Flex';
+import { Avatar } from './Avatar';
+import Icons from './Icons';
 import './card.css';
 
 export interface CardAction {
   label: string;
   onClick?: () => void;
   icon?: React.ReactNode;
-  variant?: 'subtle' | 'filled' | 'outline';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   color?: string;
+  disabled?: boolean;
 }
 
 export interface CardProps {
@@ -26,8 +32,7 @@ export interface CardProps {
   /** Badge in the header */
   badge?: {
     label: string;
-    color?: string;
-    variant?: 'filled' | 'light' | 'outline';
+    variant?: 'primary' | 'secondary' | 'success' | 'warning' | 'error';
   };
   /** Action buttons */
   actions?: CardAction[];
@@ -49,34 +54,18 @@ export interface CardProps {
   style?: React.CSSProperties;
   /** Whether to show dividers */
   withDividers?: boolean;
+  /** Whether to show border */
+  withBorder?: boolean;
+  /** Loading state */
+  loading?: boolean;
 }
 
-const MoreIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path
-      d="M8 8.66667C8.36819 8.66667 8.66667 8.36819 8.66667 8C8.66667 7.63181 8.36819 7.33333 8 7.33333C7.63181 7.33333 7.33333 7.63181 7.33333 8C7.33333 8.36819 7.63181 8.66667 8 8.66667Z"
-      stroke="currentColor"
-      strokeWidth="1.33333"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M8 4C8.36819 4 8.66667 3.70152 8.66667 3.33333C8.66667 2.96514 8.36819 2.66667 8 2.66667C7.63181 2.66667 7.33333 2.96514 7.33333 3.33333C7.33333 3.70152 7.63181 4 8 4Z"
-      stroke="currentColor"
-      strokeWidth="1.33333"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M8 13.3333C8.36819 13.3333 8.66667 13.0349 8.66667 12.6667C8.66667 12.2985 8.36819 12 8 12C7.63181 12 7.33333 12.2985 7.33333 12.6667C7.33333 13.0349 7.63181 13.3333 8 13.3333Z"
-      stroke="currentColor"
-      strokeWidth="1.33333"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
+/**
+ * Card component for the Nexus Design System
+ * 
+ * A flexible container component that can display content with optional header,
+ * footer, actions, and various styling options.
+ */
 export const Card: React.FC<CardProps> = ({
   children,
   header,
@@ -95,32 +84,36 @@ export const Card: React.FC<CardProps> = ({
   radius = 'md',
   style,
   withDividers = false,
+  withBorder = true,
+  loading = false,
   ...props
 }) => {
   const hasHeader = header || title || subtitle || badge || actions.length > 0;
-  const cardClassName = `
-    nexus-card
-    nexus-card--${variant}
-    nexus-card--${size}
-    ${interactive || onClick ? 'nexus-card--interactive' : ''}
-    ${className || ''}
-  `.trim();
-
-  const paddingValue = {
-    xs: 'xs',
-    sm: 'sm', 
-    md: 'md',
-    lg: 'lg',
-    xl: 'xl'
-  }[padding];
+  
+  const cardClassName = [
+    'nexus-card',
+    `nexus-card--${variant}`,
+    `nexus-card--${size}`,
+    `nexus-card--radius-${radius}`,
+    interactive || onClick ? 'nexus-card--interactive' : '',
+    withBorder ? 'nexus-card--with-border' : '',
+    loading ? 'nexus-card--loading' : '',
+    className || ''
+  ].filter(Boolean).join(' ');
 
   return (
-    <Paper
+    <div
       className={cardClassName}
-      p={0}
-      radius={radius}
       style={style}
       onClick={onClick}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={onClick ? (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onClick();
+        }
+      } : undefined}
       {...props}
     >
       {/* Image Section */}
@@ -137,22 +130,21 @@ export const Card: React.FC<CardProps> = ({
       {/* Header Section */}
       {hasHeader && (
         <>
-          <div className={`nexus-card__header nexus-card__section--${paddingValue}`}>
+          <div className={`nexus-card__header nexus-card__section--${padding}`}>
             {header ? (
               header
             ) : (
               <Group justify="space-between" align="flex-start">
                 <div className="nexus-card__header-content">
-                  <Group gap="sm" align="center">
+                  <Group gap="sm" align="center" wrap="wrap">
                     {title && (
-                      <Text className="nexus-card__title" fw={600}>
+                      <Text className="nexus-card__title" weight="semibold" size={size === 'sm' ? 'md' : size === 'lg' ? 'lg' : 'md'}>
                         {title}
                       </Text>
                     )}
                     {badge && (
                       <Badge
-                        variant={badge.variant || 'light'}
-                        color={badge.color}
+                        variant={badge.variant || 'secondary'}
                         size="sm"
                         className="nexus-card__badge"
                       >
@@ -161,7 +153,7 @@ export const Card: React.FC<CardProps> = ({
                     )}
                   </Group>
                   {subtitle && (
-                    <Text className="nexus-card__subtitle" size="sm" c="dimmed">
+                    <Text className="nexus-card__subtitle" size="sm" color="secondary">
                       {subtitle}
                     </Text>
                   )}
@@ -170,42 +162,49 @@ export const Card: React.FC<CardProps> = ({
                 {actions.length > 0 && (
                   <Group gap="xs">
                     {actions.map((action, index) => (
-                      <ActionIcon
+                      <Button
                         key={index}
-                        variant={action.variant || 'subtle'}
-                        color={action.color}
+                        variant={action.variant || 'ghost'}
                         size="sm"
                         onClick={action.onClick}
-                        title={action.label}
+                        disabled={action.disabled}
                         className="nexus-card__action"
+                        aria-label={action.label}
                       >
-                        {action.icon || <MoreIcon />}
-                      </ActionIcon>
+                        {action.icon || <Icons name="more-horizontal" size="small" />}
+                      </Button>
                     ))}
                   </Group>
                 )}
               </Group>
             )}
           </div>
-          {withDividers && <Divider className="nexus-card__divider" />}
+          {withDividers && <div className="nexus-card__divider" />}
         </>
       )}
 
       {/* Content Section */}
-      <div className={`nexus-card__content nexus-card__section--${paddingValue}`}>
+      <div className={`nexus-card__content nexus-card__section--${padding}`}>
         {children}
       </div>
 
       {/* Footer Section */}
       {footer && (
         <>
-          {withDividers && <Divider className="nexus-card__divider" />}
-          <div className={`nexus-card__footer nexus-card__section--${paddingValue}`}>
+          {withDividers && <div className="nexus-card__divider" />}
+          <div className={`nexus-card__footer nexus-card__section--${padding}`}>
             {footer}
           </div>
         </>
       )}
-    </Paper>
+
+      {/* Loading overlay */}
+      {loading && (
+        <div className="nexus-card__loading-overlay">
+          <Icons name="loader" size="medium" className="nexus-card__loading-spinner" />
+        </div>
+      )}
+    </div>
   );
 };
 

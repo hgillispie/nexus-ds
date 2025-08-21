@@ -4,6 +4,10 @@ import { Grid, GridCol } from './Grid';
 import { SimpleGrid } from './SimpleGrid';
 import { Flex, Group, Stack } from './Flex';
 import { CustomCard } from './CustomCard';
+import { Button } from './Button';
+import { Text } from './Text';
+import { Heading } from './Typography';
+import { tokens } from '../tokens/design-tokens';
 import React from 'react';
 
 const meta: Meta = {
@@ -12,7 +16,33 @@ const meta: Meta = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'Layout examples showing how to combine our custom layout components.',
+        component: `Layout examples showing how to combine our custom layout components with proper spacing principles.
+
+## Layout Spacing Standards
+
+These examples demonstrate the Nexus Design System's spacing guidelines in action:
+
+### Core Principles Applied
+- **Design tokens only**: All spacing uses \`tokens.spacing\` values
+- **Generous padding**: Minimum 24px, recommended 32px for cards
+- **Clear hierarchy**: Consistent spacing ratios (16px → 20px → 24px → 32px)
+- **Explicit wrappers**: Div containers for precise spacing control
+- **Component composition**: Proper use of Container, Grid, SimpleGrid, and Flex
+
+### Spacing Scale in Layouts
+- **Page sections**: \`tokens.spacing[10-12]\` (40-48px) between major areas
+- **Card grids**: \`tokens.spacing[8]\` (32px) gaps for comfortable separation
+- **Content blocks**: \`tokens.spacing[6]\` (24px) between related content
+- **Element groups**: \`tokens.spacing[4]\` (16px) for closely related items
+
+### Professional Layout Standards
+Every layout example follows these quality standards:
+- Sufficient whitespace prevents cramped appearance
+- Consistent spacing ratios create visual harmony
+- Design token usage ensures maintainability
+- Responsive behavior works across all screen sizes
+
+See the examples below for implementation patterns that maintain these professional standards.`,
       },
     },
   },
@@ -22,29 +52,21 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-const SampleText = ({ children }: { children: React.ReactNode }) => (
-  <div style={{ fontFamily: 'Inter, sans-serif', color: '#374151' }}>
-    {children}
-  </div>
-);
+// Remove SampleText - use Text component directly
 
 const SampleCard = ({ title, children }: { title: string; children: React.ReactNode }) => (
-  <CustomCard shadow="sm" padding="20px" radius="8px" withBorder>
-    <SampleText>
-      <h3 style={{ margin: '0 0 8px 0', fontSize: '16px', fontWeight: '600' }}>{title}</h3>
-      <div style={{ fontSize: '14px', color: '#6b7280' }}>{children}</div>
-    </SampleText>
+  <CustomCard shadow="sm" padding={tokens.spacing[5]} radius={tokens.borderRadius.md} withBorder>
+    <Heading level={3} mb="xs">{title}</Heading>
+    <Text size="sm" c="dimmed">{children}</Text>
   </CustomCard>
 );
 
 export const BasicLayout: Story = {
   render: () => (
     <Container size="lg" style={{ padding: '40px 0' }}>
-      <SampleText>
-        <h1 style={{ margin: '0 0 32px 0', fontSize: '32px', fontWeight: 'bold', textAlign: 'center' }}>
-          Basic Layout Example
-        </h1>
-      </SampleText>
+      <Heading level={1} mb="xl" ta="center">
+        Basic Layout Example
+      </Heading>
       
       <Grid gap="24px">
         <GridCol span={8}>
@@ -65,11 +87,9 @@ export const BasicLayout: Story = {
 export const ResponsiveLayout: Story = {
   render: () => (
     <Container size="xl" style={{ padding: '40px 0' }}>
-      <SampleText>
-        <h1 style={{ margin: '0 0 32px 0', fontSize: '32px', fontWeight: 'bold', textAlign: 'center' }}>
-          Responsive Grid Layout
-        </h1>
-      </SampleText>
+      <Heading level={1} mb="xl" ta="center">
+        Responsive Grid Layout
+      </Heading>
       
       <Grid gap="20px">
         <GridCol span={{ base: 12, md: 6, lg: 4 }}>
@@ -95,11 +115,9 @@ export const ResponsiveLayout: Story = {
 export const SimpleGridLayout: Story = {
   render: () => (
     <Container size="lg" style={{ padding: '40px 0' }}>
-      <SampleText>
-        <h1 style={{ margin: '0 0 32px 0', fontSize: '32px', fontWeight: 'bold', textAlign: 'center' }}>
-          SimpleGrid Layout
-        </h1>
-      </SampleText>
+      <Heading level={1} mb="xl" ta="center">
+        SimpleGrid Layout
+      </Heading>
       
       <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="24px">
         {[1, 2, 3, 4, 5, 6].map((num) => (
@@ -115,11 +133,9 @@ export const SimpleGridLayout: Story = {
 export const FlexLayout: Story = {
   render: () => (
     <Container size="lg" style={{ padding: '40px 0' }}>
-      <SampleText>
-        <h1 style={{ margin: '0 0 32px 0', fontSize: '32px', fontWeight: 'bold', textAlign: 'center' }}>
-          Flex Layout Examples
-        </h1>
-      </SampleText>
+      <Heading level={1} mb="xl" ta="center">
+        Flex Layout Examples
+      </Heading>
       
       <Stack gap="32px">
         {/* Header */}
@@ -132,54 +148,35 @@ export const FlexLayout: Story = {
             border: '1px solid #e5e7eb'
           }}
         >
-          <SampleText>
-            <div style={{ fontWeight: '600' }}>My Application</div>
-          </SampleText>
-          <Group gap="12px">
-            <button style={{ 
-              padding: '8px 16px', 
-              backgroundColor: 'transparent',
-              border: '1px solid #d1d5db',
-              borderRadius: '6px',
-              fontSize: '14px',
-              cursor: 'pointer'
-            }}>
+          <Text fw={600}>My Application</Text>
+          <Group gap="sm">
+            <Button variant="outline" size="sm">
               Login
-            </button>
-            <button style={{ 
-              padding: '8px 16px', 
-              backgroundColor: '#3b82f6',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              fontSize: '14px',
-              cursor: 'pointer'
-            }}>
+            </Button>
+            <Button size="sm">
               Sign Up
-            </button>
+            </Button>
           </Group>
         </Group>
 
         {/* Content with Flex */}
         <Flex gap="24px">
           <Stack gap="16px" style={{ minWidth: '200px' }}>
-            <SampleText>
-              <div style={{ fontWeight: '600', marginBottom: '12px' }}>Navigation</div>
-            </SampleText>
+            <Text fw={600} mb="sm">Navigation</Text>
             {['Dashboard', 'Projects', 'Settings'].map((item) => (
-              <div 
+              <div
                 key={item}
-                style={{ 
-                  padding: '12px 16px', 
-                  backgroundColor: '#f9fafb',
-                  borderRadius: '6px',
-                  border: '1px solid #e5e7eb',
-                  fontSize: '14px',
-                  fontFamily: 'Inter, sans-serif',
+                style={{
+                  padding: `${tokens.spacing[3]} ${tokens.spacing[4]}`,
+                  backgroundColor: tokens.semantic.background.secondary,
+                  borderRadius: tokens.borderRadius.sm,
+                  border: `1px solid ${tokens.semantic.border.secondary}`,
+                  fontSize: tokens.typography.fontSize.sm,
+                  fontFamily: tokens.typography.fontFamily.body,
                   cursor: 'pointer'
                 }}
               >
-                {item}
+                <Text size="sm">{item}</Text>
               </div>
             ))}
           </Stack>
@@ -210,33 +207,16 @@ export const ComplexLayout: Story = {
               boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)'
             }}
           >
-            <SampleText>
-              <h2 style={{ margin: 0, fontSize: '24px', fontWeight: 'bold' }}>
-                Dashboard
-              </h2>
-            </SampleText>
-            <Group gap="16px">
-              <button style={{ 
-                padding: '10px 20px', 
-                backgroundColor: '#f3f4f6',
-                border: '1px solid #d1d5db',
-                borderRadius: '8px',
-                fontSize: '14px',
-                cursor: 'pointer'
-              }}>
+            <Heading level={2}>
+              Dashboard
+            </Heading>
+            <Group gap="md">
+              <Button variant="outline">
                 Export
-              </button>
-              <button style={{ 
-                padding: '10px 20px', 
-                backgroundColor: '#3b82f6',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '14px',
-                cursor: 'pointer'
-              }}>
+              </Button>
+              <Button>
                 New Project
-              </button>
+              </Button>
             </Group>
           </Group>
 
@@ -249,17 +229,15 @@ export const ComplexLayout: Story = {
               { title: 'Active Now', value: '573', change: '+5.2%' },
             ].map((stat) => (
               <CustomCard key={stat.title} shadow="sm" padding="24px" radius="8px">
-                <SampleText>
-                  <div style={{ fontSize: '14px', fontWeight: '500', color: '#6b7280', marginBottom: '8px' }}>
-                    {stat.title}
-                  </div>
-                  <div style={{ fontSize: '32px', fontWeight: 'bold', marginBottom: '4px' }}>
-                    {stat.value}
-                  </div>
-                  <div style={{ fontSize: '14px', color: '#059669' }}>
-                    {stat.change} from last month
-                  </div>
-                </SampleText>
+                <Text size="sm" fw={500} c="dimmed" mb="xs">
+                  {stat.title}
+                </Text>
+                <Text size="2xl" fw="bold" mb="xs">
+                  {stat.value}
+                </Text>
+                <Text size="sm" style={{ color: tokens.color.success[600] }}>
+                  {stat.change} from last month
+                </Text>
               </CustomCard>
             ))}
           </SimpleGrid>
@@ -268,72 +246,63 @@ export const ComplexLayout: Story = {
           <Grid gap="24px">
             <GridCol span={{ base: 12, lg: 8 }}>
               <CustomCard shadow="sm" padding="24px" radius="8px">
-                <SampleText>
-                  <h3 style={{ margin: '0 0 16px 0', fontSize: '18px', fontWeight: '600' }}>
-                    Recent Activity
-                  </h3>
-                  <div style={{ height: '300px', backgroundColor: '#f9fafb', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', color: '#6b7280' }}>
-                    Chart placeholder
-                  </div>
-                </SampleText>
+                <Heading level={3} mb="md">
+                  Recent Activity
+                </Heading>
+                <div style={{ height: '300px', backgroundColor: tokens.semantic.background.secondary, borderRadius: tokens.borderRadius.md, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Text size="sm" c="dimmed">Chart placeholder</Text>
+                </div>
               </CustomCard>
             </GridCol>
             
             <GridCol span={{ base: 12, lg: 4 }}>
               <Stack gap="20px">
                 <CustomCard shadow="sm" padding="20px" radius="8px">
-                  <SampleText>
-                    <h4 style={{ margin: '0 0 12px 0', fontSize: '16px', fontWeight: '600' }}>
-                      Quick Actions
-                    </h4>
-                    <Stack gap="8px">
-                      {['Create Project', 'Invite User', 'View Reports'].map((action) => (
-                        <button 
-                          key={action}
-                          style={{ 
-                            padding: '12px 16px', 
-                            backgroundColor: '#f9fafb',
-                            border: '1px solid #e5e7eb',
-                            borderRadius: '6px',
-                            fontSize: '14px',
-                            textAlign: 'left',
-                            cursor: 'pointer',
-                            width: '100%'
-                          }}
-                        >
-                          {action}
-                        </button>
-                      ))}
-                    </Stack>
-                  </SampleText>
+                  <Heading level={4} mb="sm">
+                    Quick Actions
+                  </Heading>
+                  <Stack gap="xs">
+                    {['Create Project', 'Invite User', 'View Reports'].map((action) => (
+                      <Button
+                        key={action}
+                        variant="outline"
+                        size="sm"
+                        style={{ justifyContent: 'flex-start' }}
+                        fullWidth
+                      >
+                        {action}
+                      </Button>
+                    ))}
+                  </Stack>
                 </CustomCard>
 
                 <CustomCard shadow="sm" padding="20px" radius="8px">
-                  <SampleText>
-                    <h4 style={{ margin: '0 0 12px 0', fontSize: '16px', fontWeight: '600' }}>
-                      Team Members
-                    </h4>
-                    <Stack gap="12px">
-                      {['Alice Johnson', 'Bob Smith', 'Carol Davis'].map((name, i) => (
-                        <Group key={name} gap="12px">
-                          <div style={{ 
-                            width: '32px', 
-                            height: '32px', 
-                            borderRadius: '50%', 
-                            backgroundColor: ['#dbeafe', '#dcfce7', '#fef3c7'][i],
+                  <Heading level={4} mb="sm">
+                    Team Members
+                  </Heading>
+                  <Stack gap="sm">
+                    {['Alice Johnson', 'Bob Smith', 'Carol Davis'].map((name, i) => {
+                      const colors = [tokens.color.accent[100], tokens.color.success[100], tokens.color.warning[100]];
+                      return (
+                        <Group key={name} gap="sm">
+                          <div style={{
+                            width: '32px',
+                            height: '32px',
+                            borderRadius: '50%',
+                            backgroundColor: colors[i],
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: 'center',
-                            fontSize: '14px',
-                            fontWeight: '600'
+                            justifyContent: 'center'
                           }}>
-                            {name.split(' ').map(n => n[0]).join('')}
+                            <Text size="sm" fw={600}>
+                              {name.split(' ').map(n => n[0]).join('')}
+                            </Text>
                           </div>
-                          <div style={{ fontSize: '14px' }}>{name}</div>
+                          <Text size="sm">{name}</Text>
                         </Group>
-                      ))}
-                    </Stack>
-                  </SampleText>
+                      );
+                    })}
+                  </Stack>
                 </CustomCard>
               </Stack>
             </GridCol>

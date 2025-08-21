@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { MantineProvider } from '@mantine/core';
 import { Navigation } from './Navigation';
-import { designSystemTheme } from './theme';
 
 const meta: Meta<typeof Navigation> = {
   title: 'Components/Navigation',
@@ -10,17 +8,15 @@ const meta: Meta<typeof Navigation> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'Navigation header component with user menu, notifications, and responsive design using Mantine and design system tokens.',
+        component: 'Navigation header component with user menu, notifications, and responsive design.',
       },
     },
   },
   decorators: [
     (Story) => (
-      <MantineProvider theme={designSystemTheme}>
-        <div style={{ minHeight: '200px' }}>
-          <Story />
-        </div>
-      </MantineProvider>
+      <div style={{ minHeight: '200px' }}>
+        <Story />
+      </div>
     ),
   ],
   tags: ['autodocs'],
@@ -94,7 +90,7 @@ const SearchInput = () => (
 
 export const Default: Story = {
   args: {
-    brand: 'Untitled UI',
+    brand: 'Nexus',
     items: [
       {
         label: 'Home',
@@ -116,7 +112,7 @@ export const Default: Story = {
     ],
     user: {
       name: 'Olivia Rhye',
-      email: 'olivia@untitledui.com',
+      email: 'olivia@nexus.com',
       avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
       onProfile: () => console.log('Profile clicked'),
       onSettings: () => console.log('Settings clicked'),
@@ -151,10 +147,10 @@ export const MinimalBrand: Story = {
           fontSize: '1rem',
           fontWeight: 600
         }}>
-          U
+          N
         </div>
         <span style={{ fontSize: '1.125rem', fontWeight: 600, color: '#171717' }}>
-          Untitled UI
+          Nexus
         </span>
       </div>
     ),
@@ -163,7 +159,7 @@ export const MinimalBrand: Story = {
 
 export const WithoutUser: Story = {
   args: {
-    brand: 'Untitled UI',
+    brand: 'Nexus',
     items: [
       {
         label: 'Dashboard',

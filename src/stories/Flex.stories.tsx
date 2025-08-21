@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Flex, Group, Stack } from './Flex';
+import { tokens } from '../tokens/design-tokens';
 
 // Flex Stories
 const flexMeta: Meta<typeof Flex> = {
@@ -41,15 +42,15 @@ export default flexMeta;
 type FlexStory = StoryObj<typeof Flex>;
 
 const FlexItem = ({ children, ...props }: { children: React.ReactNode; [key: string]: any }) => (
-  <div 
-    style={{ 
-      backgroundColor: '#dbeafe', 
-      padding: '16px 24px', 
-      borderRadius: '8px',
-      border: '1px solid #93c5fd',
-      fontFamily: 'Inter, sans-serif',
-      color: '#1e40af',
-      fontWeight: '500'
+  <div
+    style={{
+      backgroundColor: tokens.color.accent[100],
+      padding: `${tokens.spacing[4]} ${tokens.spacing[6]}`,
+      borderRadius: tokens.borderRadius.md,
+      border: `1px solid ${tokens.color.accent[300]}`,
+      fontFamily: tokens.typography.fontFamily.body,
+      color: tokens.color.accent[800],
+      fontWeight: tokens.typography.fontWeight.medium
     }}
     {...props}
   >
@@ -63,7 +64,7 @@ export const FlexBasic: FlexStory = {
     direction: 'row',
     justify: 'flex-start',
     align: 'center',
-    gap: '16px',
+    gap: tokens.spacing[4],
     children: (
       <>
         <FlexItem>Item 1</FlexItem>
@@ -78,7 +79,7 @@ export const FlexColumn: FlexStory = {
   name: 'Flex Column',
   args: {
     direction: 'column',
-    gap: '12px',
+    gap: tokens.spacing[3],
     children: (
       <>
         <FlexItem>First</FlexItem>
@@ -111,8 +112,8 @@ export const FlexCenter: FlexStory = {
     direction: 'row',
     justify: 'center',
     align: 'center',
-    gap: '20px',
-    style: { minHeight: '200px', backgroundColor: '#f9fafb', borderRadius: '8px' },
+    gap: tokens.spacing[5],
+    style: { minHeight: '200px', backgroundColor: tokens.semantic.background.secondary, borderRadius: tokens.borderRadius.md },
     children: (
       <>
         <FlexItem>Centered</FlexItem>
@@ -127,7 +128,7 @@ export const FlexWrap: FlexStory = {
   args: {
     direction: 'row',
     wrap: 'wrap',
-    gap: '16px',
+    gap: tokens.spacing[4],
     children: (
       <>
         {Array.from({ length: 8 }, (_, i) => (
@@ -170,7 +171,7 @@ export const GroupSpaceBetween: StoryObj<typeof Group> = {
     children: (
       <>
         <FlexItem>Brand</FlexItem>
-        <div style={{ display: 'flex', gap: '12px' }}>
+        <div style={{ display: 'flex', gap: tokens.spacing[3] }}>
           <FlexItem>Login</FlexItem>
           <FlexItem>Sign Up</FlexItem>
         </div>
@@ -191,7 +192,7 @@ export const GroupWithWrap: StoryObj<typeof Group> = {
   render: (args) => <Group {...args} />,
   args: {
     wrap: true,
-    gap: '12px',
+    gap: tokens.spacing[3],
     children: (
       <>
         {['Home', 'About', 'Services', 'Portfolio', 'Blog', 'Contact'].map((item) => (
@@ -236,15 +237,15 @@ export const StackCentered: StoryObj<typeof Stack> = {
   render: (args) => <Stack {...args} />,
   args: {
     align: 'center',
-    gap: '24px',
-    style: { minHeight: '300px', backgroundColor: '#f9fafb', borderRadius: '8px', padding: '40px' },
+    gap: tokens.spacing[6],
+    style: { minHeight: '300px', backgroundColor: tokens.semantic.background.secondary, borderRadius: tokens.borderRadius.md, padding: tokens.spacing[10] },
     children: (
       <>
-        <div style={{ fontSize: '24px', fontWeight: 'bold', fontFamily: 'Inter, sans-serif' }}>
+        <div style={{ fontSize: tokens.typography.fontSize.xl, fontWeight: tokens.typography.fontWeight.bold, fontFamily: tokens.typography.fontFamily.body }}>
           Welcome
         </div>
         <FlexItem>Get started with our platform</FlexItem>
-        <FlexItem style={{ backgroundColor: '#3b82f6', color: 'white' }}>
+        <FlexItem style={{ backgroundColor: tokens.color.accent[600], color: tokens.semantic.text.inverse }}>
           Sign Up Now
         </FlexItem>
       </>
@@ -264,7 +265,7 @@ export const StackJustified: StoryObj<typeof Stack> = {
   render: (args) => <Stack {...args} />,
   args: {
     justify: 'space-between',
-    style: { minHeight: '400px', backgroundColor: '#f9fafb', borderRadius: '8px', padding: '24px' },
+    style: { minHeight: '400px', backgroundColor: tokens.semantic.background.secondary, borderRadius: tokens.borderRadius.md, padding: tokens.spacing[6] },
     children: (
       <>
         <FlexItem>Header Content</FlexItem>

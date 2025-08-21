@@ -1,8 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { MantineProvider, AppShell, Text, Button, Group } from '@mantine/core';
 import { useState } from 'react';
 import { Sidebar, DrawerSidebar } from './Sidebar';
-import { designSystemTheme } from './theme';
+import { Button } from './Button';
+import { Text } from './Text';
+import { Group } from './Flex';
+import { PageLayout } from './PageLayout';
+import { CustomCard } from './CustomCard';
+import { tokens } from '../tokens/design-tokens';
 
 const meta: Meta<typeof Sidebar> = {
   title: 'Components/Sidebar',
@@ -17,11 +21,9 @@ const meta: Meta<typeof Sidebar> = {
   },
   decorators: [
     (Story) => (
-      <MantineProvider theme={designSystemTheme}>
-        <div style={{ height: '100vh', display: 'flex' }}>
-          <Story />
-        </div>
-      </MantineProvider>
+      <div style={{ height: '100vh', display: 'flex' }}>
+        <Story />
+      </div>
     ),
   ],
   tags: ['autodocs'],
@@ -268,9 +270,9 @@ export const WithHeader: Story = {
           fontWeight: 600,
           margin: '0 auto 0.5rem'
         }}>
-          U
+          N
         </div>
-        <Text fw={600} size="sm">Untitled UI</Text>
+        <Text fw={600} size="sm">Nexus</Text>
         <Text size="xs" c="dimmed">Design System</Text>
       </div>
     ),
@@ -330,78 +332,75 @@ export const WithoutUser: Story = {
   ),
 };
 
-export const InAppShell: Story = {
+export const InPageLayout: Story = {
   render: () => (
-    <MantineProvider theme={designSystemTheme}>
-      <AppShell
-        navbar={{ width: 280, breakpoint: 'sm' }}
-        padding="md"
-      >
-      <AppShell.Navbar>
-        <Sidebar
-          sections={sampleSections}
-          user={sampleUser}
-        />
-      </AppShell.Navbar>
-      
-      <AppShell.Main>
-        <div style={{ padding: '2rem' }}>
-          <Text size="xl" fw={600} mb="md">
-            Sidebar in AppShell
-          </Text>
-          <Text mb="md">
-            This example shows how to use the Sidebar component within Mantine's AppShell for a complete layout.
-          </Text>
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
-            gap: '1rem' 
+    <div style={{ display: 'flex', height: '100vh' }}>
+      <Sidebar
+        sections={sampleSections}
+        user={sampleUser}
+      />
+      <div style={{ flex: 1, overflow: 'auto' }}>
+        <PageLayout
+          header={{
+            title: 'Sidebar with PageLayout',
+            subtitle: 'This example shows how to use the Sidebar component with our PageLayout for a complete app layout.',
+            actions: <Button size="sm">New Project</Button>
+          }}
+        >
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: tokens.spacing[8]
           }}>
             {Array.from({ length: 6 }, (_, i) => (
-              <div key={i} style={{ 
-                padding: '1.5rem', 
-                backgroundColor: '#ffffff', 
-                borderRadius: '8px',
-                border: '1px solid #e5e5e5'
-              }}>
+              <CustomCard key={i} shadow="sm" padding={tokens.spacing[6]} radius={tokens.borderRadius.md} withBorder>
                 <Text fw={600} mb="sm">Card {i + 1}</Text>
                 <Text size="sm" c="dimmed">
                   This is a sample card in the main content area.
                 </Text>
-              </div>
+              </CustomCard>
             ))}
           </div>
-        </div>
-      </AppShell.Main>
-      </AppShell>
-    </MantineProvider>
+        </PageLayout>
+      </div>
+    </div>
   ),
 };
 
 export const DrawerExample: Story = {
   render: () => {
     const [opened, setOpened] = useState(false);
-    
+
     return (
-      <MantineProvider theme={designSystemTheme}>
-        <div style={{ padding: '2rem', minHeight: '100vh', backgroundColor: '#fafafa' }}>
-        <Text size="xl" fw={600} mb="md">Drawer Sidebar Demo</Text>
-        <Text mb="md">
+      <div style={{
+        padding: tokens.spacing[8],
+        minHeight: '100vh',
+        backgroundColor: tokens.semantic.background.secondary
+      }}>
+        <Text size="xl" fw={600} mb="lg">Drawer Sidebar Demo</Text>
+        <Text mb="xl">
           The DrawerSidebar component is perfect for mobile interfaces or when you need a temporary sidebar.
         </Text>
-        <Button onClick={() => setOpened(true)}>
+        <Button onClick={() => setOpened(true)} size="sm">
           Open Sidebar Drawer
         </Button>
-        
+
         <DrawerSidebar
           opened={opened}
           onClose={() => setOpened(false)}
-          title="Navigation"
           sections={sampleSections}
           user={sampleUser}
         />
+
+        <div style={{ marginTop: tokens.spacing[12] }}>
+          <CustomCard shadow="sm" padding={tokens.spacing[6]} radius={tokens.borderRadius.md} withBorder>
+            <Text fw={600} mb="sm">Main Content</Text>
+            <Text>
+              This content is in the background. When you open the drawer, it will overlay on top with a backdrop.
+            </Text>
+          </CustomCard>
         </div>
-      </MantineProvider>
+      </div>
     );
   },
 };

@@ -1,17 +1,6 @@
-import React from 'react';
-import {
-  Burger,
-  Group,
-  Text,
-  UnstyledButton,
-  Avatar,
-  Menu,
-  Divider,
-  ActionIcon,
-  Badge,
-  Indicator,
-} from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import React, { useState } from 'react';
+import { Group } from './Flex';
+import { Badge } from './Badge';
 import './navigation.css';
 
 export interface NavigationItem {
@@ -33,198 +22,428 @@ export interface UserMenuProps {
 }
 
 export interface NavigationProps {
-  /** Brand/logo text or component */
+  /** Brand/logo element */
   brand?: React.ReactNode;
-  /** Navigation items for the main menu */
+  /** Navigation items */
   items?: NavigationItem[];
+  /** Right side content (user menu, actions, etc) */
+  rightSection?: React.ReactNode;
   /** User menu configuration */
-  user?: UserMenuProps;
-  /** Additional actions in the header */
-  actions?: React.ReactNode[];
-  /** Whether to show the mobile menu burger */
-  showMobileMenu?: boolean;
-  /** Callback when mobile menu is toggled */
-  onMobileMenuToggle?: (opened: boolean) => void;
-  /** Search component */
-  search?: React.ReactNode;
-  /** Notifications count */
-  notificationsCount?: number;
-  /** Callback for notifications click */
-  onNotificationsClick?: () => void;
-  /** Custom className */
+  userMenu?: UserMenuProps;
+  /** Height of the navigation bar */
+  height?: number;
+  /** Background color */
+  backgroundColor?: string;
+  /** Show burger menu on mobile */
+  withBurger?: boolean;
+  /** Burger menu opened state */
+  opened?: boolean;
+  /** Burger menu toggle handler */
+  onToggle?: () => void;
+  /** Additional CSS classes */
   className?: string;
+  /** Additional styles */
+  style?: React.CSSProperties;
 }
 
-const NotificationIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-    <path
-      d="M15 6.66669C15 5.34061 14.4732 4.06883 13.5355 3.13115C12.5979 2.19347 11.3261 1.66669 10 1.66669C8.67392 1.66669 7.40215 2.19347 6.46447 3.13115C5.52678 4.06883 5 5.34061 5 6.66669C5 12.5 2.5 14.1667 2.5 14.1667H17.5C17.5 14.1667 15 12.5 15 6.66669Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M11.4417 17.5C11.2952 17.7526 11.0849 17.9622 10.8319 18.1079C10.5789 18.2537 10.292 18.3304 10 18.3304C9.70803 18.3304 9.42117 18.2537 9.16816 18.1079C8.91514 17.9622 8.70482 17.7526 8.55835 17.5"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
-const ChevronDownIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path
-      d="M4 6L8 10L12 6"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
+/**
+ * Navigation component for application headers
+ */
 export const Navigation: React.FC<NavigationProps> = ({
-  brand = "Untitled UI",
+  brand,
   items = [],
-  user,
-  actions = [],
-  showMobileMenu = true,
-  onMobileMenuToggle,
-  search,
-  notificationsCount,
-  onNotificationsClick,
-  className,
+  rightSection,
+  userMenu,
+  height = 60,
+  backgroundColor = '#ffffff',
+  withBurger = false,
+  opened = false,
+  onToggle,
+  className = '',
+  style,
 }) => {
-  const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(opened);
 
-  const handleMobileToggle = () => {
-    toggleMobile();
-    onMobileMenuToggle?.(mobileOpened);
+  React.useEffect(() => {
+    setMobileMenuOpen(opened);
+  }, [opened]);
+
+  const handleToggle = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+    onToggle?.();
   };
 
   return (
-    <header className={`nexus-navigation ${className || ''}`}>
-      <div className="nexus-navigation__container">
-        <Group justify="space-between" h="100%">
-          {/* Left Section: Brand + Navigation */}
-          <Group gap="xl">
-            {/* Mobile Menu Burger */}
-            {showMobileMenu && (
-              <Burger
-                opened={mobileOpened}
-                onClick={handleMobileToggle}
-                hiddenFrom="sm"
-                size="sm"
-                className="nexus-navigation__burger"
-              />
-            )}
-
-            {/* Brand */}
-            <Group gap="sm">
-              {typeof brand === 'string' ? (
-                <Text className="nexus-navigation__brand">{brand}</Text>
-              ) : (
-                brand
-              )}
-            </Group>
-
-            {/* Desktop Navigation */}
-            <Group gap="xs" visibleFrom="sm">
-              {items.map((item, index) => (
-                <UnstyledButton
-                  key={index}
-                  className={`nexus-navigation__item ${item.active ? 'nexus-navigation__item--active' : ''}`}
-                  onClick={item.onClick}
-                >
-                  <Group gap="xs">
-                    {item.icon}
-                    <Text size="sm">{item.label}</Text>
-                    {item.badge && (
-                      <Badge size="xs" variant="filled" className="nexus-navigation__badge">
-                        {item.badge}
-                      </Badge>
-                    )}
-                  </Group>
-                </UnstyledButton>
-              ))}
-            </Group>
-          </Group>
-
-          {/* Center Section: Search */}
-          {search && (
-            <div className="nexus-navigation__search">
-              {search}
-            </div>
-          )}
-
-          {/* Right Section: Actions + User */}
-          <Group gap="sm">
-            {/* Notifications */}
-            {(notificationsCount !== undefined || onNotificationsClick) && (
-              <ActionIcon
-                variant="subtle"
-                size="lg"
-                className="nexus-navigation__notification"
-                onClick={onNotificationsClick}
+    <>
+      <nav
+        className={`navigation ${className}`}
+        style={{
+          height: `${height}px`,
+          backgroundColor,
+          borderBottom: '1px solid #e5e7eb',
+          position: 'relative',
+          ...style,
+        }}
+      >
+        <div style={{ 
+          height: '100%',
+          padding: '0 20px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}>
+          <Group gap="32px">
+            {withBurger && (
+              <button
+                className="burger-button"
+                onClick={handleToggle}
+                style={{
+                  display: 'none',
+                  flexDirection: 'column',
+                  justifyContent: 'space-around',
+                  width: '24px',
+                  height: '24px',
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: 0,
+                }}
               >
-                {notificationsCount && notificationsCount > 0 ? (
-                  <Indicator inline label={notificationsCount} size={16}>
-                    <NotificationIcon />
-                  </Indicator>
-                ) : (
-                  <NotificationIcon />
-                )}
-              </ActionIcon>
+                <span style={{
+                  width: '100%',
+                  height: '2px',
+                  backgroundColor: '#374151',
+                  borderRadius: '10px',
+                  transform: mobileMenuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none',
+                  transition: 'transform 0.3s',
+                }} />
+                <span style={{
+                  width: '100%',
+                  height: '2px',
+                  backgroundColor: '#374151',
+                  borderRadius: '10px',
+                  opacity: mobileMenuOpen ? 0 : 1,
+                  transition: 'opacity 0.3s',
+                }} />
+                <span style={{
+                  width: '100%',
+                  height: '2px',
+                  backgroundColor: '#374151',
+                  borderRadius: '10px',
+                  transform: mobileMenuOpen ? 'rotate(-45deg) translate(5px, -6px)' : 'none',
+                  transition: 'transform 0.3s',
+                }} />
+              </button>
             )}
-
-            {/* Additional Actions */}
-            {actions.map((action, index) => (
-              <div key={index}>{action}</div>
-            ))}
-
-            {/* User Menu */}
-            {user && (
-              <Menu position="bottom-end" withArrow>
-                <Menu.Target>
-                  <UnstyledButton className="nexus-navigation__user">
-                    <Group gap="sm">
-                      <Avatar src={user.avatar} size="sm" radius="xl">
-                        {user.name.split(' ').map(n => n[0]).join('').toUpperCase()}
-                      </Avatar>
-                      <div className="nexus-navigation__user-info" style={{ display: 'none' }}>
-                        <Text size="sm" fw={500}>{user.name}</Text>
-                        <Text size="xs" c="dimmed">{user.email}</Text>
-                      </div>
-                      <ChevronDownIcon />
-                    </Group>
-                  </UnstyledButton>
-                </Menu.Target>
-
-                <Menu.Dropdown>
-                  <Menu.Label>
-                    <div>
-                      <Text size="sm" fw={500}>{user.name}</Text>
-                      <Text size="xs" c="dimmed">{user.email}</Text>
-                    </div>
-                  </Menu.Label>
-                  <Divider />
-                  <Menu.Item onClick={user.onProfile}>Profile</Menu.Item>
-                  <Menu.Item onClick={user.onSettings}>Settings</Menu.Item>
-                  <Divider />
-                  <Menu.Item color="red" onClick={user.onLogout}>
-                    Logout
-                  </Menu.Item>
-                </Menu.Dropdown>
-              </Menu>
-            )}
+            
+            {brand && <div className="navigation-brand">{brand}</div>}
+            
+            <div className="navigation-items desktop-only" style={{ display: 'flex', gap: '4px' }}>
+              {items.map((item, index) => (
+                <button
+                  key={index}
+                  className={`navigation-item ${item.active ? 'active' : ''}`}
+                  onClick={item.onClick}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '8px 16px',
+                    backgroundColor: item.active ? '#f3f4f6' : 'transparent',
+                    border: 'none',
+                    borderRadius: '6px',
+                    color: item.active ? '#0a0e1b' : '#6b7280',
+                    fontSize: '14px',
+                    fontWeight: item.active ? '500' : '400',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                    fontFamily: 'Inter, sans-serif',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!item.active) {
+                      e.currentTarget.style.backgroundColor = '#f9fafb';
+                      e.currentTarget.style.color = '#374151';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!item.active) {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = '#6b7280';
+                    }
+                  }}
+                >
+                  {item.icon && <span>{item.icon}</span>}
+                  <span>{item.label}</span>
+                  {item.badge && (
+                    <Badge 
+                      variant="filled" 
+                      size="sm"
+                      style={{ marginLeft: '4px' }}
+                    >
+                      {item.badge}
+                    </Badge>
+                  )}
+                </button>
+              ))}
+            </div>
           </Group>
-        </Group>
-      </div>
-    </header>
+
+          <div className="navigation-right">
+            {rightSection}
+            {userMenu && (
+              <div style={{ position: 'relative' }}>
+                <button
+                  className="user-menu-trigger"
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '6px 12px',
+                    backgroundColor: 'transparent',
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#f9fafb';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
+                >
+                  {userMenu.avatar ? (
+                    <img
+                      src={userMenu.avatar}
+                      alt={userMenu.name}
+                      style={{
+                        width: '32px',
+                        height: '32px',
+                        borderRadius: '50%',
+                        objectFit: 'cover',
+                      }}
+                    />
+                  ) : (
+                    <div style={{
+                      width: '32px',
+                      height: '32px',
+                      borderRadius: '50%',
+                      backgroundColor: '#e5e7eb',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      color: '#6b7280',
+                    }}>
+                      {userMenu.name.charAt(0).toUpperCase()}
+                    </div>
+                  )}
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={{ fontSize: '14px', fontWeight: '500', color: '#374151', fontFamily: 'Inter, sans-serif' }}>
+                      {userMenu.name}
+                    </div>
+                    <div style={{ fontSize: '12px', color: '#6b7280', fontFamily: 'Inter, sans-serif' }}>
+                      {userMenu.email}
+                    </div>
+                  </div>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    style={{
+                      transform: userMenuOpen ? 'rotate(180deg)' : 'rotate(0)',
+                      transition: 'transform 0.2s',
+                    }}
+                  >
+                    <path
+                      d="M4 6L8 10L12 6"
+                      stroke="#6b7280"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+
+                {userMenuOpen && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: 'calc(100% + 8px)',
+                      right: 0,
+                      minWidth: '200px',
+                      backgroundColor: 'white',
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '8px',
+                      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+                      zIndex: 1000,
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {userMenu.onProfile && (
+                      <button
+                        onClick={() => {
+                          userMenu.onProfile?.();
+                          setUserMenuOpen(false);
+                        }}
+                        style={{
+                          width: '100%',
+                          padding: '10px 16px',
+                          backgroundColor: 'transparent',
+                          border: 'none',
+                          textAlign: 'left',
+                          fontSize: '14px',
+                          color: '#374151',
+                          cursor: 'pointer',
+                          fontFamily: 'Inter, sans-serif',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#f9fafb';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }}
+                      >
+                        Profile
+                      </button>
+                    )}
+                    {userMenu.onSettings && (
+                      <button
+                        onClick={() => {
+                          userMenu.onSettings?.();
+                          setUserMenuOpen(false);
+                        }}
+                        style={{
+                          width: '100%',
+                          padding: '10px 16px',
+                          backgroundColor: 'transparent',
+                          border: 'none',
+                          textAlign: 'left',
+                          fontSize: '14px',
+                          color: '#374151',
+                          cursor: 'pointer',
+                          fontFamily: 'Inter, sans-serif',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#f9fafb';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }}
+                      >
+                        Settings
+                      </button>
+                    )}
+                    {(userMenu.onProfile || userMenu.onSettings) && userMenu.onLogout && (
+                      <div style={{ height: '1px', backgroundColor: '#e5e7eb', margin: '4px 0' }} />
+                    )}
+                    {userMenu.onLogout && (
+                      <button
+                        onClick={() => {
+                          userMenu.onLogout?.();
+                          setUserMenuOpen(false);
+                        }}
+                        style={{
+                          width: '100%',
+                          padding: '10px 16px',
+                          backgroundColor: 'transparent',
+                          border: 'none',
+                          textAlign: 'left',
+                          fontSize: '14px',
+                          color: '#ef4444',
+                          cursor: 'pointer',
+                          fontFamily: 'Inter, sans-serif',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#fef2f2';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }}
+                      >
+                        Logout
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile menu */}
+      {withBurger && mobileMenuOpen && (
+        <div
+          className="mobile-menu"
+          style={{
+            position: 'fixed',
+            top: `${height}px`,
+            left: 0,
+            right: 0,
+            backgroundColor: 'white',
+            borderBottom: '1px solid #e5e7eb',
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+            zIndex: 999,
+            padding: '8px',
+          }}
+        >
+          {items.map((item, index) => (
+            <button
+              key={index}
+              className={`mobile-menu-item ${item.active ? 'active' : ''}`}
+              onClick={() => {
+                item.onClick?.();
+                handleToggle();
+              }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                width: '100%',
+                padding: '12px 16px',
+                backgroundColor: item.active ? '#f3f4f6' : 'transparent',
+                border: 'none',
+                borderRadius: '6px',
+                color: item.active ? '#0a0e1b' : '#6b7280',
+                fontSize: '14px',
+                fontWeight: item.active ? '500' : '400',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                textAlign: 'left',
+                fontFamily: 'Inter, sans-serif',
+              }}
+            >
+              {item.icon && <span>{item.icon}</span>}
+              <span>{item.label}</span>
+              {item.badge && (
+                <Badge 
+                  variant="filled" 
+                  size="sm"
+                  style={{ marginLeft: 'auto' }}
+                >
+                  {item.badge}
+                </Badge>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <style>{`
+        @media (max-width: 768px) {
+          .burger-button {
+            display: flex !important;
+          }
+          .desktop-only {
+            display: none !important;
+          }
+        }
+      `}</style>
+    </>
   );
 };
-
-export default Navigation;

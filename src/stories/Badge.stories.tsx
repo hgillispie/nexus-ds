@@ -9,7 +9,42 @@ const meta: Meta<typeof Badge> = {
     layout: 'padded',
     docs: {
       description: {
-        component: 'Badge component for status indicators and labels. Supports multiple sizes, colors, and optional trailing icons.'
+        component: `Badge component for status indicators and labels. Supports multiple sizes, colors, and optional trailing icons.
+
+## Spacing Guidelines
+
+### Badge Placement
+Badges should have appropriate spacing from surrounding elements:
+- **After headings**: Use \`mb="md"\` prop or \`tokens.spacing[5]\` (20px) wrapper
+- **Inline with text**: No additional spacing needed
+- **Before content**: Use \`mb="lg"\` prop or \`tokens.spacing[6]\` (24px) wrapper
+- **In card headers**: Part of the heading group, use \`tokens.spacing[4]\` (16px) spacing
+
+### Margin Props
+The Badge component now supports margin bottom props for consistent spacing:
+- \`mb="xs"\` = 4px - Tight spacing
+- \`mb="sm"\` = 8px - Small spacing
+- \`mb="md"\` = 16px - Standard spacing
+- \`mb="lg"\` = 24px - Large spacing
+- \`mb="xl"\` = 32px - Extra large spacing
+
+### Usage Examples
+\`\`\`jsx
+// In card headers
+<Heading level={3}>Product Title</Heading>
+<Badge mb="md" color="primary">Featured</Badge>
+<Text>Product description...</Text>
+
+// With explicit wrapper (preferred for complex layouts)
+<div style={{ marginBottom: tokens.spacing[5] }}>
+  <Badge color="success">In Stock</Badge>
+</div>
+\`\`\`
+
+### Variant Support
+- **filled** (default): Solid background for high emphasis
+- **light**: Subtle background for lower emphasis
+- **outline**: Border style for minimal visual weight`,
       }
     }
   },
@@ -24,10 +59,20 @@ const meta: Meta<typeof Badge> = {
       options: ['primary', 'gray', 'error', 'warning', 'success'],
       description: 'Badge color theme'
     },
+    variant: {
+      control: { type: 'select' },
+      options: ['filled', 'light', 'outline'],
+      description: 'Badge visual variant - filled for high emphasis, light for subtle, outline for minimal'
+    },
     icon: {
       control: { type: 'select' },
       options: ['none', 'trailing'],
       description: 'Icon position within badge'
+    },
+    mb: {
+      control: { type: 'select' },
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      description: 'Margin bottom for consistent spacing - xs: 4px, sm: 8px, md: 16px, lg: 24px, xl: 32px'
     },
     children: {
       control: 'text',

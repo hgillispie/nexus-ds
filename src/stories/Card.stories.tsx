@@ -1,7 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { MantineProvider, Group, Text, Button, ActionIcon, Avatar } from '@mantine/core';
 import { Card } from './Card';
-import { designSystemTheme } from './theme';
+import { Text } from './Text';
+import { Button } from './Button';
+import { Badge } from './Badge';
+import { Avatar } from './Avatar';
+import { Group, Stack } from './Flex';
+import Icons from './Icons';
+import './card.css';
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
@@ -10,47 +15,87 @@ const meta: Meta<typeof Card> = {
     layout: 'padded',
     docs: {
       description: {
-        component: 'Flexible card component with header, content, footer, and various styling options using design system tokens.',
+        component: `
+The Card component provides a flexible container for displaying content with optional header, footer, actions, and various styling options.
+
+## Features
+- **Flexible Layout**: Header, content, and footer sections
+- **Interactive States**: Hover and click interactions
+- **Action Buttons**: Support for action buttons in header
+- **Badge Support**: Display status badges
+- **Multiple Variants**: Default, elevated, outline, and subtle styles
+- **Responsive**: Adapts to different screen sizes
+- **Accessible**: Proper ARIA labels and keyboard navigation
+
+## Usage
+
+\`\`\`jsx
+import { Card } from '@nexus/design-system';
+
+// Basic card
+<Card title="Card Title" subtitle="Optional subtitle">
+  Card content goes here
+</Card>
+
+// Interactive card with actions
+<Card 
+  title="Project Name"
+  badge={{ label: "Active", variant: "success" }}
+  actions={[
+    { label: "Edit", icon: <EditIcon />, onClick: handleEdit },
+    { label: "Delete", icon: <DeleteIcon />, onClick: handleDelete }
+  ]}
+>
+  Project description and details
+</Card>
+\`\`\`
+        `,
       },
     },
   },
-  decorators: [
-    (Story) => (
-      <MantineProvider theme={designSystemTheme}>
-        <div style={{ backgroundColor: '#ffffff', padding: '2rem', minHeight: '400px' }}>
-          <Story />
-        </div>
-      </MantineProvider>
-    ),
-  ],
   tags: ['autodocs'],
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['default', 'elevated', 'outline', 'subtle'],
+      description: 'Visual variant of the card',
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg'],
+      description: 'Size of the card',
+    },
+    padding: {
+      control: 'select',
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      description: 'Internal padding of the card',
+    },
+    radius: {
+      control: 'select',
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      description: 'Border radius of the card',
+    },
+    interactive: {
+      control: 'boolean',
+      description: 'Whether the card responds to hover/click',
+    },
+    withBorder: {
+      control: 'boolean',
+      description: 'Whether to show border',
+    },
+    withDividers: {
+      control: 'boolean',
+      description: 'Whether to show dividers between sections',
+    },
+    loading: {
+      control: 'boolean',
+      description: 'Loading state',
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
-
-const EditIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path d="M8 2H2.5C2.22386 2 2 2.22386 2 2.5V13.5C2 13.7761 2.22386 14 2.5 14H13.5C13.7761 14 14 13.7761 14 13.5V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M13 1C13.2652 0.734784 13.6174 0.585786 13.985 0.585786C14.3526 0.585786 14.7348 0.734784 15 1C15.2652 1.26522 15.4142 1.61739 15.4142 1.985C15.4142 2.35261 15.2652 2.70478 15 2.97L8.5 9.5L6 10L6.5 7.5L13 1Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
-
-const DeleteIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path d="M2 4H14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M12.6667 4V13.3333C12.6667 14 12 14.6667 11.3333 14.6667H4.66667C4 14.6667 3.33333 14 3.33333 13.3333V4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M5.33333 4V2.66667C5.33333 2 6 1.33333 6.66667 1.33333H9.33333C10 1.33333 10.6667 2 10.6667 2.66667V4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
-
-const MoreIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path d="M8 8.66667C8.36819 8.66667 8.66667 8.36819 8.66667 8C8.66667 7.63181 8.36819 7.33333 8 7.33333C7.63181 7.33333 7.33333 7.63181 7.33333 8C7.33333 8.36819 7.63181 8.66667 8 8.66667Z" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M8 4C8.36819 4 8.66667 3.70152 8.66667 3.33333C8.66667 2.96514 8.36819 2.66667 8 2.66667C7.63181 2.66667 7.33333 2.96514 7.33333 3.33333C7.33333 3.70152 7.63181 4 8 4Z" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M8 13.3333C8.36819 13.3333 8.66667 13.0349 8.66667 12.6667C8.66667 12.2985 8.36819 12 8 12C7.63181 12 7.33333 12.2985 7.33333 12.6667C7.33333 13.0349 7.63181 13.3333 8 13.3333Z" stroke="currentColor" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
 
 export const Default: Story = {
   args: {
@@ -61,9 +106,6 @@ export const Default: Story = {
         This is the main content area of the card. You can put any content here including text, images, forms, or other components.
       </Text>
     ),
-    variant: 'default',
-    size: 'md',
-    padding: 'md',
   },
 };
 
@@ -71,59 +113,65 @@ export const WithActions: Story = {
   args: {
     title: 'Project Card',
     subtitle: 'Active project with recent updates',
-    badge: {
-      label: 'Active',
-      color: 'green',
-      variant: 'light',
-    },
+    badge: { label: 'Active', variant: 'success' },
     actions: [
-      {
-        label: 'Edit',
-        icon: <EditIcon />,
-        onClick: () => console.log('Edit clicked'),
+      { 
+        label: 'Edit', 
+        icon: <Icons name="edit" size="small" />, 
+        onClick: () => console.log('Edit clicked') 
       },
-      {
-        label: 'Delete',
-        icon: <DeleteIcon />,
-        variant: 'subtle',
-        color: 'red',
+      { 
+        label: 'Delete', 
+        icon: <Icons name="trash-2" size="small" />, 
         onClick: () => console.log('Delete clicked'),
+        variant: 'ghost' as const
       },
-      {
-        label: 'More',
-        icon: <MoreIcon />,
-        onClick: () => console.log('More clicked'),
-      },
+      { 
+        label: 'More', 
+        icon: <Icons name="more-horizontal" size="small" />, 
+        onClick: () => console.log('More clicked') 
+      }
     ],
     children: (
-      <div>
-        <Text mb="sm">
+      <Stack gap="md">
+        <Text>
           This project is currently active and has received recent updates from the team.
         </Text>
         <Group gap="xs">
-          <Avatar size="xs" radius="xl">JD</Avatar>
-          <Avatar size="xs" radius="xl">MS</Avatar>
-          <Avatar size="xs" radius="xl">+3</Avatar>
+          <Avatar size="sm" initials="JD" />
+          <Avatar size="sm" initials="MS" />
+          <Avatar size="sm" initials="+3" />
         </Group>
-      </div>
+      </Stack>
     ),
   },
 };
 
-export const WithImage: Story = {
+export const WithFooter: Story = {
   args: {
-    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=400&fit=crop&crop=top',
-    title: 'Office Space',
-    subtitle: 'Modern workspace design',
+    title: 'Settings',
+    subtitle: 'Manage your account preferences',
+    withDividers: true,
     children: (
-      <Text>
-        A beautiful modern office space designed for productivity and collaboration. Features include open floor plans, natural lighting, and ergonomic furniture.
-      </Text>
+      <Stack gap="md">
+        <div>
+          <Text weight="medium" size="sm">Notifications</Text>
+          <Text size="sm" color="secondary">Choose what notifications you want to receive.</Text>
+        </div>
+        <div>
+          <Text weight="medium" size="sm">Privacy</Text>
+          <Text size="sm" color="secondary">Control who can see your information.</Text>
+        </div>
+        <div>
+          <Text weight="medium" size="sm">Security</Text>
+          <Text size="sm" color="secondary">Manage your security settings.</Text>
+        </div>
+      </Stack>
     ),
     footer: (
-      <Group justify="space-between">
-        <Text size="sm" c="dimmed">Published 2 days ago</Text>
-        <Button size="sm">View Details</Button>
+      <Group justify="flex-end" gap="md">
+        <Button variant="outline" size="sm">Cancel</Button>
+        <Button variant="primary" size="sm">Save Changes</Button>
       </Group>
     ),
   },
@@ -132,7 +180,8 @@ export const WithImage: Story = {
 export const Interactive: Story = {
   args: {
     title: 'Interactive Card',
-    subtitle: 'Click me to see the hover effect',
+    subtitle: 'Click me to see the interaction',
+    badge: { label: 'Clickable', variant: 'primary' },
     interactive: true,
     onClick: () => alert('Card clicked!'),
     children: (
@@ -141,29 +190,25 @@ export const Interactive: Story = {
         It's perfect for navigation cards or action cards.
       </Text>
     ),
-    badge: {
-      label: 'Clickable',
-      color: 'blue',
-    },
   },
 };
 
 export const Variants: Story = {
   render: () => (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem' }}>
-      <Card variant="default" title="Default Card" padding="md">
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+      <Card title="Default Card" variant="default">
         <Text>Default card with subtle shadow and border.</Text>
       </Card>
       
-      <Card variant="elevated" title="Elevated Card" padding="md">
+      <Card title="Elevated Card" variant="elevated">
         <Text>Elevated card with enhanced shadow and no border.</Text>
       </Card>
       
-      <Card variant="outline" title="Outline Card" padding="md">
+      <Card title="Outline Card" variant="outline">
         <Text>Outlined card with border and no shadow.</Text>
       </Card>
       
-      <Card variant="subtle" title="Subtle Card" padding="md">
+      <Card title="Subtle Card" variant="subtle">
         <Text>Subtle card with light background and minimal styling.</Text>
       </Card>
     </div>
@@ -173,82 +218,52 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
-      <Card size="sm" title="Small Card" padding="sm">
+      <Card title="Small Card" size="sm" padding="sm">
         <Text size="sm">This is a small card with compact styling.</Text>
       </Card>
       
-      <Card size="md" title="Medium Card" padding="md">
+      <Card title="Medium Card" size="md" padding="md">
         <Text>This is a medium card with standard styling.</Text>
       </Card>
       
-      <Card size="lg" title="Large Card" padding="lg">
+      <Card title="Large Card" size="lg" padding="lg">
         <Text size="lg">This is a large card with spacious styling.</Text>
       </Card>
     </div>
   ),
 };
 
-export const WithDividers: Story = {
-  args: {
-    title: 'Settings',
-    subtitle: 'Manage your account preferences',
-    withDividers: true,
-    children: (
-      <div>
-        <Text fw={500} mb="xs">Notifications</Text>
-        <Text size="sm" c="dimmed" mb="md">Choose what notifications you want to receive.</Text>
-        
-        <Text fw={500} mb="xs">Privacy</Text>
-        <Text size="sm" c="dimmed" mb="md">Control who can see your information.</Text>
-        
-        <Text fw={500} mb="xs">Security</Text>
-        <Text size="sm" c="dimmed">Manage your security settings.</Text>
-      </div>
-    ),
-    footer: (
-      <Group justify="flex-end">
-        <Button variant="outline" size="sm">Cancel</Button>
-        <Button size="sm">Save Changes</Button>
-      </Group>
-    ),
-  },
-};
-
 export const StatusCards: Story = {
   render: () => (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
       <Card 
         title="Success" 
-        className="nexus-card--success"
-        badge={{ label: 'Completed', color: 'green', variant: 'filled' }}
-        padding="md"
+        badge={{ label: 'Completed', variant: 'success' }}
+        style={{ borderLeftColor: '#22C55E', borderLeftWidth: '4px' }}
       >
         <Text size="sm">Operation completed successfully.</Text>
       </Card>
       
       <Card 
         title="Warning" 
-        className="nexus-card--warning"
-        badge={{ label: 'Attention', color: 'orange', variant: 'filled' }}
-        padding="md"
+        badge={{ label: 'Attention', variant: 'warning' }}
+        style={{ borderLeftColor: '#F59E0B', borderLeftWidth: '4px' }}
       >
         <Text size="sm">Please review the following items.</Text>
       </Card>
       
       <Card 
         title="Error" 
-        className="nexus-card--error"
-        badge={{ label: 'Failed', color: 'red', variant: 'filled' }}
-        padding="md"
+        badge={{ label: 'Failed', variant: 'error' }}
+        style={{ borderLeftColor: '#EF4444', borderLeftWidth: '4px' }}
       >
         <Text size="sm">An error occurred during processing.</Text>
       </Card>
       
       <Card 
         title="Info" 
-        className="nexus-card--info"
-        badge={{ label: 'Info', color: 'cyan', variant: 'filled' }}
-        padding="md"
+        badge={{ label: 'Info', variant: 'primary' }}
+        style={{ borderLeftColor: '#3B82F6', borderLeftWidth: '4px' }}
       >
         <Text size="sm">Here's some helpful information.</Text>
       </Card>
@@ -256,44 +271,280 @@ export const StatusCards: Story = {
   ),
 };
 
-export const CustomContent: Story = {
+export const WithProfile: Story = {
   args: {
-    header: (
-      <Group justify="space-between">
-        <Group gap="sm">
-          <Avatar radius="xl" size="md">UI</Avatar>
+    withDividers: true,
+    padding: 'lg',
+    children: (
+      <Stack gap="lg">
+        <Group gap="md">
+          <Avatar size="lg" initials="JD" />
           <div>
-            <Text fw={600}>Untitled UI</Text>
-            <Text size="sm" c="dimmed">Design System</Text>
+            <Text weight="semibold">John Doe</Text>
+            <Text size="sm" color="secondary">Software Engineer</Text>
+            <Text size="sm" color="secondary">Joined 2 years ago</Text>
           </div>
         </Group>
-        <Button size="sm">Follow</Button>
-      </Group>
-    ),
-    children: (
-      <div>
-        <Text mb="md">
-          A comprehensive design system built with React and TypeScript. 
-          Includes components, tokens, and patterns for building modern applications.
+        <Text>
+          Passionate developer with expertise in React, TypeScript, and modern web technologies. 
+          Currently working on the Nexus Design System and contributing to open source projects.
         </Text>
-        <Group gap="xs">
-          <Text size="sm" c="dimmed">TypeScript</Text>
-          <Text size="sm" c="dimmed">•</Text>
-          <Text size="sm" c="dimmed">React</Text>
-          <Text size="sm" c="dimmed">•</Text>
-          <Text size="sm" c="dimmed">Storybook</Text>
-        </Group>
-      </div>
+      </Stack>
     ),
     footer: (
       <Group justify="space-between">
-        <Text size="sm" c="dimmed">Updated 2 hours ago</Text>
-        <Group gap="sm">
-          <Text size="sm" c="dimmed">⭐ 1.2k</Text>
-          <Text size="sm" c="dimmed">🍴 234</Text>
+        <Group gap="md">
+          <Group gap="xs" align="center">
+            <Icons name="map-pin" size="small" color="#6B7280" />
+            <Text size="sm" color="secondary">San Francisco, CA</Text>
+          </Group>
+          <Group gap="xs" align="center">
+            <Icons name="mail" size="small" color="#6B7280" />
+            <Text size="sm" color="secondary">john@example.com</Text>
+          </Group>
+        </Group>
+        <Button size="sm">Contact</Button>
+      </Group>
+    ),
+  },
+};
+
+export const ProductCard: Story = {
+  render: () => (
+    <Card
+      variant="outline"
+      padding="lg"
+      style={{ maxWidth: '400px' }}
+    >
+      <Stack gap="lg">
+        <div style={{
+          width: '100%',
+          height: '200px',
+          backgroundColor: '#F3F4F6',
+          borderRadius: '8px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <Icons name="smartphone" size={48} color="#6B7280" />
+        </div>
+
+        <Stack gap="md">
+          <div>
+            <Text weight="semibold" size="lg">iPhone 15 Pro</Text>
+            <Text size="sm" color="secondary">Latest flagship smartphone with advanced camera system</Text>
+          </div>
+
+          <Text weight="bold" size="xl" color="#059669">$999</Text>
+
+          <Group gap="xs" align="center">
+            <div style={{ display: 'flex', gap: '2px' }}>
+              <Icons name="star" size="small" color="#FCD34D" />
+              <Icons name="star" size="small" color="#FCD34D" />
+              <Icons name="star" size="small" color="#FCD34D" />
+              <Icons name="star" size="small" color="#FCD34D" />
+              <Icons name="star" size="small" color="#FCD34D" />
+            </div>
+            <Text size="sm" color="secondary">(128 reviews)</Text>
+          </Group>
+
+          <Group gap="md">
+            <Button variant="primary" style={{ flex: 1 }}>
+              Add to Cart
+            </Button>
+            <Button variant="outline" size="sm">
+              <Icons name="heart" size="small" />
+            </Button>
+          </Group>
+        </Stack>
+      </Stack>
+    </Card>
+  ),
+};
+
+export const CardGrid: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+      <Card
+        title="Analytics"
+        subtitle="Track your performance metrics"
+        padding="lg"
+        variant="outline"
+      >
+        <Stack gap="md">
+          <div style={{
+            width: '48px',
+            height: '48px',
+            backgroundColor: '#E0F2FE',
+            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <Icons name="bar-chart-3" size="medium" color="#0EA5E9" />
+          </div>
+          <Group justify="space-between">
+            <Text size="sm" color="secondary">Total Views</Text>
+            <Text weight="semibold">12,543</Text>
+          </Group>
+          <Group justify="space-between">
+            <Text size="sm" color="secondary">Conversion Rate</Text>
+            <Text weight="semibold">3.24%</Text>
+          </Group>
+        </Stack>
+      </Card>
+
+      <Card
+        title="Reports"
+        subtitle="Generate detailed reports"
+        padding="lg"
+        variant="outline"
+      >
+        <Stack gap="md">
+          <div style={{
+            width: '48px',
+            height: '48px',
+            backgroundColor: '#F0FDF4',
+            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <Icons name="file-text" size="medium" color="#22C55E" />
+          </div>
+          <Text size="sm">Generate detailed reports</Text>
+          <Group gap="xs">
+            <Badge variant="secondary" size="sm">PDF</Badge>
+            <Badge variant="secondary" size="sm">CSV</Badge>
+          </Group>
+        </Stack>
+      </Card>
+
+      <Card
+        title="Settings"
+        subtitle="Configure your account"
+        padding="lg"
+        variant="outline"
+      >
+        <Stack gap="md">
+          <div style={{
+            width: '48px',
+            height: '48px',
+            backgroundColor: '#FEF3C7',
+            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <Icons name="settings" size="medium" color="#F59E0B" />
+          </div>
+          <Text size="sm">Configure your account</Text>
+        </Stack>
+      </Card>
+
+      <Card
+        title="Users"
+        subtitle="Manage team members"
+        padding="lg"
+        variant="outline"
+      >
+        <Stack gap="md">
+          <div style={{
+            width: '48px',
+            height: '48px',
+            backgroundColor: '#F3E8FF',
+            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <Icons name="users" size="medium" color="#8B5CF6" />
+          </div>
+          <Text size="sm">Manage team members</Text>
+        </Stack>
+      </Card>
+    </div>
+  ),
+};
+
+export const WithSection: Story = {
+  render: () => (
+    <Card variant="outline" padding="none" style={{ maxWidth: '500px' }}>
+      <div style={{
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        padding: '2rem',
+        color: 'white',
+        textAlign: 'center'
+      }}>
+        <Text weight="semibold" size="xl" style={{ color: 'white' }}>
+          Header Section
+        </Text>
+      </div>
+
+      <div style={{ padding: '1.5rem' }}>
+        <Stack gap="md">
+          <Text weight="semibold" size="lg">Card with Section</Text>
+          <Text size="sm" color="secondary">
+            This card uses CardSection for the header area, which extends to the card edges.
+          </Text>
+          <Button variant="primary" size="sm" style={{ alignSelf: 'flex-start' }}>
+            Action
+          </Button>
+        </Stack>
+      </div>
+    </Card>
+  ),
+};
+
+export const LoadingState: Story = {
+  args: {
+    title: 'Loading Card',
+    subtitle: 'Please wait while we load the content',
+    loading: true,
+    children: (
+      <Text>
+        This content is currently being loaded. The card shows a loading state with a spinner overlay.
+      </Text>
+    ),
+  },
+};
+
+export const CustomHeader: Story = {
+  args: {
+    header: (
+      <Group justify="space-between" align="center">
+        <Group gap="md">
+          <Icons name="folder" size="medium" color="#3B82F6" />
+          <div>
+            <Text weight="semibold">Project Files</Text>
+            <Text size="sm" color="secondary">Updated 2 hours ago</Text>
+          </div>
+        </Group>
+        <Group gap="xs">
+          <Button size="sm" variant="outline">
+            <Icons name="upload" size="small" />
+          </Button>
+          <Button size="sm" variant="outline">
+            <Icons name="more-horizontal" size="small" />
+          </Button>
         </Group>
       </Group>
     ),
-    withDividers: true,
+    children: (
+      <Stack gap="sm">
+        <Group justify="space-between">
+          <Text size="sm">design-system.zip</Text>
+          <Text size="sm" color="secondary">2.4 MB</Text>
+        </Group>
+        <Group justify="space-between">
+          <Text size="sm">components.tsx</Text>
+          <Text size="sm" color="secondary">156 KB</Text>
+        </Group>
+        <Group justify="space-between">
+          <Text size="sm">styles.css</Text>
+          <Text size="sm" color="secondary">89 KB</Text>
+        </Group>
+      </Stack>
+    ),
   },
 };

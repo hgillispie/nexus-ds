@@ -1,5 +1,4 @@
 import type { Preview } from "@storybook/react";
-import '@mantine/core/styles.css';
 import '../src/index.css';
 import './design-tokens.css';
 import theme from './theme';
