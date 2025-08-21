@@ -37,7 +37,7 @@ The Inter font is imported globally in `src/index.css`:
 ### Usage Guidelines
 
 1. **Body text**: Use `font-weight: 400` (Regular)
-2. **Headings**: Use `font-weight: 600` (Semi Bold) or `font-weight: 700` (Bold)
+2. **Important text**: Use `font-weight: 600` (Semi Bold) or `font-weight: 700` (Bold)
 3. **Captions/Labels**: Use `font-weight: 500` (Medium)
 4. **Buttons**: Use `font-weight: 600` (Semi Bold)
 5. **Form inputs**: Use `font-weight: 400` (Regular)

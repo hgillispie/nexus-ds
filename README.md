@@ -188,7 +188,7 @@ function MyPage() {
 #### [`Card`](src/stories/Card.stories.tsx)
 **Purpose**: Content containers with structured information
 **When to use**: For displaying grouped information, dashboard widgets, product cards
-**Features**: Headers, actions, badges, images, interactive states
+**Features**: Actions, badges, images, interactive states
 
 ```tsx
 // Basic card
@@ -408,12 +408,11 @@ All design tokens are defined in [`DESIGN-TOKENS.md`](DESIGN-TOKENS.md) and incl
 }
 ```
 
-### Typography Scale
-Built on **Inter font family** with semantic scaling:
+### Text Styling
+Built on **Inter font family** with the Text component:
 
-- **Display**: `display-2xl` (36px) to `display-xs` (24px)
-- **Text**: `text-xl` (20px) to `text-xs` (12px)
-- Proper line heights and letter spacing included
+- Use Text component with size prop: `xl`, `lg`, `md`, `sm`, `xs`
+- Use weight prop: `regular`, `medium`, `semibold`, `bold`
 
 ### Spacing & Layout
 - Consistent 8px grid system
@@ -587,7 +586,7 @@ function AdminPanel() {
 
 ### Design Inspiration
 - **[Untitled UI](https://untitledui.com/)** - Original Figma design system
-- **[Inter Font](https://fonts.google.com/specimen/Inter)** - Typography foundation
+- **[Inter Font](https://fonts.google.com/specimen/Inter)** - Font foundation
 
 ### Technical Documentation
 - **[Storybook](https://storybook.js.org/)** - Component documentation
@@ -690,7 +689,7 @@ npx builder.io@latest launch --serverUrl http://localhost:6006
 
 ### Design System Documentation
 - **[Design Tokens](DESIGN-TOKENS.md)** - Color, typography, and spacing guidelines
-- **[Font Standards](FONT_STANDARDS.md)** - Typography and font usage
+- **[Font Standards](FONT_STANDARDS.md)** - Font and text usage
 - **[Layout Components](LAYOUT_COMPONENTS.md)** - Layout patterns and components
 - **[Agent Guidelines](AGENTS.md)** - AI agent development guidelines
 
