@@ -110,7 +110,7 @@ export const CardSpacingExample: Story = {
         </div>
         
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: tokens.spacing[8] }}>
-          <CustomCard shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
+          <Card shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
             <div style={{ marginBottom: tokens.spacing[4] }}>
               <Heading level={3}>Proper Card Spacing</Heading>
             </div>
@@ -124,9 +124,9 @@ export const CardSpacingExample: Story = {
               </Text>
             </div>
             <Button size="sm">Learn More</Button>
-          </CustomCard>
+          </Card>
 
-          <CustomCard shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
+          <Card shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
             <div style={{ marginBottom: tokens.spacing[4] }}>
               <Heading level={3}>With Badge and Actions</Heading>
             </div>
@@ -143,7 +143,7 @@ export const CardSpacingExample: Story = {
               <Button variant="outline" size="sm">Cancel</Button>
               <Button size="sm">Continue</Button>
             </Group>
-          </CustomCard>
+          </Card>
         </div>
       </div>
     </Container>
@@ -246,7 +246,7 @@ export const LayoutSpacingExample: Story = {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: tokens.spacing[10] }}>
-            <CustomCard shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
+            <Card shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
               <div style={{ marginBottom: tokens.spacing[6] }}>
                 <Heading level={3}>Page Structure</Heading>
                 <div style={{ marginTop: tokens.spacing[3] }}>
@@ -259,9 +259,9 @@ export const LayoutSpacingExample: Story = {
                 <Text size="sm">• Content blocks: 24-32px spacing</Text>
                 <Text size="sm">• Related elements: 16-20px gaps</Text>
               </Stack>
-            </CustomCard>
+            </Card>
 
-            <CustomCard shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
+            <Card shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
               <div style={{ marginBottom: tokens.spacing[6] }}>
                 <Heading level={3}>Grid Guidelines</Heading>
                 <div style={{ marginTop: tokens.spacing[3] }}>
@@ -274,7 +274,7 @@ export const LayoutSpacingExample: Story = {
                 <Text size="sm">• Button groups: 16px related, 24px separated</Text>
                 <Text size="sm">• Minimum card width: 300px for readability</Text>
               </Stack>
-            </CustomCard>
+            </Card>
           </div>
         </div>
       </Container>
