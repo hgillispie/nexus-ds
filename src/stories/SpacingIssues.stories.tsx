@@ -214,7 +214,7 @@ export const BeforeAndAfterComparison: Story = {
             <Text size="sm" c="dimmed">Tight spacing hurts readability</Text>
           </div>
           
-          <CustomCard shadow="sm" padding="16px" radius={tokens.borderRadius.md} withBorder>
+          <Card shadow="sm" padding="16px" radius={tokens.borderRadius.md} withBorder>
             <Heading level={3} style={{ marginBottom: '8px' }}>Quick Actions</Heading>
             <Badge color="primary">Important</Badge>
             <Text size="sm" c="dimmed" style={{ margin: '4px 0 8px 0' }}>
@@ -224,7 +224,7 @@ export const BeforeAndAfterComparison: Story = {
               <Button size="sm">Create</Button>
               <Button variant="outline" size="sm">Cancel</Button>
             </div>
-          </CustomCard>
+          </Card>
         </div>
 
         {/* AFTER - Good spacing */}
@@ -234,7 +234,7 @@ export const BeforeAndAfterComparison: Story = {
             <Text size="sm" c="dimmed">Proper spacing improves clarity</Text>
           </div>
           
-          <CustomCard shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
+          <Card shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
             <div style={{ marginBottom: tokens.spacing[4] }}>
               <Heading level={3}>Quick Actions</Heading>
             </div>
@@ -250,7 +250,7 @@ export const BeforeAndAfterComparison: Story = {
               <Button size="sm">Create</Button>
               <Button variant="outline" size="sm">Cancel</Button>
             </div>
-          </CustomCard>
+          </Card>
         </div>
       </div>
       
