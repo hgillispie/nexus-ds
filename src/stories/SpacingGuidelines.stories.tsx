@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Container } from './Container';
 import { CustomCard } from './CustomCard';
 import { Text } from './Text';
-import { Heading } from './Typography';
+
 import { Button } from './Button';
 import { Badge } from './Badge';
 import { Group, Stack } from './Flex';

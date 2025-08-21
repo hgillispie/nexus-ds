@@ -6,7 +6,7 @@ import { Flex, Group, Stack } from './Flex';
 import { CustomCard } from './CustomCard';
 import { Button } from './Button';
 import { Text } from './Text';
-import { Heading } from './Typography';
+
 import { tokens } from '../tokens/design-tokens';
 import React from 'react';
 
