@@ -214,7 +214,7 @@ export const BeforeAndAfterComparison: Story = {
             <Text size="sm" c="dimmed">Tight spacing hurts readability</Text>
           </div>
           
-          <Card shadow="sm" padding="16px" radius={tokens.borderRadius.md} withBorder>
+          <Card style={{ padding: '16px' }} radius="md" withBorder>
             <Heading level={3} style={{ marginBottom: '8px' }}>Quick Actions</Heading>
             <Badge color="primary">Important</Badge>
             <Text size="sm" c="dimmed" style={{ margin: '4px 0 8px 0' }}>
@@ -234,7 +234,7 @@ export const BeforeAndAfterComparison: Story = {
             <Text size="sm" c="dimmed">Proper spacing improves clarity</Text>
           </div>
           
-          <Card shadow="sm" padding={tokens.spacing[8]} radius={tokens.borderRadius.md} withBorder>
+          <Card padding="xl" radius="md" withBorder>
             <div style={{ marginBottom: tokens.spacing[4] }}>
               <Heading level={3}>Quick Actions</Heading>
             </div>
